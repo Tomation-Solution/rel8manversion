@@ -31,6 +31,7 @@
     "react-hook-form": "^7.31.1",
     "react-leaflet": "3.2.4",
     "react-redux": "^7.2.6",
+    "react-responsive": "^9.0.2",
     "react-simple-maps": "^2.3.0",
     "react-toastify": "^9.0.1",
     "yup": "^0.32.11"

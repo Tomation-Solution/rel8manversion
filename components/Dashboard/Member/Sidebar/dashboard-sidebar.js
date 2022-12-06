@@ -16,17 +16,17 @@ const items = [
     icon: (<DashboardCustomize fontSize="small" />),
     title: 'Dashboard'
   },
-  {
-    href: '/members/account',
-    icon: (<AccountBalanceWalletRounded fontSize="small" />),
-    title: 'My Account'
-  },
+  // {
+  //   href: '/members/account',
+  //   icon: (<AccountBalanceWalletRounded fontSize="small" />),
+  //   title: 'My Account'
+  // },
 
-  {
-    href: '/members/directory',
-    icon: (<Person fontSize="small" />),
-    title: 'Member Directory'
-  },
+  // {
+  //   href: '/members/directory',
+  //   icon: (<Person fontSize="small" />),
+  //   title: 'Member Directory'
+  // },
   {
     href: '/members/events',
     icon: (<PeopleRounded fontSize="small" />),

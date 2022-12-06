@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useState,useRef,useEffect } from "react"
 import { Card,Box,IconButton, InputAdornment, Typography,TextField, Button,Grid, Checkbox } from "@mui/material"
 import { style } from "@mui/system"
@@ -54,8 +56,8 @@ const Login =  () =>{
         notify(error?.data?.error[0])
     }
     if(status ==="succeeded"){
-        notify("Login Successful")
-        router.push('/admin/home')
+        notify("Login Successful",'success')
+        router.push('/members/home')
     }
   },[status])
 
@@ -65,91 +67,84 @@ const Login =  () =>{
 
 //   },[status])
     return(
-        <Grid >
-            <Navbar/>
-            <HeroSection message={"AANI  "+ " "+router.query.login + "  Chapter"}/>
-            
-            <Grid className={styles.loginBg}   >
-            {/* <center><Image src={Logo}/></center> */}
-            <br/>
-            
-            <Grid item md={12} className={styles.card} sm={10}  style={{margin:'0 auto'}} >
-                <Typography className='text' textAlign='center' marginBottom={2} fontWeight='bolder' >USER LOGIN</Typography>
-               <Typography className='text' fontWeight='normal' textAlign='center' marginBottom={2} variant='subtitle2' color='InactiveCaption'>
-               Click here to login into your Dashboard </Typography>
-               <br/>
-                        <form onSubmit={handleSubmit(submitData)} >
-                <Grid>
-                    
-                    <>
-                    <TextField 
-                    placeholder=' Email' 
-                    // label='Username'  
-                    style={{width:'100%'}} size='small'
-                    InputProps={{
-                    
-                        startAdornment:(
-                            <Person color='disabled'  fontSize={'medium'}/>
+      <Grid className={styles.loginBg}  style={{'height':'100vh'}}  >
+      {/* <center><Image src={Logo}/></center> */}
+      <br/>
+      
+      <Grid item md={12} className={styles.card} sm={10}  style={{margin:'0 auto'}} >
+          <Typography className='text' textAlign='center' marginBottom={2} fontWeight='bolder' >USER LOGIN</Typography>
+         <Typography className='text' fontWeight='normal' textAlign='center' marginBottom={2} variant='subtitle2' color='InactiveCaption'>
+         Click here to login into your Dashboard </Typography>
+         <br/>
+                  <form onSubmit={handleSubmit(submitData)} >
+          <Grid>
+              <>
+              <TextField 
+              placeholder=' Email' 
+              // label='Username'  
+              style={{width:'100%'}} size='small'
+              InputProps={{
+              
+                  startAdornment:(
+                      <Person color='disabled'  fontSize={'medium'}/>
+                  )
+              }}
+              {...register("email")}
+              />
+              <Typography >{errors.email?.message}</Typography>
+              </>
+              
+          </Grid>
+          {/* <br/> */}
+          <Grid container marginY={2}>
+              <>
+              <TextField 
+              placeholder=' Password'
+              // label='Password'
+              size='small'
+              type= {showPassword ? 'password' : 'text'}
+              style={{width:'100%'}}
+              InputLabelProps={{ shrink: true,  }}
+              InputProps={{
+                  endAdornment: (
+                  <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={()=>setShowPassword(!showPassword)}
+                      // onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  ),
+                  startAdornment: (
+                       <Lock color='disabled'  fontSize={'medium'} /> 
                         )
-                    }}
-                    {...register("email")}
-                    />
-                    <Typography >{errors.email?.message}</Typography>
-                    </>
-                    
-                </Grid>
-                {/* <br/> */}
-                <Grid container marginY={2}>
-                    <>
-                    <TextField 
-                    placeholder=' Password'
-                    // label='Password'
-                    size='small'
-                    type= {showPassword ? 'password' : 'text'}
-                    style={{width:'100%'}}
-                    InputLabelProps={{ shrink: true,  }}
-                    InputProps={{
-                        endAdornment: (
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={()=>setShowPassword(!showPassword)}
-                            // onMouseDown={handleMouseDownPassword}
-                          >
-                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                          </IconButton>
-                        ),
-                        startAdornment: (
-                             <Lock color='disabled'  fontSize={'medium'} /> 
-                              )
-                        
-                        
-                    }}
-                    {...register("password")}
-                    />
-                    <Typography >{errors.password?.message}</Typography>
-                    </>
+                  
+                  
+              }}
+              {...register("password")}
+              />
+              <Typography >{errors.password?.message}</Typography>
+              </>
 
-                </Grid>
-                <br/>
-                <Grid container alignItems='center' justifyContent='space-between' paddingY={1}>
-                    <Grid item><Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>Forgot Password?</Typography></Grid>
-                    <Grid item >
-                        <Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>
-                        <Checkbox/>Remember me</Typography>
-                    </Grid>
-                </Grid>
-                <SubmitButton  text={status==="loading"?"Loading":'Login'} radius='10px'
-               textColor='white' paddingY={1} paddingX={2} bg='#436937'
-               
-               />
-               </form>
-                {/* <GreenButton text='Login' /> */}
-                {/* <Button variant='contained' size='large' className={styles.button}>Login</Button> */}
-            </Grid>
-            <br/>
-            </Grid>
-            <Footer/>
-        </Grid>
+          </Grid>
+          <br/>
+          <Grid container alignItems='center' justifyContent='space-between' paddingY={1}>
+              <Grid item><Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>Forgot Password?</Typography></Grid>
+              <Grid item >
+                  <Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>
+                  <Checkbox/>Remember me</Typography>
+              </Grid>
+          </Grid>
+          <SubmitButton  text={status==="loading"?"Loading":'Login'} radius='10px'
+         textColor='white' paddingY={1} paddingX={2} bg='#436937'
+         
+         />
+         </form>
+          {/* <GreenButton text='Login' /> */}
+          {/* <Button variant='contained' size='large' className={styles.button}>Login</Button> */}
+      </Grid>
+      <br/>
+      </Grid>
     )
 }
 

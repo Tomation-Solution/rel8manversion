@@ -4,58 +4,43 @@ import Link from 'next/link'
 import NewImage from '../../images/Vectorlanding.png';
 import ChildNewsCard from "../../components/ChildNewsCard";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
+import { useState } from "react";
+import axios from "../../helpers/axios";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectmemberPublication } from "../../redux/memberPublication/memberPublicationSlice";
+import Spinner from "../../components/Spinner";
+import { useEffect } from "react";
+import { getMemberPublication } from "../../redux/memberPublication/memberPublicationAPi";
 
 export default function Publications(props){
+
+    const dispatch = useAppDispatch();
+    const { status,publication} = useAppSelector(selectmemberPublication);
+
+    useEffect(()=>{
+        dispatch(getMemberPublication({}))
+    },[])
     return(
         <DashboardLayout>
-        <Grid mx={1}>
-            <Grid className='light-green-bg rounded-corners'>
-               <Typography variant='caption' fontWeight='400' marginX={2} marginTop={1}>
-                    Feb 15th, 2022 - 10:33 
-               </Typography>
-               <Grid container justifyContent='space-around'>
-                <Grid item  md={3}  paddingLeft={2}  className='rounded-corners' >
-                  <Image src={NewImage} height='700px'  className='rounded-corners' />
-                </Grid>
+          {status=='pending'&&<Spinner/>}
 
-                <Grid item md={9} padding={3}>
-                    <Typography fontWeight='500' variant="subtitle2">
-                        dsdsdsdsdsds dsddsd dsdsdsdsdsdd dsdsdss dssdsdsds sdsdssds
-                    </Typography>
-                    <Typography fontWeight='300' variant='subtitle2'>
-                        ssdsdsdsdsds dsddsd dsdsdsdsdsdd dsdsdss dssdsdsds sdsdssdsdsdsdsdsdsds dsddsd dsdsdsdsdsdd dsdsdss dssdsdsds sdsdssdsdsdsdsdsdsds dsddsd 
-                        dsdsdsdsdsdd dsdsdss dssdsdsds sdsdssds dsdsdsdsdsdd dsdsdss dssdsdsds sdsdssdsdsdsdsdsdsdd dsdsdss dssdsdsds sdsdssds...
-                        <Typography paddingLeft={2} className='text' fontWeight='600' variant='caption'><Link href='/'><div className='nav-link'>Read More</div></Link></Typography> 
-                   </Typography>                    
-                </Grid>
-               </Grid>
-            </Grid>
-            
+        <Grid mx={1}>
+           
             <Typography variant='h6' className='text' marginTop={2}>
                 AANI Publications
             </Typography>
             <Grid container>
-                <ChildNewsCard 
-                    date='Feb 15th, 2022 - 10:33 '
-                    image={NewImage}                
-                    title='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sedLorem ipsum dolor sit '
-                    click={()=>props.setSelected(10)}
-                />
-
-                <ChildNewsCard 
-                    date='Feb 15th, 2022 - 10:33 '
-                    image={NewImage}                
-                    title='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sedLorem ipsum dolor sit '
-                    click={()=>props.setSelected(10)}
-
-                />
-                <ChildNewsCard 
-                    date='Feb 15th, 2022 - 10:33 '
-                    image={NewImage}                
-                    title='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sedLorem ipsum dolor sit '
-                    click={()=>props.setSelected(10)}
-
-                />                
+                {
+                    publication.map((data,index)=>(
+                        <ChildNewsCard 
+                        key={index}
+                        date='Feb 15th, 2022 - 10:33 '
+                        image={NewImage}                
+                        title={data.name}
+                        click={()=>props.setSelected(10)}
+                    />
+                    ))
+                }
             </Grid>
         </Grid>
         </DashboardLayout>

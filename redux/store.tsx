@@ -10,6 +10,9 @@ import publicationSlice from './publication/publicationSlice';
 import gallerySlice from './gallery/gallerySlice';
 import ManageAssigningExcoSlice from './ManageAssigningExco/ManageAssigningExcoSlice';
 import MembersAndExcoSlice from './members/membersSlice'
+import memeberEventsSlice from './memeberEvents/memeberEventsSlice';
+import memberNewsSlice from './memberNews/memberNewsSlice';
+import memberPublicationSlice from './memberPublication/memberPublicationSlice';
 export const store = configureStore({
   reducer: {
     // signUp:signUpReducer,
@@ -23,7 +26,13 @@ export const store = configureStore({
     publication:publicationSlice,
     gallery:gallerySlice,
     manage_assigning_exco:ManageAssigningExcoSlice,
-    member_and_exco:MembersAndExcoSlice
+    member_and_exco:MembersAndExcoSlice,
+
+
+    // members related slice
+    memeberEventsSlice:memeberEventsSlice,
+    MemberNews:memberNewsSlice,
+    memberPublication:memberPublicationSlice
   },
 })
 
