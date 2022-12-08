@@ -11,7 +11,7 @@ import { selectmemberPublication } from "../../redux/memberPublication/memberPub
 import Spinner from "../../components/Spinner";
 import { useEffect } from "react";
 import { getMemberPublication } from "../../redux/memberPublication/memberPublicationAPi";
-
+import moment from "moment";
 export default function Publications(props){
 
     const dispatch = useAppDispatch();
@@ -34,10 +34,11 @@ export default function Publications(props){
                     publication.map((data,index)=>(
                         <ChildNewsCard 
                         key={index}
-                        date='Feb 15th, 2022 - 10:33 '
+                        date={moment(data.created_at).format('LLL')}
                         image={NewImage}                
                         title={data.name}
-                        click={()=>props.setSelected(10)}
+                        data={data}
+                        // click={()=>props.setSelected(10)}
                     />
                     ))
                 }

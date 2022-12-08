@@ -1,8 +1,10 @@
 import { Grid, Typography } from "@mui/material"
 import Image from "next/image";
 import Link from 'next/link'
+import { useRouter } from "next/router";
 
 export default function ChildNewsCard (props){
+    const route = useRouter()
     return(
         <Grid px={1} item md={4}>
             <Grid item md={11} marginX={1}>
@@ -13,7 +15,7 @@ export default function ChildNewsCard (props){
                         </Typography>
                     </Grid>
                     <Grid item sm={3}>
-                        <Image height='900px' src={props.image} className='rounded-corners-small' />
+                        <img height={'70px'}  src={props.image.src} className='rounded-corners-small' />
                     </Grid>
                     <Grid item paddingLeft={1} sm={9}>
                         <Typography textAlign='justify' variant='subtitle2' fontWeight='400' className='text'> 
@@ -21,7 +23,11 @@ export default function ChildNewsCard (props){
                         </Typography>
                     </Grid>
                     {/* <Link href="/"> */}
-                        <Typography  onClick={props.click} variant='caption' fontWeight='500' className='text nav-link green-text'>Read More</Typography>
+                    <br/>
+                        <Typography  onClick={()=>{
+                            localStorage.setItem('publication_detail',JSON.stringify(props.data))
+                            route.push('/members/NewsDetail/')
+                        }} variant='caption' fontWeight='500' className='text nav-link green-text'>Read More</Typography>
                     {/* </Link> */}
                 </Grid>
             </Grid>

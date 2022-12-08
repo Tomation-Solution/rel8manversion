@@ -7,48 +7,102 @@ import ChatImage from '../../images/logo.png'
 import ChatCard from "../../components/ChatCard";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import Router from "next/router";
-
+import { useAppSelector,useAppDispatch} from '../../redux/hooks'
+import { addChat, selectChat } from "../../redux/Chat/ChatSlice";
+import { useEffect } from "react";
+import { get_list_members, get_old_chats } from "../../redux/Chat/ChatApi";
+import axios from "../../helpers/axios";
+import Spinner from '../../components/Spinner'
 
 export default function SingleChat (){
         const date = new Date();
     // console.log(text)
+    const dispatch = useAppDispatch()
+    const {status,members,chat} = useAppSelector(selectChat) 
     const [text, setText] = useState('')
     const [user, setUser] = useState('')
+    const [logged_in_user,setLoggedInUser] = useState(null)
+    const [messages, setMessages]=useState([])
+    const [web_socket,setWeb_socket] = useState(null)
+
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
-    const sendMessage=()=>{
-        setMessages([...messages, {
-            'sender':'Funmi',
-            'message' : text,
-            'time': date.getHours() +':' + date.getMinutes() + ' pm',
-            'date' : monthNames[date.getMonth()]+'.'  + ' ' + date.getDay() + ', '+ date.getFullYear()
-        }])
-        console.log(messages)
-    }
-    const [messages, setMessages]=useState([
-        {
-        'sender':'me',
-        'message': 'Whats up man',
-        'time' : '10:00 am',
-        'date' : 'Feb. 2, 2020'
-         },
-         {
-            'sender':'me',
-            'message': 'Hope you are doing good?',
-            'time' : '10:00 am',
-            'date' : 'Feb. 2, 2020'
-             },
-             {
-                'sender':'Shola James',
-                'message': 'Am good',
-                'time' : '10:18 am',
-                'date' : 'Feb. 2, 2020'
-                 },
 
-])
+    const getLoggedInUser =async ()=>{
+
+        try{
+            const resp = await axios.get('/tenant/user/memberlist-info/my_profile/')
+            console.log({resp})
+            let resp_data = resp.data.data
+            setLoggedInUser(resp_data[0])
+        }
+        catch(err){
+            // notify
+        }
+    }
+    const sendMessage=()=>{
+        // web_socket
+        const data ={
+            'message':text,
+            'send_user_id':logged_in_user.user,
+            'is_group':false
+        }
+
+        try{
+            web_socket.send(JSON.stringify(data))
+           }
+           catch(e){
+             console.log('catch',e)
+           }
+
+           web_socket.onmessage = (e) => {
+            // a message was received
+            const response = JSON.parse(e.data)
+            console.log({response})
+            dispatch(addChat({
+                'user__id':response.send_user_id,
+                'message':response.message
+            }))
+            // setAllmessages(prevState => [...prevState, response])
+            // inputRef.current.clear()
+          };
+    }
+
+    useEffect(()=>{
+        getLoggedInUser()
+        dispatch(get_list_members({}))
+    },[])
+    
+
+    useEffect(()=>{
+        if(user){
+            //get users message
+            const room_name = logged_in_user.user>user.more.user?`${logged_in_user.user}and${user.more.user}`:`${user.more.user}and${logged_in_user.user}`
+            
+            dispatch(get_old_chats(`?room_name=${room_name}`))
+
+            var ws = new WebSocket(`ws://rel8-backend-production.up.railway.app/ws/chat/nimn/${room_name}/`)
+            setWeb_socket(ws)
+            ws.onopen = (e) => {
+                // connection opened
+                console.log('connecting',e)
+              };
+        
+             
+        
+              ws.onclose = (e) => {
+                console.log('err',e)
+              }
+        }
+    },[user])
+
+console.log({chat})
     return(
         <DashboardLayout>
+            { !logged_in_user&&<Spinner/>}
+            {/* { !user&&<Spinner/>} */}
+            
         <Grid mx={1}>
             <Grid container justifyContent='space-between' paddingY={2}>
                 <Typography marginBottom={2} className='text'>Private Chatroom</Typography>
@@ -71,12 +125,27 @@ export default function SingleChat (){
                             // inputProps={InputAdornment:(<Icon name='hey'/>)}
                         />
                     </Grid>
-                    { [
-                        {id:1 , 'time':'10:40 am', date:'Feb.2, 2022', image:ChatImage, name:'Ola James', message:'Hello, how are you'},
-                        {id:2 ,'time':'10:51 am', date:'Feb.2, 2022', image:ChatImage, name:'Abubakar Yusuf', message:'How have you been'},
-                        {id:3 ,'time':'09:30 pm', date:'Feb.2, 2022', image:ChatImage, name:'Chukwu Mike', message:'Are you still up for nominations?'},
-                        {id:4 ,'time':'10:51 am', date:'Feb.2, 2022', image:ChatImage, name:'Justice Jane', message:'How about the exxcuive meeting'}
-                    ].map((e,index)=><Grid onClick={()=>setUser(e)} key={index}>
+                    {
+                    //  [
+                    //     {id:1 , 'time':'10:40 am', date:'Feb.2, 2022', image:ChatImage, name:'Ola James', message:'Hello, how are you'},
+                    //     {id:2 ,'time':'10:51 am', date:'Feb.2, 2022', image:ChatImage, name:'Abubakar Yusuf', message:'How have you been'},
+                    //     {id:3 ,'time':'09:30 pm', date:'Feb.2, 2022', image:ChatImage, name:'Chukwu Mike', message:'Are you still up for nominations?'},
+                    //     {id:4 ,'time':'10:51 am', date:'Feb.2, 2022', image:ChatImage, name:'Justice Jane', message:'How about the exxcuive meeting'}
+                    // ]
+                    
+                    members.map(data=>{
+                        return {
+                            more:data,
+                            message:'',
+                            id:data.id,
+                            'time':'..',
+                            date:'',
+                            image:'',
+                            name:data.member_info.find(d=>{
+                                return d.name.toLocaleLowerCase() == 'name' ||  d.name.toLocaleLowerCase() == 'first' ||d.name.toLocaleLowerCase() == 'first name' || d.name.toLocaleLowerCase() == 'surname'
+                            })['value']
+                        }
+                    }).map((e,index)=><Grid onClick={()=>setUser(e)} key={index}>
                         <ChatCard bg={e.id == user.id ?'light-green-bg':'light-grey-bg'} time={e.time} date={e.date} image={e.image} name={e.name} message={e.message} />
                     </Grid>)
                     // <ChatCard time='10:43 am' date='Feb.2, 2022' image={ChatImage} name='Abubakar Yusuf' message='How have you been' />
@@ -94,8 +163,8 @@ export default function SingleChat (){
                     <Grid item lg={12} sx={{height:'75vh'}} className='rounded-corners light-green-bg' paddingY={2}>
                         { user ?
                         <Grid className='chat-bg' sx={{height:'70vh', overflow:'scroll', overflowX:'hidden'}} >
-                            {messages.map((e)=>
-                            (e.sender=='me' ?
+                            {chat.map((e)=>
+                            (e.user__id==logged_in_user.user ?
                                 <Grid container marginX={3} marginY={1} sx={{maxWidth:'60%', minWidth:'10%', borderRadius:'10px', float:'right'}} paddingX={1} paddingBottom={1} className='dark-green-bg'>
                                     <Grid container >
                                         <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='white-text' > {e.date + ' - ' + e.time} </Typography>
@@ -135,7 +204,7 @@ export default function SingleChat (){
                                     placeholder='Type Message'
                                     size='large'
                                     sx={{width:'100%', borderBottom:'none'}}
-                                    onChange={()=>setText(event.target.value)}
+                                    onChange={(event)=>setText(event.target.value)}
                                     InputProps={{ disableUnderline:true }}
                                 />
                             </Grid>

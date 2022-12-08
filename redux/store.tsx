@@ -13,6 +13,7 @@ import MembersAndExcoSlice from './members/membersSlice'
 import memeberEventsSlice from './memeberEvents/memeberEventsSlice';
 import memberNewsSlice from './memberNews/memberNewsSlice';
 import memberPublicationSlice from './memberPublication/memberPublicationSlice';
+import ChatSlice from './Chat/ChatSlice';
 export const store = configureStore({
   reducer: {
     // signUp:signUpReducer,
@@ -28,7 +29,7 @@ export const store = configureStore({
     manage_assigning_exco:ManageAssigningExcoSlice,
     member_and_exco:MembersAndExcoSlice,
 
-
+    chat:ChatSlice,
     // members related slice
     memeberEventsSlice:memeberEventsSlice,
     MemberNews:memberNewsSlice,

@@ -10,7 +10,7 @@ export default function ChatCard(props){
             </Typography>
             <Grid container >
                 <Grid item paddingRight={2}>
-                    <Image src={props.image} height={45} width={45} className='rounded-corners'/>
+                    {/* <Image src={props.image} height={'45px'} width={'45px'} className='rounded-corners'/> */}
                 </Grid>
                 <Grid item>
                     <Typography variant='subtitle2' className='green-text' fontWeight='bold'>

@@ -109,10 +109,9 @@ export const NavItem = (props) => {
           </Box>
         </Button>
       <Collapse in={open} timeout="auto" unmountOnExit>
-      <NextLink href='/excos' passHref>
+      {/* <NextLink href='/excos' passHref>
         <Button
             component="a"
-            // startIcon={icon}
             disableRipple
             sx={{ backgroundColor: router.pathname=='/excos' && '#E1F1DC', borderRadius: 1,
               color: router.pathname=='/excos' ? '#2B4A21' : 'white',
@@ -132,7 +131,7 @@ export const NavItem = (props) => {
               Excos
             </Box>
           </Button>
-        </NextLink>
+        </NextLink> */}
 
 
         <NextLink href='/members/publications' passHref>

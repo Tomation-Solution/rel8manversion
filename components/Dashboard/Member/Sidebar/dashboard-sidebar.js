@@ -41,7 +41,7 @@ const items = [
   {
     href: '/members/news',
     icon: (<Info fontSize="small" />),
-    title: 'AANI News'
+    title: 'Nimn News'
   },
   {
 
