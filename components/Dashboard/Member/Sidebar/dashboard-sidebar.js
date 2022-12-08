@@ -34,7 +34,7 @@ const items = [
   },
 
   {
-    href: '/members/chat',
+    href: '/members/single-chat',
     icon: (<ChatBubble fontSize="small" />),
     title: 'Chat'
   },
@@ -94,30 +94,17 @@ export const DashboardSidebar = (props) => {
         }}
       >
         <div>
-          <Box sx={{ px: 2 }}>
-            <Box
-              my={2}
-              sx={{
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                cursor: 'pointer',
-                display: 'flex',
-                justifyContent: 'space-between',
-                px: 3,
-                py: '11px',
-                borderRadius: 1
+          <br/>
+          <img 
+              src={LogoImage.src}
+              alt='logo'
+              style={{
+                'width':'80px',
+                'margin':'0 auto',
+                'display':'block',
+
               }}
-            >
-              <Image src={LogoImage}/>
-              {/* <SelectorIcon
-                sx={{
-                  color: 'neutral.500',
-                  width: 14,
-                  height: 14
-                }}
-              /> */}
-            </Box>
-          </Box>
+              />
         </div>
         <Divider
           sx={{
@@ -146,7 +133,7 @@ export const DashboardSidebar = (props) => {
         open
         PaperProps={{
           sx: {
-            backgroundColor: '#365C2A',
+            backgroundColor: ' #075a94',
             color: '#FFFFFF',
             width: 200,
             borderRadius:"10px"

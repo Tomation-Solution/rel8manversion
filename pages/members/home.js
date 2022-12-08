@@ -61,7 +61,7 @@ export default function Home(props){
           <br/>
           
           <Grid container md={12} justifyContent='space-around'>
-              <Grid item md={8} sm={12} sx={12} marginY={2} paddingBottom={2} className='light-green-bg rounded-corners'>
+              <Grid item md={8} sm={12} sx={12} marginY={2} paddingBottom={2} className='rounded-corners' style={{'color':'#04a9fb','backgroundColor':'rgba(4, 169, 251, 0.11)'}}>
                 <Grid container md={12}  justifyContent='space-between' marginX={3} marginY={2}>
                   <Grid item>
                     <Typography fontWeight='500'  className='text '>
@@ -91,12 +91,13 @@ export default function Home(props){
                 <Grid md={4} marginRight={2} marginTop={2} style={{float:'right'}}>
                 <GreenButton text='Register to Attend' radius='10px'
                 click={(e)=>register_for_event(events.slice(0)[0])}
-               textColor='white' paddingY={1} paddingX={2} bg='#436937'/>
+               textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                   {/* <Button variant='contained' size='small' className={[styles.button, 'button-lower'] }>Register to Attend</Button>    */}
                 </Grid>
 
               </Grid>
-              <Grid item md={3} sm={12} xs={12} className='light-green-bg rounded-corners' paddingY={3} >
+              {/* light-green-bg  */}
+              <Grid item md={3} sm={12} xs={12} className='rounded-corners' style={{'color':'#04a9fb','backgroundColor':'rgba(4, 169, 251, 0.11)'}} paddingY={3} >
                   <Grid container justifyContent='space-evenly'>
                   <Grid item>
                     <AccountBalanceWalletRounded/>
@@ -111,7 +112,7 @@ export default function Home(props){
                     <Grid item md={8}>
                     <br/>
                     <GreenButton text='Pay' radius='10px'
-                      textColor='white' paddingY={1} paddingX={1} marginX={2} bg='#436937'/>
+                      textColor='white' paddingY={1} paddingX={1} marginX={2} bg='#04a9fb'/>
                       {/* <Button variant='contained' size='small' className={[styles.button, 'button-lower'] }>
                         Pay
                       </Button> */}

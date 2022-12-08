@@ -20,7 +20,7 @@ export default function NoChapter(){
                 </Grid>
                 <br/>
                 <GreenButton text='Go to Home' radius='10px'
-                textColor='white' paddingY={1} paddingX={3} bg='#436937'
+                textColor='white' paddingY={1} paddingX={3} bg='#04a9fb'
                 click={()=>router.push('/')}
               />
             {/* </Grid> */}

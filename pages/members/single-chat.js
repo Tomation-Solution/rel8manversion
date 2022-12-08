@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AddToPhotos, SendRounded } from "@mui/icons-material";
 import { Grid, Typography, IconButton, TextField, InputAdornment, Icon } from "@mui/material";
 import GreenButton from "../../components/Buttonn";
@@ -8,15 +8,28 @@ import ChatCard from "../../components/ChatCard";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import Router from "next/router";
 import { useAppSelector,useAppDispatch} from '../../redux/hooks'
-import { addChat, selectChat } from "../../redux/Chat/ChatSlice";
+import { addChat, selectChat,clearChat } from "../../redux/Chat/ChatSlice";
 import { useEffect } from "react";
 import { get_list_members, get_old_chats } from "../../redux/Chat/ChatApi";
 import axios from "../../helpers/axios";
 import Spinner from '../../components/Spinner'
-
+import { useMediaQuery } from 'react-responsive'
+import BasicModal from '../../components/Modals'
 export default function SingleChat (){
         const date = new Date();
     // console.log(text)
+    const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+    const isLaptop = useMediaQuery({
+        query: '(min-width:1200px)'
+      })
     const dispatch = useAppDispatch()
     const {status,members,chat} = useAppSelector(selectChat) 
     const [text, setText] = useState('')
@@ -48,7 +61,7 @@ export default function SingleChat (){
             'send_user_id':logged_in_user.user,
             'is_group':false
         }
-
+        
         try{
             web_socket.send(JSON.stringify(data))
            }
@@ -57,6 +70,7 @@ export default function SingleChat (){
            }
 
            web_socket.onmessage = (e) => {
+
             // a message was received
             const response = JSON.parse(e.data)
             console.log({response})
@@ -67,6 +81,7 @@ export default function SingleChat (){
             // setAllmessages(prevState => [...prevState, response])
             // inputRef.current.clear()
           };
+
     }
 
     useEffect(()=>{
@@ -97,17 +112,17 @@ export default function SingleChat (){
         }
     },[user])
 
-console.log({chat})
+
+    
     return(
         <DashboardLayout>
             { !logged_in_user&&<Spinner/>}
-            {/* { !user&&<Spinner/>} */}
             
         <Grid mx={1}>
             <Grid container justifyContent='space-between' paddingY={2}>
                 <Typography marginBottom={2} className='text'>Private Chatroom</Typography>
                 <GreenButton text='General Chat' click={()=>Router.back()} radius='10px'
-                textColor='white' paddingY={1} paddingX={2} bg='#436937'
+                textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'
                 />
             </Grid>
 
@@ -132,8 +147,8 @@ console.log({chat})
                     //     {id:3 ,'time':'09:30 pm', date:'Feb.2, 2022', image:ChatImage, name:'Chukwu Mike', message:'Are you still up for nominations?'},
                     //     {id:4 ,'time':'10:51 am', date:'Feb.2, 2022', image:ChatImage, name:'Justice Jane', message:'How about the exxcuive meeting'}
                     // ]
-                    
-                    members.map(data=>{
+                    logged_in_user?
+                    members.filter((value)=>logged_in_user.user !=value.user).map(data=>{
                         return {
                             more:data,
                             message:'',
@@ -145,78 +160,46 @@ console.log({chat})
                                 return d.name.toLocaleLowerCase() == 'name' ||  d.name.toLocaleLowerCase() == 'first' ||d.name.toLocaleLowerCase() == 'first name' || d.name.toLocaleLowerCase() == 'surname'
                             })['value']
                         }
-                    }).map((e,index)=><Grid onClick={()=>setUser(e)} key={index}>
+                    }).map((e,index)=><Grid onClick={()=>{
+                        dispatch(clearChat({}))
+                        setOpen(true)
+                        setUser(e)
+
+                    }} key={index}>
                         <ChatCard bg={e.id == user.id ?'light-green-bg':'light-grey-bg'} time={e.time} date={e.date} image={e.image} name={e.name} message={e.message} />
-                    </Grid>)
+                    </Grid>):''
                     // <ChatCard time='10:43 am' date='Feb.2, 2022' image={ChatImage} name='Abubakar Yusuf' message='How have you been' />
                     // <ChatCard time='09:30 pm' date='Feb.2, 2022' image={ChatImage} name='Chukwu Mie' message='Are ou still up for nominations?' />
                     // <ChatCard time='05:30 am' date='Feb.3, 2022' image={ChatImage} name='Justice Jane' message='How about the exxcuive meeting' />
                     }
                     
                 </Grid>
-
-                <Grid item lg={8} >
-                    {user ?
-                    <ChatCard image={user.image} name={user.name} message='sddsdsds' header={true}/>
-                    :''
+                    {
+                        isLaptop?
+                        <ChatPane
+                        logged_in_user={logged_in_user}
+                        status={status}
+                                user={user}
+                                chat={chat}
+                                setText={setText}
+                                sendMessage={sendMessage}
+                        />:
+                        <BasicModal
+                        open={open}
+                        handleClose={handleClose}
+                        body={
+                            <ChatPane
+                            logged_in_user={logged_in_user}
+                                status={status}
+                                user={user}
+                                chat={chat}
+                                setText={setText}
+                                sendMessage={sendMessage}
+                            />
+                        }
+                        >
+                        </BasicModal>
                     }
-                    <Grid item lg={12} sx={{height:'75vh'}} className='rounded-corners light-green-bg' paddingY={2}>
-                        { user ?
-                        <Grid className='chat-bg' sx={{height:'70vh', overflow:'scroll', overflowX:'hidden'}} >
-                            {chat.map((e)=>
-                            (e.user__id==logged_in_user.user ?
-                                <Grid container marginX={3} marginY={1} sx={{maxWidth:'60%', minWidth:'10%', borderRadius:'10px', float:'right'}} paddingX={1} paddingBottom={1} className='dark-green-bg'>
-                                    <Grid container >
-                                        <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='white-text' > {e.date + ' - ' + e.time} </Typography>
-                                    </Grid>
-                                    <Grid container>
-                                        <Typography variant='body2' fontWeight='300' className='white-text' > {e.message} </Typography>
-                                    </Grid>
-                                </Grid>:
-                                <Grid container marginX={3} marginY={1} sx={{maxWidth:'60%', minWidth:'10%', borderRadius:'10px'}} paddingX={1} paddingBottom={1} className='white-bg'>
-                                    <Grid container justifyContent='space-between'>
-                                        <Grid item>
-                                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='light-text' > {e.sender} </Typography>
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='text' > {e.date + ' - ' + e.time} </Typography>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container>
-                                        <Typography variant='body2' fontWeight='300' className='text' > {e.message} </Typography>
-                                    </Grid>
-                                </Grid>)
-                            )}
-
-           
-                        </Grid> : 
-                        <Typography textAlign='center' >Select a user to chat with</Typography>}
-                        <Grid md={6} paddingX={1} container justifyContent='space-between'   marginTop={5} position='fixed' bottom='10px' className='rounded-corners light-grey-bg'>
-                            <Grid item paddingY={1}  >
-                                <IconButton >
-                                    <AddToPhotos/>
-                                </IconButton>
-                            </Grid>
-                            <Grid item paddingTop={1}  md={10}>
-                                <TextField
-                                    variant='standard'
-                                    fullwidth
-                                    placeholder='Type Message'
-                                    size='large'
-                                    sx={{width:'100%', borderBottom:'none'}}
-                                    onChange={(event)=>setText(event.target.value)}
-                                    InputProps={{ disableUnderline:true }}
-                                />
-                            </Grid>
-                            <Grid item paddingY={1}>
-                                <IconButton onClick={sendMessage}>
-                                <SendRounded/>
-                                </IconButton>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    
-                </Grid>
             </Grid>
             
         </Grid>
@@ -224,3 +207,79 @@ console.log({chat})
     )
     
 } 
+
+
+
+
+const ChatPane = (props)=>{
+    
+    const ref = useRef()
+    
+    return (
+    <Grid item lg={8} >
+    {props.user ?
+    <ChatCard image={props.user.image} name={props.user.name} message='sddsdsds' header={true}/>
+    :''
+    }
+    <Grid item lg={12} sx={{height:'75vh'}} className='rounded-corners light-green-bg' style={{'padding':'0px'}}>
+    { props.status=='pending'&&<Spinner/>}
+
+        { props.user ?
+        <Grid className='chat-bg' sx={{height:'60vh', overflow:'scroll', overflowX:'hidden'}} >
+            {props.chat.map((e)=>
+            (e.user__id==props.logged_in_user.user ?
+                <Grid container marginX={3} marginY={1} sx={{maxWidth:'60%', minWidth:'10%', borderRadius:'10px', float:'right'}} paddingX={1} paddingBottom={1} className='dark-green-bg'>
+                    <Grid container >
+                        <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='white-text' > {e.date + ' - ' + e.time} </Typography>
+                    </Grid>
+                    <Grid container>
+                        <Typography variant='body2' fontWeight='300' className='white-text' > {e.message} </Typography>
+                    </Grid>
+                </Grid>:
+                <Grid container marginX={3} marginY={1} sx={{maxWidth:'60%', minWidth:'10%', borderRadius:'10px'}} paddingX={1} paddingBottom={1} className='white-bg'>
+                    <Grid container justifyContent='space-between'>
+                        <Grid item>
+                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='light-text' > {e.sender} </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='text' > {e.date + ' - ' + e.time} </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                        <Typography variant='body2' fontWeight='300' className='text' > {e.message} </Typography>
+                    </Grid>
+                </Grid>)
+            )}
+        </Grid> : 
+        <Typography textAlign='center' >Select a user to chat with</Typography>}
+        <Grid md={6} paddingX={1} container justifyContent='space-between'   marginTop={5} position='fixed' bottom='10px' className='rounded-corners light-grey-bg'>
+            <Grid item paddingY={1}  >
+                <IconButton >
+                    <AddToPhotos/>
+                </IconButton>
+            </Grid>
+            <Grid item paddingTop={1}  md={10}>
+                <TextField
+                    variant='standard'
+                    fullwidth
+                    placeholder='Type Message'
+                    size='large'
+                    ref={ref}
+                    sx={{width:'100%', borderBottom:'none'}}
+                    onChange={(event)=>props.setText(event.target.value)}
+                    InputProps={{ disableUnderline:true }}
+                />
+            </Grid>
+            <Grid item paddingY={1}>
+                <IconButton onClick={()=>{
+                    props.sendMessage()
+                }}>
+                <SendRounded/>
+                </IconButton>
+            </Grid>
+        
+        </Grid>
+    </Grid>
+    
+</Grid>
+)}

@@ -26,6 +26,9 @@ export const ChatSlice = createSlice({
     reducers:{
         addChat:(state,action)=>{
             state.chat =[...state.chat,action.payload]
+        },
+        clearChat:(state,action)=>{
+            state.chat=[]
         }
     },
     extraReducers:({addCase})=>{
@@ -63,6 +66,6 @@ export const ChatSlice = createSlice({
     }
 })
 
-export const {addChat}  =  ChatSlice.actions
+export const {addChat,clearChat}  =  ChatSlice.actions
 export default ChatSlice.reducer
 export const selectChat = (state:RootState)=>state.chat

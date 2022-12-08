@@ -54,11 +54,11 @@ export default function EventCard (props:Prop){
                         props.data?.is_virtual?
                 <Grid className='light-text'>{props.data?.event_access.link}</Grid>
 :<GreenButton text='Attend' radius='10px'
-textColor='white' paddingY={1} paddingX={2} bg='#436937'/>
+textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                         :
                         <GreenButton text='Register to Attend' radius='10px'
                         click={(e)=>register_for_event()}
-                    textColor='white' paddingY={1} paddingX={2} bg='#436937'/>
+                    textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                    
                    }
                 </Grid>
