@@ -14,12 +14,15 @@ import {useAppDispatch,useAppSelector} from '../../redux/hooks'
 import { useEffect } from "react";
 import { getMembersEvent } from "../../redux/memeberEvents/memeberEventsApi";
 import { selectMemberEvent } from "../../redux/memeberEvents/memeberEventsSlice";
-import Spinner from '../../components/spinner'
 import { getMemberNews } from "../../redux/memberNews/memberNewsApi";
 import { selectMemberNews } from "../../redux/memberNews/memberNewsSlice";
 import useToast from "../../hooks/useToast";
 import { useState } from "react";
+import Spinner from '../../components/Spinner'
 import axios from "../../helpers/axios";
+
+
+
 export default function Home(props){
 
     const dispatch = useAppDispatch()
