@@ -32,8 +32,10 @@ export const getMembersEvent = createAsyncThunk(
     'MemberEvent/getMembersEvent',async ({is_chapter=false}:getMembersEventProp,thunkApi)=>{
         //
         // ?is_chapter='+is_chapter
+        const chapter:any = localStorage.getItem('chapter')
+
         try{
-            const resp = await axios.get('/tenant/event/eventview/get_events/');
+            const resp = await axios.get(`/tenant/event/eventview/get_events/${chapter?'?is_chapter=True':''}`);
             console.log({resp},'justin')
             return resp.data.data as MemberEventType[]
         }

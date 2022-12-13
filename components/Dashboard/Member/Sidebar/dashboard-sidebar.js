@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
@@ -9,7 +9,10 @@ import { Person, DashboardCustomize, PeopleRounded, PersonPinRounded,
   SettingsSuggest, AccountBalanceWalletRounded, Info, LogoutRounded, EventRounded, ChatBubble, Photo, MenuBook  } from '@mui/icons-material';
 import Image from 'next/image';
 import LogoImage from '../../../../images/logo.png'
-
+import SwitchLabels from '../../../SwitchLabels';
+const centerSwitch={
+         'display':'flex','alignItems':'center','justifyContent':'center'
+        }
 const items = [
   {
     href: '/members/home',
@@ -65,11 +68,36 @@ const items = [
 ];
 
 export const DashboardSidebar = (props) => {
+  const [custom_window,setCustom_window] = useState(null)
+  const [chapter,setChapter] = useState(false);
+  const [exco,setExco]=useState(false)
   const { open, onClose } = props;
   const router = useRouter();
   const theme = useTheme();
-  const lgUp = useMediaQuery(theme.breakpoints.up('lg')
-)
+  const lgUp = useMediaQuery(theme.breakpoints.up('lg'))
+
+  useEffect(()=>{
+    if(custom_window){
+      //check if chapter is on or not
+     let isChapter  = localStorage.getItem('chapter')
+     let isExco  = localStorage.getItem('exco')
+     if(isChapter){
+      setChapter(true)
+    }
+    if(isExco){
+      setExco(true)
+     }
+    }
+  },[custom_window])
+
+  try{
+    window.localStorage
+      if(!custom_window){
+        setCustom_window(window)
+      }
+  }catch(err){
+    //
+  }
   useEffect(
     () => {
       if (!router.isReady) {
@@ -121,6 +149,49 @@ export const DashboardSidebar = (props) => {
               title={item.title}
             />
           ))}
+
+         <div style={centerSwitch}>
+
+         <SwitchLabels
+          label={'Chapter'}
+          switch={chapter}
+          func={
+            ()=>{
+              console.log('Yo Yo')
+              if(chapter){
+                localStorage.removeItem('chapter')
+              }else{
+                localStorage.setItem('chapter','1')
+              }
+            setChapter(!chapter)
+
+              window.location.reload()
+            }
+          }
+          />
+         </div>
+
+         <div style={centerSwitch}>
+
+<SwitchLabels
+          label={'For Exco'}
+          switch={exco}
+          func={
+            ()=>{
+              //
+              if(exco){
+                localStorage.removeItem('exco')
+              }else{
+                localStorage.setItem('exco','1')
+              }
+
+              setExco(!exco)
+              window.location.reload()
+
+            }
+          }
+          />
+        </div>
         </Box>
         </Box>
     </>

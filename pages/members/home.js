@@ -50,10 +50,12 @@ export default function Home(props){
 
         }
     }
+    
     useEffect(()=>{
       dispatch(getMembersEvent({}))
       dispatch(getMemberNews({}))
     },[])
+
 
     return(
         <DashboardLayout>
