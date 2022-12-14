@@ -97,7 +97,7 @@ export default function SingleChat (){
             
             dispatch(get_old_chats(`?room_name=${room_name}`))
 
-            var ws = new WebSocket(`ws://rel8-backend-production.up.railway.app/ws/chat/nimn/${room_name}/`)
+            var ws = new WebSocket(`wss://rel8-backend-production.up.railway.app/ws/chat/nimn/${room_name}/`)
             setWeb_socket(ws)
             ws.onopen = (e) => {
                 // connection opened
