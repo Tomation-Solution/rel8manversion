@@ -61,6 +61,8 @@ export const ChatSlice = createSlice({
         addCase(get_old_chats.rejected,(state,action)=>{
             
             state.status='error'
+            state.chat=[]
+            state.errorMessage='Something went wrong'
             console.log(action.payload)
         })
     }

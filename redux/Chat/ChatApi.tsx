@@ -44,11 +44,13 @@ export const get_old_chats = createAsyncThunk(
 
         try{
             const resp = await axios.get(`/tenant/chat/${data}`)
-
+            console.log({'chat resp':resp})
             return resp.data.data as chatResponseType[]
         }
         catch(err:any){
-            return thunkApi.rejectWithValue(err)
+            console.log({'chat err':err})
+
+            return thunkApi.rejectWithValue({'err':'somth'})
         }
 
 
