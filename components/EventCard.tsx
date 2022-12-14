@@ -37,6 +37,18 @@ export default function EventCard (props:Prop){
 
         }
     }
+
+    const paid_event = async()=>{
+        if(!props.data.id) return 
+        setisLoading(true)
+        const form = new FormData()
+        form.append('event_id',JSON.stringify(props.data.id))
+        const resp = await axios.post('/tenant/dues/process_payment/event_payment/'+props.data.id,)
+        console.log(resp)
+        setisLoading(false)
+        // window.location.href=resp
+    }
+
     return(
         <Grid md={4} >
             {isLoading==true?<Spinner/>:''}
@@ -57,7 +69,15 @@ export default function EventCard (props:Prop){
 textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                         :
                         <GreenButton text='Register to Attend' radius='10px'
-                        click={(e)=>register_for_event()}
+                        click={(e)=>{
+                            if(props.data.is_paid_event){
+                                paid_event()
+                            }   else{
+
+                                register_for_event()
+                            } 
+                        
+                        }}
                     textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                    
                    }

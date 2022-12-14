@@ -23,7 +23,7 @@ export default function Events(){
     useEffect(()=>{
       dispatch(getMembersEvent({}))
     },[])
-
+    console.log(events)
     return(
         <DashboardLayout>
           {status=='pending'&&<Spinner/>}
