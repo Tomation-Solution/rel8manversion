@@ -11,7 +11,8 @@ import Image from 'next/image';
 import LogoImage from '../../../../images/logo.png'
 import SwitchLabels from '../../../SwitchLabels';
 const centerSwitch={
-         'display':'flex','alignItems':'center','justifyContent':'center'
+         'display':'flex',
+         'padding':' 0 .7rem'
         }
 const items = [
   {
@@ -140,6 +141,94 @@ export const DashboardSidebar = (props) => {
             my: 1
           }}
         />
+         <div style={centerSwitch}>
+
+<SwitchLabels
+ label={'Council'}
+ switch={chapter}
+ func={
+   ()=>{
+   //   console.log('Yo Yo')
+   //   if(chapter){
+   //     localStorage.removeItem('chapter')
+   //   }else{
+   //     localStorage.setItem('chapter','1')
+   //   }
+   // setChapter(!chapter)
+
+     // window.location.reload()
+   }
+ }
+ />
+</div>
+
+<div style={centerSwitch}>
+
+<SwitchLabels
+ label={'Principal Officers '}
+ switch={exco}
+ func={
+   ()=>{
+     //
+     // if(exco){
+     //   localStorage.removeItem('exco')
+     // }else{
+     //   localStorage.setItem('exco','1')
+     // }
+
+     // setExco(!exco)
+     // window.location.reload()
+
+   }
+ }
+ />
+</div>
+
+
+<div style={centerSwitch}>
+
+<SwitchLabels
+ label={'Management'}
+ switch={exco}
+ func={
+   ()=>{
+     //
+     // if(exco){
+     //   localStorage.removeItem('exco')
+     // }else{
+     //   localStorage.setItem('exco','1')
+     // }
+
+     // setExco(!exco)
+     // window.location.reload()
+
+   }
+ }
+ />
+</div>
+
+<div style={centerSwitch}>
+
+<SwitchLabels
+ label={'Committee'}
+ switch={exco}
+ func={
+   ()=>{
+     //
+     // if(exco){
+     //   localStorage.removeItem('exco')
+     // }else{
+     //   localStorage.setItem('exco','1')
+     // }
+
+     // setExco(!exco)
+     // window.location.reload()
+
+   }
+ }
+ />
+</div>
+<br/>
         <Box sx={{ flexGrow: 1 }}>
           {items.map((item) => (
             <NavItem
@@ -150,48 +239,7 @@ export const DashboardSidebar = (props) => {
             />
           ))}
 
-         <div style={centerSwitch}>
-
-         <SwitchLabels
-          label={'Chapter'}
-          switch={chapter}
-          func={
-            ()=>{
-              console.log('Yo Yo')
-              if(chapter){
-                localStorage.removeItem('chapter')
-              }else{
-                localStorage.setItem('chapter','1')
-              }
-            setChapter(!chapter)
-
-              window.location.reload()
-            }
-          }
-          />
-         </div>
-
-         <div style={centerSwitch}>
-
-<SwitchLabels
-          label={'For Exco'}
-          switch={exco}
-          func={
-            ()=>{
-              //
-              if(exco){
-                localStorage.removeItem('exco')
-              }else{
-                localStorage.setItem('exco','1')
-              }
-
-              setExco(!exco)
-              window.location.reload()
-
-            }
-          }
-          />
-        </div>
+        
         </Box>
         </Box>
     </>
@@ -206,7 +254,7 @@ export const DashboardSidebar = (props) => {
           sx: {
             backgroundColor: ' #075a94',
             color: '#FFFFFF',
-            width: 200,
+            width: 210,
             borderRadius:"10px"
           }
         }}

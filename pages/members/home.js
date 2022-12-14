@@ -20,17 +20,23 @@ import useToast from "../../hooks/useToast";
 import { useState } from "react";
 import Spinner from '../../components/Spinner'
 import axios from "../../helpers/axios";
-
+import {EventContainerV2, EventV2, GalleryEventGrid, HomeLayout, MainPane, MeetingHeader, PublicationContainerv2, Publicationv2, SidePane } from '../../styles/MembersHome.style'
+import { getPublication } from "../../redux/publication/publicationApi";
+import { getMemberPublication } from "../../redux/memberPublication/memberPublicationAPi";
+import { selectmemberPublication } from "../../redux/memberPublication/memberPublicationSlice";
+import { useRouter } from "next/router";
 
 
 export default function Home(props){
-
+  const route = useRouter()
     const dispatch = useAppDispatch()
     const { status,events} = useAppSelector(selectMemberEvent)
     const {news,status:news_status} = useAppSelector(selectMemberNews)
-
+    const [images,setImages] = useState([])
+    const {status:pub_status,publication} = useAppSelector(selectmemberPublication)
     const {notify} = useToast()
     const [isLoading,setisLoading]= useState(false)
+    const [meetings,setMeetings]=useState([])
     const register_for_event = async(data)=>{
         if(!data.id) return 
         setisLoading(true)
@@ -50,158 +56,130 @@ export default function Home(props){
 
         }
     }
-    
+    const getmage =async () =>{
+
+      const resp  = await axios.get('/tenant/extras/galleryview/member_get_gallery/')
+      setImages(resp.data.data.data)
+
+  }
+
+  const get_meeting =async ()=>{
+    const resp  = await axios.get('/tenant/meeting/meeting_member/?for_members=True')
+    setMeetings(resp.data.data)
+
+  }
     useEffect(()=>{
-      dispatch(getMembersEvent({}))
+      // dispatch(getMembersEvent({}))
+      getmage()
+      get_meeting()
       dispatch(getMemberNews({}))
+      dispatch(getMemberPublication({}))
     },[])
 
-
+   
+    // "id": 1,
+    // "name": "The ExcoPart",
+    // "details": "KKKrndfr",
+    // "date_for": "2022-12-14T11:41:40+01:00",
+    // "exco": 4,
+    // "chapters": null
     return(
         <DashboardLayout>
-        <Grid>
-          {status=='pending'&&<Spinner/>}
-          {news_status=='pending'&&<Spinner/>}
-          
-          <br/>
-          
-          <Grid container md={12} justifyContent='space-around'>
-              <Grid item md={8} sm={12} sx={12} marginY={2} paddingBottom={2} className='rounded-corners' style={{'color':'#04a9fb','backgroundColor':'rgba(4, 169, 251, 0.11)'}}>
-                <Grid container md={12}  justifyContent='space-between' marginX={3} marginY={2}>
-                  <Grid item>
-                    <Typography fontWeight='500'  className='text '>
-                      Events Dashboard
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Typography fontWeight='400' className='text light-text'>
-                      {/* Aug 23, 2022 */}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                {/* // Alumni Thanksgiving Day 2022   -    Feb., 2 2022 */}
+          <HomeLayout>
+            <MainPane>
+                <MeetingHeader>
+                  <div>
+                    <h1>Next Meeting</h1>
+                    <p>Dec 23,2022</p>
+                  </div>
 
-                <Grid>
-                  <Typography variant='body2' fontWeight='300' marginX={3} className='text '>
-                    {
-                      events.slice(0).map((data,index)=>(
-                        <>
-                        {data.name} 
-                        </>
-                      )
-                    )}
-                  </Typography>
-                </Grid>
+                  <h3>
+                      10<br/>Days
+                  </h3>
+                </MeetingHeader>
+      <br/>
+      <br/>
+                    <div style={{'display':'flex','justifyContent':'space-between','alignItems':'center','padding':'0 1.2rem'}}>
+                    <h2>Gallery</h2>
+                    <h2>Meeting</h2>
+                    </div>
+                <GalleryEventGrid>
+                  
+                    <div className="galleryContainer">
 
-                <Grid md={4} marginRight={2} marginTop={2} style={{float:'right'}}>
-                <GreenButton text='Register to Attend' radius='10px'
-                click={(e)=>register_for_event(events.slice(0)[0])}
-               textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
-                  {/* <Button variant='contained' size='small' className={[styles.button, 'button-lower'] }>Register to Attend</Button>    */}
-                </Grid>
+                      <img src={images.length!=0?images[0].photo_file:''} />
+                      <p onClick={()=>{
+                          route.push('/members/gallery')
+                      }}><small>See more</small></p>
+                    </div>
 
-              </Grid>
-              {/* light-green-bg  */}
-              <Grid item md={3} sm={12} xs={12} className='rounded-corners' style={{'color':'#04a9fb','backgroundColor':'rgba(4, 169, 251, 0.11)'}} paddingY={3} >
-                  <Grid container justifyContent='space-evenly'>
-                  <Grid item>
-                    <AccountBalanceWalletRounded/>
-                  </Grid>
-                  <Grid item>
-                    <Typography fontWeight='bold' className='text'  >0.00</Typography>
-                  </Grid>
-                  <Grid container justifyContent='space-around'>
-                    <Grid item md={8}>
-                      <Typography fontWeight='normal' textAlign='center' className='text' >Oustanding</Typography>
-                    </Grid>
-                    <Grid item md={8}>
-                    <br/>
-                    <GreenButton text='Pay' radius='10px'
-                      textColor='white' paddingY={1} paddingX={1} marginX={2} bg='#04a9fb'/>
-                      {/* <Button variant='contained' size='small' className={[styles.button, 'button-lower'] }>
-                        Pay
-                      </Button> */}
-                    </Grid>
-                  </Grid>
-                  </Grid>
-              </Grid>
-          </Grid>
+                    <EventContainerV2>
 
+                      {
+                        meetings.map((data,index)=>(
+                          <EventV2 key={index}>
+                          <img
+                            src='https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1lZXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
+                          />
+                          <h4><small>{data.name}</small></h4>
+                          <p>{data.details.slice(0,30)}..</p>
+                          <div className="btn_container">
+                            <button className="main" onClick={()=>{
+                              notify('You have successfully registed for this meeting','success')
+                            }}>Accept</button>
+                            {/* <button  className="not_main">View</button> */}
+                          </div>
+                        </EventV2>
+                        ))
+                      }
 
-          {/* News */}
+                       
+                    </EventContainerV2>
+                </GalleryEventGrid>
 
-          <Grid container justifyContent='space-between'  md={11} style={{'margin':'10px auto'}} >
-            <Grid item>
-              <Typography className='text' fontWeight='500'>Latest AANI News</Typography>
-            </Grid>
-            <Grid item>
-              <Typography className='text' fontWeight='500'>..</Typography>
-            </Grid>
+                <br/>
+        <h2>Notice/ Publication</h2>
+                <PublicationContainerv2>
+               
+{
+  publication.map((pub,index)=>(
+    <Publicationv2 key={index}>
+    <img src={pub.image}/>
+    <h3>
+      {pub.name}
+    </h3>
+    <p>
+      {pub.paragraphs.length!=0?pub.paragraphs[0].paragragh.slice(0,50):''}..
+    </p>
+    <a href="#"style={{'color':'#075a94'}}
+      onClick={()=>{
+        localStorage.setItem('publication_detail',JSON.stringify(pub))
+        route.push('/members/publicationDetail')
+      }}
+    >Read More</a>
+  </Publicationv2>
+  ))
+}
 
-            {/* New Details */}
-            <Grid container  justifyContent='space-between' >
-              {
-                news.slice(0,3).map((data,index)=>(
-                  <Newscard 
-                  key={index}
-                  title={data.name}
-                  image={data.image}
-                  body={data.paragraphs.length==0?'....':data.paragraphs[0].paragragh.slice(0,100)}
-                  data={data}
-                  />
-                ))
-              }
-              
-                
-            </Grid>
+                </PublicationContainerv2>
+            </MainPane>
 
-            {/* Exco Members */}
-
-            
-          </Grid>
-          
-          {/* <Grid item md={3}  >
-                  <br/>
-              <Typography marginLeft={2} fontWeight='bold' marginBottom={1}>EXCO MEMBERS</Typography>
-              <Grid container justifyContent='space-around'  className='light-grey-bg rounded-corners' padding={3}>
-              <Typography variant='body2'  className='text' fontWeight='400'  marginY={1}>Hon. Babalola John</Typography>
-              <Typography variant='body2'  className='text' fontWeight='400'  marginY={1}>Hon. Babalola John</Typography>
-              <Typography variant='body2'  className='text' fontWeight='400'  marginY={1}>Hon. Babalola John</Typography>
-              <Typography variant='body2'  className='text' fontWeight='400'  marginY={1}>Hon. Babalola John</Typography>
-              <Typography variant='body2'  className='text' fontWeight='400'  marginY={1}>Hon. Babalola John</Typography>
-              <Typography variant='body2'  className='text' fontWeight='400'  marginY={1}>Hon. Babalola John</Typography>
-                 
-                  <Grid container justifyContent='center'>
-                        <Link href='/excos'>
-                           <Typography textAlign='center' className='nav-link text'>
-                               See All
-                           </Typography>    
-                        </Link> 
-                </Grid>
-              </Grid>
-              
-          </Grid> */}
-        <br/>
-        <Typography marginLeft={2} className='text' >Upcoming Members Events</Typography>
-
-        <Grid container justifyContent='space-between' padding={2} className='rounded-corners light-grey-bg'>
-          {/* <br/> */}
+            <SidePane>
+              <h2>Latest Updates</h2>
           {
-            events.slice(0,3).map((data,index)=>(
-              <EventCard 
-              key={index}
-              title={data.name}
-              body={data.startDate +"  "+data.startTime}
-              data={data}
-              img={'https://images.unsplash.com/photo-1670000037516-62045745b67d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}
-              />
-            ))
+          images.map((img,index)=>(
+            <img className="sideImages" key={index} src={img.photo_file}/>
+
+          ))
           }
 
-
-        </Grid>
-
-        </Grid>
+            <p
+            
+            onClick={()=>{
+              route.push('/members/gallery')
+          }}>See More</p>
+            </SidePane>
+          </HomeLayout>
         </DashboardLayout>
     )
 }

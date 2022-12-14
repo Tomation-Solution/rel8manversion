@@ -17,12 +17,14 @@
     "@mui/material": "^5.4.2",
     "@mui/x-date-pickers": "^5.0.0-alpha.3",
     "@reduxjs/toolkit": "^1.8.0",
+    "@types/styled-components": "^5.1.26",
     "axios": "^0.27.2",
     "leaflet": "1.6.0",
     "material-ui-popup-state": "^2.0.0",
     "moment": "^2.29.3",
     "next": "12.0.10",
     "next-redux-wrapper": "^7.0.5",
+    "nextjs-progressbar": "^0.0.16",
     "react": "17.0.2",
     "react-calendar": "^3.7.0",
     "react-cookie": "^4.1.1",
@@ -35,6 +37,7 @@
     "react-responsive": "^9.0.2",
     "react-simple-maps": "^2.3.0",
     "react-toastify": "^9.0.1",
+    "styled-components": "^5.3.6",
     "yup": "^0.32.11"
   },
   "devDependencies": {

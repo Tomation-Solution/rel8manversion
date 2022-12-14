@@ -6,10 +6,12 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import useToast from "../../hooks/useToast";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectMemberEvent } from "../../redux/memeberEvents/memeberEventsSlice";
 import EventCard from "../../components/EventCard";
 import Spinner from "../../components/Spinner";
+import { useEffect } from "react";
+import { getMembersEvent } from "../../redux/memeberEvents/memeberEventsApi";
 
 
 export default function Events(){
@@ -17,7 +19,10 @@ export default function Events(){
     console.log("wowo fuc")
     const { status,events} = useAppSelector(selectMemberEvent)
     const {notify} = useToast()
-
+  const dispatch = useAppDispatch()
+    useEffect(()=>{
+      dispatch(getMembersEvent({}))
+    },[])
 
     return(
         <DashboardLayout>
@@ -31,7 +36,7 @@ export default function Events(){
               title={data.name}
               body={data.startDate +"  "+data.startTime}
               data={data}
-              img={'https://images.unsplash.com/photo-1670000037516-62045745b67d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}
+              img={data.image}
               />
             ))
           }
