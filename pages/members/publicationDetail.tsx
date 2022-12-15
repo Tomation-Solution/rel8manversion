@@ -19,7 +19,6 @@ const NewsDetail:NextPage=()=>{
       if( localStorage.getItem('publication_detail')){
         data  = JSON.parse(localStorage.getItem('publication_detail'))
       }
-      console.log({data})
     return (
         <DashboardLayout>
              <img src={data?.image} alt=""  style={{'width':'100%',

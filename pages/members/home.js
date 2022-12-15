@@ -25,6 +25,8 @@ import { getPublication } from "../../redux/publication/publicationApi";
 import { getMemberPublication } from "../../redux/memberPublication/memberPublicationAPi";
 import { selectmemberPublication } from "../../redux/memberPublication/memberPublicationSlice";
 import { useRouter } from "next/router";
+import { selectMeetings } from "../../redux/memberMeeting/memberMeetingSlice";
+import { getMeetings } from "../../redux/memberMeeting/memberMeetingApi";
 
 
 export default function Home(props){
@@ -32,11 +34,11 @@ export default function Home(props){
     const dispatch = useAppDispatch()
     const { status,events} = useAppSelector(selectMemberEvent)
     const {news,status:news_status} = useAppSelector(selectMemberNews)
+    const { status:meeting_status,meetings } =useAppSelector(selectMeetings) 
     const [images,setImages] = useState([])
     const {status:pub_status,publication} = useAppSelector(selectmemberPublication)
     const {notify} = useToast()
     const [isLoading,setisLoading]= useState(false)
-    const [meetings,setMeetings]=useState([])
     const register_for_event = async(data)=>{
         if(!data.id) return 
         setisLoading(true)
@@ -63,15 +65,11 @@ export default function Home(props){
 
   }
 
-  const get_meeting =async ()=>{
-    const resp  = await axios.get('/tenant/meeting/meeting_member/?for_members=True')
-    setMeetings(resp.data.data)
 
-  }
     useEffect(()=>{
       // dispatch(getMembersEvent({}))
+      dispatch(getMeetings({}))
       getmage()
-      get_meeting()
       dispatch(getMemberNews({}))
       dispatch(getMemberPublication({}))
     },[])

@@ -10,6 +10,8 @@ import { Person, DashboardCustomize, PeopleRounded, PersonPinRounded,
 import Image from 'next/image';
 import LogoImage from '../../../../images/logo.png'
 import SwitchLabels from '../../../SwitchLabels';
+import Spinner from "../../../Spinner";
+
 const centerSwitch={
          'display':'flex',
          'padding':' 0 .7rem'
@@ -71,7 +73,7 @@ const items = [
 export const DashboardSidebar = (props) => {
   const [custom_window,setCustom_window] = useState(null)
   const [chapter,setChapter] = useState(false);
-  const [exco,setExco]=useState(false)
+  const [exco,setExco]=useState(0)
   const { open, onClose } = props;
   const router = useRouter();
   const theme = useTheme();
@@ -86,7 +88,7 @@ export const DashboardSidebar = (props) => {
       setChapter(true)
     }
     if(isExco){
-      setExco(true)
+      setExco(JSON.parse(isExco))
      }
     }
   },[custom_window])
@@ -113,137 +115,90 @@ export const DashboardSidebar = (props) => {
     [router.asPath]
   );
 
-  const content = (
-    <>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%'
-        }}
-      >
-        <div>
-          <br/>
-          <img 
-              src={LogoImage.src}
-              alt='logo'
-              style={{
-                'width':'80px',
-                'margin':'0 auto',
-                'display':'block',
 
-              }}
-              />
-        </div>
-        <Divider
-          sx={{
-            borderColor: 'rgba(255, 255, 255, 0.04)',
-            my: 1
+  if(typeof window == 'undefined'){
+    return <Spinner/>
+  }
+
+  let user_info = null
+      if( localStorage.getItem('token')){
+        user_info  = JSON.parse(localStorage.getItem('token'))
+      }
+
+const content = (
+  <>
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%'
+    }}
+  >
+    <div>
+      <br/>
+      <img 
+          src={LogoImage.src}
+          alt='logo'
+          style={{
+            'width':'80px',
+            'margin':'0 auto',
+            'display':'block',
+
           }}
+          />
+    </div>
+    <Divider
+      sx={{
+        borderColor: 'rgba(255, 255, 255, 0.04)',
+        my: 1
+      }}
+    />
+
+{
+  user_info?
+  user_info.exco.map((data,index)=>(
+        <div style={centerSwitch} key={index}>
+
+        <SwitchLabels
+        label={data.name}
+        switch={exco == data.id}
+        func={
+        ()=>{
+        //   console.log('Yo Yo')
+          if(exco){
+            if(exco == data.id){
+              localStorage.removeItem('exco')
+            }else{
+              localStorage.setItem('exco',data.id)
+            }
+          }else{
+            localStorage.setItem('exco',JSON.stringify(data.id))
+          }
+
+        window.location.reload()
+        }
+        }
         />
-         <div style={centerSwitch}>
+        </div>
+  )):''
+}
 
-<SwitchLabels
- label={'Council'}
- switch={chapter}
- func={
-   ()=>{
-   //   console.log('Yo Yo')
-   //   if(chapter){
-   //     localStorage.removeItem('chapter')
-   //   }else{
-   //     localStorage.setItem('chapter','1')
-   //   }
-   // setChapter(!chapter)
-
-     // window.location.reload()
-   }
- }
- />
-</div>
-
-<div style={centerSwitch}>
-
-<SwitchLabels
- label={'Principal Officers '}
- switch={exco}
- func={
-   ()=>{
-     //
-     // if(exco){
-     //   localStorage.removeItem('exco')
-     // }else{
-     //   localStorage.setItem('exco','1')
-     // }
-
-     // setExco(!exco)
-     // window.location.reload()
-
-   }
- }
- />
-</div>
-
-
-<div style={centerSwitch}>
-
-<SwitchLabels
- label={'Management'}
- switch={exco}
- func={
-   ()=>{
-     //
-     // if(exco){
-     //   localStorage.removeItem('exco')
-     // }else{
-     //   localStorage.setItem('exco','1')
-     // }
-
-     // setExco(!exco)
-     // window.location.reload()
-
-   }
- }
- />
-</div>
-
-<div style={centerSwitch}>
-
-<SwitchLabels
- label={'Committee'}
- switch={exco}
- func={
-   ()=>{
-     //
-     // if(exco){
-     //   localStorage.removeItem('exco')
-     // }else{
-     //   localStorage.setItem('exco','1')
-     // }
-
-     // setExco(!exco)
-     // window.location.reload()
-
-   }
- }
- />
-</div>
 <br/>
-        <Box sx={{ flexGrow: 1 }}>
-          {items.map((item) => (
-            <NavItem
-              key={item.title}
-              icon={item.icon}
-              href={item.href}
-              title={item.title}
-            />
-          ))}
+    <Box sx={{ flexGrow: 1 }}>
+      {items.map((item) => (
+        <NavItem
+          key={item.title}
+          icon={item.icon}
+          href={item.href}
+          title={item.title}
+        />
+      ))}
 
-        
-        </Box>
-        </Box>
-    </>
-  );
+    
+    </Box>
+    </Box>
+</>
+)
 
   if (lgUp) {
     return (
@@ -254,7 +209,7 @@ export const DashboardSidebar = (props) => {
           sx: {
             backgroundColor: ' #075a94',
             color: '#FFFFFF',
-            width: 210,
+            width: 220,
             borderRadius:"10px"
           }
         }}
@@ -264,6 +219,8 @@ export const DashboardSidebar = (props) => {
       </Drawer>
     );
   }
+
+
 
   return (
     <Drawer
@@ -280,8 +237,7 @@ export const DashboardSidebar = (props) => {
       sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
       variant="temporary"
     >
-      {content}
-      
+   {content}
     </Drawer>
   );
 };

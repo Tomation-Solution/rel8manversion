@@ -9,6 +9,8 @@ export const HomeLayout = styled.div`
 @media screen and (min-width: 800px){
         padding: 1.8rem;
         display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
         justify-content: space-between;
 }
 `
