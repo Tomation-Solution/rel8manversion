@@ -29,9 +29,13 @@ export const getMemberPublication = createAsyncThunk(
     'memberPublication/getMemberPublication',async(data:any,thunkApi)=>{
         //
         const chapter:any = localStorage.getItem('chapter')
-
+        let lookup ='?for_members=True'
+        let exco:any = localStorage.getItem('exco')
+        if(exco){
+            lookup =`?exco=${exco}`
+        }
         try{
-            const resp = await axios.get(`/tenant/publication/getyourpublication/${chapter?'?is_chapter=True':''}`)
+            const resp = await axios.get(`/tenant/publication/getyourpublication/${lookup}`)
             return resp.data.data as MemberPublicationType[]
         }
         catch(err:any){

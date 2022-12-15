@@ -31,8 +31,13 @@ export const getMemberNews = createAsyncThunk(
     'MemberNews/getMemberNews',async (data:any,thunkAPi)=>{
         //
         const chapter:any = localStorage.getItem('chapter')
+        let lookup ='?for_members=True'
+        let exco:any = localStorage.getItem('exco')
+        if(exco){
+            lookup =`?exco=${exco}`
+        }
         try{
-            const resp = await axios.get(`/tenant/news/newsview/get_news/${chapter?'?is_chapter=True':''}`)
+            const resp = await axios.get(`/tenant/news/newsview/get_news/${lookup}`)
             return resp.data.data as MemberNewsType[]
         }
         catch(err:any){

@@ -6,11 +6,12 @@ import styled from 'styled-components';
 thick blue - #075a94
 */
 export const HomeLayout = styled.div`
+    /* margin: 0 auto; */
 @media screen and (min-width: 800px){
         padding: 1.8rem;
         display: flex;
         max-width: 1200px;
-        margin: 0 auto;
+        /* border: 1px solid red; */
         justify-content: space-between;
 }
 `

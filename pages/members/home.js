@@ -12,7 +12,7 @@ import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashb
 import Link from "next/link";
 import {useAppDispatch,useAppSelector} from '../../redux/hooks'
 import { useEffect } from "react";
-import { getMembersEvent } from "../../redux/memeberEvents/memeberEventsApi";
+import { getMembersEvent, registerForFreeEvent } from "../../redux/memeberEvents/memeberEventsApi";
 import { selectMemberEvent } from "../../redux/memeberEvents/memeberEventsSlice";
 import { getMemberNews } from "../../redux/memberNews/memberNewsApi";
 import { selectMemberNews } from "../../redux/memberNews/memberNewsSlice";
@@ -67,7 +67,7 @@ export default function Home(props){
 
 
     useEffect(()=>{
-      // dispatch(getMembersEvent({}))
+      dispatch(getMembersEvent({}))
       dispatch(getMeetings({}))
       getmage()
       dispatch(getMemberNews({}))
@@ -83,6 +83,10 @@ export default function Home(props){
     // "chapters": null
     return(
         <DashboardLayout>
+          {
+            isLoading?
+            <Spinner/>:''
+          }
           <HomeLayout>
             <MainPane>
                 <MeetingHeader>
@@ -97,45 +101,84 @@ export default function Home(props){
                 </MeetingHeader>
       <br/>
       <br/>
-                    <div style={{'display':'flex','justifyContent':'space-between','alignItems':'center','padding':'0 1.2rem'}}>
-                    <h2>Gallery</h2>
+                    <div style={{'padding':'0 1.2rem'}}>
                     <h2>Meeting</h2>
                     </div>
-                <GalleryEventGrid>
-                  
-                    <div className="galleryContainer">
+              
+   <EventContainerV2>
 
-                      <img src={images.length!=0?images[0].photo_file:''} />
-                      <p onClick={()=>{
-                          route.push('/members/gallery')
-                      }}><small>See more</small></p>
-                    </div>
+{
+  meetings.slice(0,3).map((data,index)=>(
+    <EventV2 key={index}>
+    <img
+      src='https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1lZXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
+    />
+    <h4><small>{data.name}</small></h4>
+    <p>{data.details.slice(0,30)}..</p>
+    <div className="btn_container">
+      <button className="main" onClick={()=>{
+        notify('You have successfully registed for this meeting','success')
+      }}>Accept</button>
+    </div>
+  </EventV2>
+  ))
+}
 
-                    <EventContainerV2>
 
-                      {
-                        meetings.map((data,index)=>(
-                          <EventV2 key={index}>
-                          <img
-                            src='https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1lZXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-                          />
-                          <h4><small>{data.name}</small></h4>
-                          <p>{data.details.slice(0,30)}..</p>
-                          <div className="btn_container">
-                            <button className="main" onClick={()=>{
-                              notify('You have successfully registed for this meeting','success')
-                            }}>Accept</button>
-                            {/* <button  className="not_main">View</button> */}
-                          </div>
-                        </EventV2>
-                        ))
-                      }
 
-                       
-                    </EventContainerV2>
-                </GalleryEventGrid>
-
+</EventContainerV2>
                 <br/>
+                <div style={{'padding':'0 1.2rem'}}>
+                    <h2>Event</h2>
+                    </div>
+      <EventContainerV2>
+
+{
+events.slice(0,3).map((data,index)=>(
+<EventV2 key={index}>
+<img
+src={data.image}
+/>
+<h4><small>{data.name}</small></h4>
+<p>
+{
+data.is_paid_event?
+`Amount:${data.amount}`:''
+}
+</p>
+<div className="btn_container">
+  {
+    data?.event_access.has_paid?
+ 
+ <button className='not_main'>Attend</button>
+ 
+ :
+ <button className="main" onClick={()=>{
+  if(data.is_paid_event){
+    // paid_event()
+}   
+else{
+
+    registerForFreeEvent({
+        'id':data.id,
+        'notify':notify,
+        setisLoading
+    })
+} 
+}}>Register</button>
+  }
+
+</div>
+</EventV2>
+))
+}
+
+
+
+
+</EventContainerV2>
+                <br/>
+
         <h2>Notice/ Publication</h2>
                 <PublicationContainerv2>
                

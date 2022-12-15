@@ -2,7 +2,7 @@ import {Grid, Button, Typography} from '@mui/material';
 import styles from '../styles/Home.module.css'
 import GreenButton from './Buttonn';
 import Image from "next/image";
-import { MemberEventType } from '../redux/memeberEvents/memeberEventsApi';
+import { MemberEventType, registerForFreeEvent, registerForPaidEvent } from '../redux/memeberEvents/memeberEventsApi';
 import axios from '../helpers/axios';
 import useToast from '../hooks/useToast';
 import { useState } from 'react';
@@ -18,36 +18,8 @@ type Prop = {
 export default function EventCard (props:Prop){
     const {notify} = useToast()
     const [isLoading,setisLoading]= useState(false)
-    const register_for_event = async()=>{
-        if(!props.data.id) return 
-        setisLoading(true)
-        const form = new FormData()
-        form.append('event_id',JSON.stringify(props.data.id))
-        const resp = await axios.post('/tenant/event/eventview/register_for_free_event/',form)
-        console.log(resp)
-        setisLoading(false)
-        if(resp.status ==200){
-            notify('Registered for Successfully','success')
-            setTimeout(()=>{
-                window.location.reload()
-            },2000)
-        }
-        if(resp.status==400){
-            notify('It a paid event you need to pay','success')
-
-        }
-    }
-
-    const paid_event = async()=>{
-        if(!props.data.id) return 
-        setisLoading(true)
-        const form = new FormData()
-        form.append('event_id',JSON.stringify(props.data.id))
-        const resp = await axios.post('/tenant/dues/process_payment/event_payment/'+props.data.id,)
-        console.log(resp)
-        setisLoading(false)
-        // window.location.href=resp
-    }
+    
+    
 
     return(
         <Grid md={4} >
@@ -71,10 +43,20 @@ textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                         <GreenButton text='Register to Attend' radius='10px'
                         click={(e)=>{
                             if(props.data.is_paid_event){
-                                paid_event()
-                            }   else{
+                                registerForPaidEvent({
+                                    'id':props.data.id,
+                                    'notify':notify,
+                                    setisLoading
+                                })
+                            }   
+                            else{
 
-                                register_for_event()
+                                registerForFreeEvent({
+                                    'id':props.data.id,
+                                    'notify':notify,
+                                    setisLoading
+                                
+                                })
                             } 
                         
                         }}
