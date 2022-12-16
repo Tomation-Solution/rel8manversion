@@ -61,8 +61,8 @@ export const getregisteredmembers_forMeeting = createAsyncThunk(
         //
 
         try{
-            const resp = await axios.post('/tenant/meeting/meeting_member/',{meeting_id})
-            return resp.data.data as RegisteredMeetingMembers[]
+            const resp = await axios.post('/tenant/meeting/meeting_member/get_register_members/',{meeting_id})
+            return resp.data.data as RegisteredMeetingMembers
         }
         catch(err:any){
 

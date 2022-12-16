@@ -12,7 +12,7 @@ import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashb
 import Link from "next/link";
 import {useAppDispatch,useAppSelector} from '../../redux/hooks'
 import { useEffect } from "react";
-import { getMembersEvent, registerForFreeEvent } from "../../redux/memeberEvents/memeberEventsApi";
+import { getMembersEvent, registerForFreeEvent, registerForPaidEvent } from "../../redux/memeberEvents/memeberEventsApi";
 import { selectMemberEvent } from "../../redux/memeberEvents/memeberEventsSlice";
 import { getMemberNews } from "../../redux/memberNews/memberNewsApi";
 import { selectMemberNews } from "../../redux/memberNews/memberNewsSlice";
@@ -26,7 +26,7 @@ import { getMemberPublication } from "../../redux/memberPublication/memberPublic
 import { selectmemberPublication } from "../../redux/memberPublication/memberPublicationSlice";
 import { useRouter } from "next/router";
 import { selectMeetings } from "../../redux/memberMeeting/memberMeetingSlice";
-import { getMeetings } from "../../redux/memberMeeting/memberMeetingApi";
+import { getMeetings, registerForMeeting } from "../../redux/memberMeeting/memberMeetingApi";
 
 
 export default function Home(props){
@@ -39,25 +39,7 @@ export default function Home(props){
     const {status:pub_status,publication} = useAppSelector(selectmemberPublication)
     const {notify} = useToast()
     const [isLoading,setisLoading]= useState(false)
-    const register_for_event = async(data)=>{
-        if(!data.id) return 
-        setisLoading(true)
-        const form = new FormData()
-        form.append('event_id',JSON.stringify(data.id))
-        const resp = await axios.post('/tenant/event/eventview/register_for_free_event/',form)
-        console.log(resp)
-        setisLoading(false)
-        if(resp.status ==200){
-            notify('Registered for Successfully','success')
-            setTimeout(()=>{
-                window.location.reload()
-            },2000)
-        }
-        if(resp.status==400){
-            notify('It a paid event you need to pay','success')
 
-        }
-    }
     const getmage =async () =>{
 
       const resp  = await axios.get('/tenant/extras/galleryview/member_get_gallery/')
@@ -73,14 +55,22 @@ export default function Home(props){
       dispatch(getMemberNews({}))
       dispatch(getMemberPublication({}))
     },[])
+    useEffect(()=>{
+
+      if(meeting_status==='registration_success'){
+        notify('Registered For Meeting Successfully','success')
+        notify('Please we loading the Meeting Details','success')
+        // setTimeout(()=>{
+        //   window.location.reload()
+        // },4000)
+      }
+      if(meeting_status=='error'){
+        notify('Some Error Occured','error')
+      }
+    },[meeting_status])
 
    
-    // "id": 1,
-    // "name": "The ExcoPart",
-    // "details": "KKKrndfr",
-    // "date_for": "2022-12-14T11:41:40+01:00",
-    // "exco": 4,
-    // "chapters": null
+ 
     return(
         <DashboardLayout>
           {
@@ -117,8 +107,15 @@ export default function Home(props){
     <p>{data.details.slice(0,30)}..</p>
     <div className="btn_container">
       <button className="main" onClick={()=>{
-        notify('You have successfully registed for this meeting','success')
+        localStorage.setItem('meeting_detail',JSON.stringify(data))
+        dispatch(registerForMeeting(data.id))
+        route.push('/members/meeting_details/')
+        // notify('You have successfully registed for this meeting','success')
       }}>Accept</button>
+
+      <button className="not_main">
+        View
+      </button>
     </div>
   </EventV2>
   ))
@@ -156,6 +153,11 @@ data.is_paid_event?
  <button className="main" onClick={()=>{
   if(data.is_paid_event){
     // paid_event()
+    registerForPaidEvent({
+      'id':data.id,
+      'notify':notify,
+      setisLoading
+  })
 }   
 else{
 

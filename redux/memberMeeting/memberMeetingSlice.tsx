@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction, } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { getMeetings, MeetingType, RegisteredMeetingMembers } from "./memberMeetingApi";
+import { getMeetings, getregisteredmembers_forMeeting, MeetingType, RegisteredMeetingMembers, registerForMeeting } from "./memberMeetingApi";
 
 
 
 
 type State ={
-    status:'pending'|'success'|'idle'|'error',
+    status:'pending'|'success'|'idle'|'error'|'registration_success',
     meetings:MeetingType[],
-    attendees:RegisteredMeetingMembers[]
+    attendees:RegisteredMeetingMembers['memebers']
 }
 
 const initialState:State={
@@ -34,6 +34,29 @@ const MeetingSlice =createSlice({
         addCase(getMeetings.rejected,(state,action)=>{
             state.status='error'
             console.log({'error':action.payload})
+        })
+
+        addCase(registerForMeeting.pending,(state,action)=>{
+            state.status= 'pending'
+        })
+        addCase(registerForMeeting.fulfilled,(state,action)=>{
+            //
+            state.status='registration_success'
+        })
+        addCase(registerForMeeting.rejected,(state,action)=>{
+
+            state.status='error';
+            // state.
+
+        })
+
+        addCase(getregisteredmembers_forMeeting.pending,(state,action)=>{
+            state.status='pending'
+        })
+
+        addCase(getregisteredmembers_forMeeting.fulfilled,(state,action:PayloadAction<RegisteredMeetingMembers>)=>{
+            state.status='success'
+            state.attendees= action.payload.memebers
         })
 
     }
