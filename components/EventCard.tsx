@@ -7,6 +7,8 @@ import axios from '../helpers/axios';
 import useToast from '../hooks/useToast';
 import { useState } from 'react';
 import Spinner from './Spinner';
+import { useRouter } from "next/router";
+
 
 type Prop = {
     title:string;
@@ -17,6 +19,7 @@ type Prop = {
 
 export default function EventCard (props:Prop){
     const {notify} = useToast()
+    const route = useRouter()
     const [isLoading,setisLoading]= useState(false)
     
     
@@ -35,9 +38,12 @@ export default function EventCard (props:Prop){
                     </Button> */}
                     {
                         props.data?.event_access.has_paid?
-                        props.data?.is_virtual?
-                <Grid className='light-text'>{props.data?.event_access.link}</Grid>
-:<GreenButton text='Attend' radius='10px'
+                        <GreenButton text='Attend' radius='10px'
+                        click={()=>{
+                            console.log('Click')
+                            localStorage.setItem('event_detail',JSON.stringify(props.data))
+                            route.push('/members/event_detail/')
+                        }}
 textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                         :
                         <GreenButton text='Register to Attend' radius='10px'

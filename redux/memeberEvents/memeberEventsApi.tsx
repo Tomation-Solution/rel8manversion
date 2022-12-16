@@ -50,6 +50,38 @@ export const getMembersEvent = createAsyncThunk(
     }
 )
 
+export type getEventAttendiesResponse = {
+    "id": number,
+    "member_info": {
+            "id": number,
+            "name": string,
+            "value": string,
+            "member_id": number}[],
+    "exco_info": any,
+    "is_active": boolean,
+    "email":string,
+    "photo": string,
+    "amount_owing": string,
+    "is_exco": boolean,
+    "is_financial": boolean,
+    "user": number
+}
+export const getEventAttendies= createAsyncThunk(
+    'MemberEvent/getEventAttendies',async ({event_id}:{'event_id':number},thunkApi)=>{
+        //
+        const form = new FormData()
+        form.append('event_id',JSON.stringify(event_id))
+        try{
+            const resp = await axios.post(`/tenant/event/eventview/list_of_register_members/`,form)
+
+            return resp.data.data  as getEventAttendiesResponse[]
+        }
+        catch(err:any){
+
+            return thunkApi.rejectWithValue(err)
+        }
+    }
+)
 
 
 type registerForFreeEventProp = {
