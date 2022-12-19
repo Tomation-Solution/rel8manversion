@@ -230,7 +230,7 @@ const ChatPane = (props)=>{
             (e.user__id==props.logged_in_user.user ?
                 <Grid container marginX={3} marginY={1} sx={{maxWidth:'60%', minWidth:'10%', borderRadius:'10px', float:'right'}} paddingX={1} paddingBottom={1} className='dark-green-bg'>
                     <Grid container >
-                        <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='white-text' > {e.date + ' - ' + e.time} </Typography>
+                        <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='white-text' > </Typography>
                     </Grid>
                     <Grid container>
                         <Typography variant='body2' fontWeight='300' className='white-text' > {e.message} </Typography>
@@ -242,7 +242,7 @@ const ChatPane = (props)=>{
                             <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='light-text' > {e.sender} </Typography>
                         </Grid>
                         <Grid item>
-                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='text' > {e.date + ' - ' + e.time} </Typography>
+                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='text' > </Typography>
                         </Grid>
                     </Grid>
                     <Grid container>

@@ -3,6 +3,9 @@ import styled from '@emotion/styled';
 import { AppBar, Avatar, Badge, Box, IconButton, Toolbar, Typography, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NotificationsRounded } from '@mui/icons-material';
+import BasicPopover from '../../../PopOver';
+import axios from '../../../../helpers/axios';
+import { useEffect, useState } from 'react';
 
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
@@ -12,7 +15,19 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, type, ...other } = props;
+  const [notification ,setNotification] =useState([])
+  const getNotification  = async ()=>{
+    try{
+      const resp = await axios.get('/tenant/reminder/member_reminder/')
+      setNotification(resp.data.results)
 
+    }catch(err){
+      setNotification([])
+    }
+  }
+  useEffect(()=>{
+    getNotification()
+  },[])
   return (
     <>
       <DashboardNavbarRoot
@@ -47,6 +62,8 @@ export const DashboardNavbar = (props) => {
             <MenuIcon fontSize="small" />
           </IconButton>
 
+<Box style={{'justifyContent':'space-between','display':'flex','width':'80%','margin':'0 auto','alignItem':'center'}}>
+
           <Typography className='text' fontWeight='bold' sx={{color:'black'}} >
             {type} Dashboard
           </Typography>
@@ -56,8 +73,8 @@ export const DashboardNavbar = (props) => {
             </IconButton>
           </Tooltip> */}
           
-          <Box sx={{ flexGrow: 1 }} />
-          
+          {/* <Box  style={{'border':'1px solid red','width':'400px'}} /> */}
+{/*           
           <Tooltip title="My Profile">
             <IconButton sx={{ ml: 1 }}>
               
@@ -66,9 +83,11 @@ export const DashboardNavbar = (props) => {
             >
             </Avatar>
             </IconButton>
-          </Tooltip>
-          <Tooltip title="Notifications">
-            <IconButton>
+          </Tooltip> */}
+            <BasicPopover
+            Button={
+              <Tooltip title="Notifications">
+<IconButton>
               <Badge
                     badgeContent={4}
                     color="primary"
@@ -78,6 +97,15 @@ export const DashboardNavbar = (props) => {
               </Badge>
             </IconButton>
           </Tooltip>
+            }>
+              {
+                notification.map((data,index)=>(
+                  <p key={index} style={{'padding':'.9rem 0'}}>{data.title}</p>
+                ))
+              }
+            </BasicPopover>
+</Box>
+            
           
             {/* <UserCircleIcon fontSize="small" /> */}
           {/* </Avatar> */}

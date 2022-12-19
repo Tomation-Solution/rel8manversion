@@ -15,6 +15,7 @@ import memberNewsSlice from './memberNews/memberNewsSlice';
 import memberPublicationSlice from './memberPublication/memberPublicationSlice';
 import ChatSlice from './Chat/ChatSlice';
 import memberMeetingSlice from './memberMeeting/memberMeetingSlice';
+import ElectionSlice from './Election/ElectionSlice';
 export const store = configureStore({
   reducer: {
     // signUp:signUpReducer,
@@ -36,6 +37,7 @@ export const store = configureStore({
     MemberNews:memberNewsSlice,
     memberPublication:memberPublicationSlice,
     member_meeting:memberMeetingSlice,
+    MemberElection:ElectionSlice,
   },
 })
 

@@ -181,7 +181,7 @@ else{
 </EventContainerV2>
                 <br/>
 
-        <h2>Notice/ Publication</h2>
+        <h2> Publication</h2>
                 <PublicationContainerv2>
                
 {
@@ -205,6 +205,24 @@ else{
 }
 
                 </PublicationContainerv2>
+
+                <br/>
+
+<h2>News</h2>
+<Grid container spacing={2} style={{'padding':'1rem'}}>
+{
+  news.slice(0,3).map((data,index)=>(
+    <Newscard
+      key={index}
+      title={data.name}
+      image={data.image}
+      body={data.paragraphs.length==0?'....':data.paragraphs[0].paragragh.slice(0,50)}
+      data={data}
+      />
+  ))
+}
+
+</Grid>
             </MainPane>
 
             <SidePane>

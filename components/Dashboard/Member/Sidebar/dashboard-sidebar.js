@@ -28,11 +28,7 @@ const items = [
   //   title: 'My Account'
   // },
 
-  // {
-  //   href: '/members/directory',
-  //   icon: (<Person fontSize="small" />),
-  //   title: 'Member Directory'
-  // },
+  
   {
     href: '/members/events',
     icon: (<PeopleRounded fontSize="small" />),
@@ -62,7 +58,11 @@ const items = [
     icon: (<Photo fontSize="small" />),
     title: 'Gallery'
   },
-
+  {
+    href: '/members/election/',
+    icon: (<Person fontSize="small" />),
+    title: 'Election'
+  },
   {
     href: '#',
     icon: (<LogoutRounded fontSize="small" />),
