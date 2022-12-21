@@ -64,6 +64,11 @@ const items = [
     title: 'Election'
   },
   {
+    href: '/members/dues/',
+    icon: (<Person fontSize="small" />),
+    title: 'Dues'
+  },
+  {
     href: '#',
     icon: (<LogoutRounded fontSize="small" />),
     title: 'Logout'
