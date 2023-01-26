@@ -113,7 +113,10 @@ export default function Home(props){
         // notify('You have successfully registed for this meeting','success')
       }}>Accept</button>
 
-      <button className="not_main">
+      <button className="not_main" onClick={()=>{
+        localStorage.setItem('meeting_detail',JSON.stringify(data))
+        route.push('/members/meeting_details/')
+      }}>
         View
       </button>
     </div>
@@ -147,7 +150,12 @@ data.is_paid_event?
   {
     data?.event_access.has_paid?
  
- <button className='not_main'>Attend</button>
+ <button className='not_main'
+ onClick={()=>{
+localStorage.setItem('event_detail',JSON.stringify(data))
+route.push('/members/event_detail/')
+ }}
+ >Attend</button>
  
  :
  <button className="main" onClick={()=>{
