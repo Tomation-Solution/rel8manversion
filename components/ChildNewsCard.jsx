@@ -26,7 +26,7 @@ export default function ChildNewsCard (props){
                     <br/>
                         <Typography  onClick={()=>{
                             localStorage.setItem('publication_detail',JSON.stringify(props.data))
-                            route.push('/members/NewsDetail/')
+                            // route.push('/members/NewsDetail/')
                         }} variant='caption' fontWeight='500' className='text nav-link green-text'>Read More</Typography>
                     {/* </Link> */}
                 </Grid>
