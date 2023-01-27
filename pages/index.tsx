@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from '../styles/Home.module.css'
 import Navbar from "../components/Navbar"
 import Logo from '../images/logo.png'
+
 import Image from "next/image"
 import Footer from "../components/Footer"
 import GreenButton from "../components/Buttonn"
@@ -68,10 +69,13 @@ const Login =  () =>{
 //   },[status])
     return(
       <Grid className={styles.loginBg}  style={{'height':'100vh'}}  >
-      {/* <center><Image src={Logo}/></center> */}
+   
       <br/>
       
       <Grid item md={12} className={styles.card} sm={10}  style={{margin:'0 auto'}} >
+      <div style={{'width':'80px','margin':'0 auto'}}>
+         <img src={Logo.src} style={{'width':'100%','height':'100%'}}/>
+     </div>
           <Typography className='text' textAlign='center' marginBottom={2} fontWeight='bolder' >USER LOGIN</Typography>
          <Typography className='text' fontWeight='normal' textAlign='center' marginBottom={2} variant='subtitle2' color='InactiveCaption'>
          Click here to login into your Dashboard </Typography>

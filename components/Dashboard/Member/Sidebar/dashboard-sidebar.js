@@ -58,15 +58,15 @@ const items = [
     icon: (<Photo fontSize="small" />),
     title: 'Gallery'
   },
-  {
-    href: '/members/election/',
-    icon: (<Person fontSize="small" />),
-    title: 'Election'
-  },
+  // {
+  //   href: '/members/election/',
+  //   icon: (<Person fontSize="small" />),
+  //   title: 'Election'
+  // },
   {
     href: '/members/dues/',
     icon: (<Person fontSize="small" />),
-    title: 'Dues'
+    title: 'Account'
   },
   {
     href: '#',
@@ -139,7 +139,7 @@ const content = (
       height: '100%'
     }}
   >
-    <div>
+    <div style={{'backgroundColor':'white'}}>
       <br/>
       <img 
           src={LogoImage.src}
@@ -148,6 +148,7 @@ const content = (
             'width':'80px',
             'margin':'0 auto',
             'display':'block',
+            'height':'80px'
 
           }}
           />
@@ -161,7 +162,10 @@ const content = (
 
 {
   user_info?
-  user_info.exco.map((data,index)=>(
+  
+  <div style={{'height':'100px'}}>
+    {
+      user_info.exco.map((data,index)=>(
         <div style={centerSwitch} key={index}>
 
         <SwitchLabels
@@ -185,7 +189,10 @@ const content = (
         }
         />
         </div>
-  )):''
+  ))
+    }
+  </div>
+  :''
 }
 
 <br/>
