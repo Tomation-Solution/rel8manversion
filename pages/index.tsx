@@ -72,7 +72,7 @@ const Login =  () =>{
    
       <br/>
       
-      <Grid item md={12} className={styles.card} sm={10}  style={{margin:'0 auto'}} >
+      <Grid item md={12} className={styles.card} sm={10}  style={{margin:'0 auto','maxWidth':'450px'}} >
       <div style={{'width':'80px','margin':'0 auto'}}>
          <img src={Logo.src} style={{'width':'100%','height':'100%'}}/>
      </div>

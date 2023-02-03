@@ -29,7 +29,9 @@ export const DashboardLayout = (props) => {
             width: '100%'
           }}
         >
+          <div style={{'padding':'.9rem'}}>
           {children}
+          </div>
         </Box>
       </DashboardLayoutRoot>
       <DashboardNavbar onSidebarOpen={() => setSidebarOpen(true)} />

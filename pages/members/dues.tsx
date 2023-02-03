@@ -16,6 +16,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Profile from '../../components/Profile/Profile'
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -23,7 +24,7 @@ interface TabPanelProps {
     value: number;
   }
   
-  function TabPanel(props: TabPanelProps) {
+ export function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
   
     return (
@@ -43,7 +44,7 @@ interface TabPanelProps {
     );
   }
   
-  function a11yProps(index: number) {
+export  function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
       'aria-controls': `simple-tabpanel-${index}`,
@@ -150,6 +151,7 @@ const Dues:NextPage = ()=>{
                 </div>
                 <br />
                 <br />
+                <Profile/>
                 <br />
 
                 <Box sx={{ width: '100%' }}>

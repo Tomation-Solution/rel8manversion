@@ -46,6 +46,11 @@ const items = [
     title: 'Nimn News'
   },
   {
+    href: '/members/all_members/',
+    icon: (<Info fontSize="small" />),
+    title: 'All Members'
+  },
+  {
 
     href: '#',
     isDroppable:true,

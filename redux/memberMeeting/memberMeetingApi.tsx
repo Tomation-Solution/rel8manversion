@@ -4,12 +4,16 @@ import axios from "../../helpers/axios";
 
 
 export type MeetingType =        {
-    "id": 1,
-    "name": "Council Zone Meeting",
-    "details": "discussion of excos",
-    "date_for": "2022-12-14T17:10:54+01:00",
-    "exco": 1,
-    "chapters": null
+    "id": number,
+            "name":string,
+            "details":string,
+            "date_for": null |string,
+            "addresse":string,
+            "event_date": string,
+            "organiserName": string,
+            "organiserDetails":string,
+            "exco": null | number,
+            "chapters": null | number
 }
 
 export type RegisteredMeetingMembers ={
