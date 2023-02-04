@@ -9,6 +9,7 @@ export const PostComentDetailsContainer=styled.div`
     align-items: center;
     margin: 10px 0;
     &>div{
+        position:  relative;
         margin-left: 10px;
         background-color: #dcdcdc26;
         padding: .5rem;
@@ -20,5 +21,8 @@ export const PostComentDetailsContainer=styled.div`
         height: 30px;
         border-radius: 50%;
     }   
+    p{
+        color: #000000;
+    }
 
 `

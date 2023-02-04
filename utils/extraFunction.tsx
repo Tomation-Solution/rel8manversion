@@ -1,3 +1,5 @@
+import { MemberType } from "../redux/members/membersApi"
+
 export type StyleTpe =  {
     'style'?:{
       [Key:string]:string,
@@ -18,3 +20,13 @@ export type StyleTpe =  {
     return styles
   }
   
+
+export const FetchName = (member:MemberType):string=>{
+  const name:any = member.member_info.find(d=>{
+    return d.name.toLocaleLowerCase() == 'name' ||  d.name.toLocaleLowerCase() == 'first' ||d.name.toLocaleLowerCase() == 'first name' || d.name.toLocaleLowerCase() == 'surname'
+})['value']
+if(typeof name==='string'){
+  return name
+}
+ return `Member (${member.id})`
+}

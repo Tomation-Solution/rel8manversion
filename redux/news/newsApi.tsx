@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../helpers/axios";
-import { NewsType } from "./newsSlice";
+import { NewsComment, NewsType } from "./newsSlice";
 
 
 
@@ -65,5 +65,53 @@ export const deleteNews = createAsyncThunk(
             return error.reponse.data
         }
 
+    }
+)
+
+
+type getNewsCommentProp ={
+    news_id:number;
+}
+export const  getNewsComment = createAsyncThunk(
+    'news/getNewsComment',async({news_id}:getNewsCommentProp)=>{
+        try {
+            const resp = await axios.get(`/tenant/news/newsview__comment/?news_id=${news_id}`,)
+
+            return resp.data.data as NewsComment[]
+        } catch (error:any) {
+            console.log({error})            
+            return error.reponse.data
+        }  
+    }
+)
+
+
+type createNwsCommentPropType ={   
+    "comment":string,
+    "news":number
+}
+export const createNwsComment = createAsyncThunk(
+    'news/createNwsComment',async(data:createNwsCommentPropType)=>{
+        try {
+            const resp = await axios.post(`/tenant/news/newsview__comment/`,data)
+
+            return resp.data as NewsComment
+        } catch (error:any) {
+            console.log({error})            
+            return error.reponse.data
+        } 
+    }
+)
+
+export const deleteNewsComment = createAsyncThunk(
+    'news/deleteNewsComment',async(newsID:number)=>{
+        try{
+            const resp = await axios.delete(`/tenant/news/newsview__comment/${newsID}/`)
+            return newsID as number 
+        }
+        catch (error:any) {
+            console.log({error})            
+            return error.reponse.data
+        } 
     }
 )

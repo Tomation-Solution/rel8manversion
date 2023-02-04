@@ -6,19 +6,24 @@ import OffCanvas from '../OffCanvas/OffCanvas'
 import { useState } from 'react'
 import Profile from '../Profile/Profile'
 import { useMediaQuery } from 'react-responsive'
+import { MemberType } from '../../redux/members/membersApi'
+import { FetchName } from '../../utils/extraFunction'
 
-
-const MemberCard = ()=>{
+type Prop ={
+    member:MemberType
+}
+const MemberCard = ({member}:Prop)=>{
     const [isOpen, setIsOpen] = useState(false)
     const isPhone = useMediaQuery({ query: '(max-width: 360px)' })
+    const Name:string = FetchName(member)
     return (
         <MemeberCardContainer>
            <div className='MemberCardphotoConainer'>
               <img src={MemberPlaceholder.src} alt="" />
            </div>
 
-           <h2>MD Abubakar</h2>
-           <p className='member_postion'>Portfolio - Chairman</p>
+           <h2>{Name}</h2>
+           <p className='member_postion'>{member.email}</p>
 
            <CustomBtn style={{'padding':'.5rem','width':'40%','margin':'10px auto'}}
            onClick={(e)=>{
@@ -31,7 +36,7 @@ const MemberCard = ()=>{
             size={isPhone?90:40}
            setIsOpen={setIsOpen}
            isOpen={isOpen}>
-                <Profile/>
+                <Profile member={member} />
            </OffCanvas>
 
         </MemeberCardContainer>

@@ -32,7 +32,7 @@ export type MemberType =       {
 
 
 type getMembersParaType = {
-    get_excos:false
+    get_excos:boolean
 }
 export const getMembersAndExco = createAsyncThunk(
     'member_and_exco/getMembersAndExco',async ({get_excos}:getMembersParaType)=>{

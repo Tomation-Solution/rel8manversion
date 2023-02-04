@@ -20,7 +20,7 @@ ${(prop)=>{
     if(prop.styleType==='pry'){
       style = 'background-color:#04a9fb;color: whitesmoke;font-weight: 600;padding: 1rem 1rem;  '
     }else{
-      style = 'background-color:#f6f6f6;color: gray;font-weight: 600;border:1px solid  #e5e7eb;'
+      style = 'color:#04a9fb;font-weight: 600;border:1px solid  #04a9fb;background-color:white;'
     }
     return style
   }};

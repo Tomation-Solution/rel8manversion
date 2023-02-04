@@ -74,3 +74,21 @@ export const getregisteredmembers_forMeeting = createAsyncThunk(
         }
     }
 )
+
+type PropSendMeetingAppology={
+    "meeting":number,
+    "note":string,
+}
+export const sendMeetingAppology= createAsyncThunk(
+    'meetings/sendMeetingAppology',async (data:PropSendMeetingAppology,thunkApi)=>{
+        console.log({data})
+        try{
+            const resp = await axios.post('/tenant/meeting/meeting_member/appologise_for_not_attending/',data)
+            return resp.data.data 
+        }
+        catch(err:any){
+
+            return thunkApi.rejectWithValue(err)
+        }
+    }
+)

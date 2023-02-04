@@ -1,29 +1,57 @@
 import { NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import Spinner from "../../components/Spinner";
 import { useMediaQuery } from 'react-responsive'
 import Table from '../../components/Table/Table'
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectMeetings } from "../../redux/memberMeeting/memberMeetingSlice";
-import { getregisteredmembers_forMeeting } from "../../redux/memberMeeting/memberMeetingApi";
+import { getregisteredmembers_forMeeting, sendMeetingAppology } from "../../redux/memberMeeting/memberMeetingApi";
 import Line from "../../components/Line";
 import {HiCalendar} from 'react-icons/hi'
 import moment from "moment";
+import CustomBtn from "../../components/CustomBtn/Button";
+import BasicModal from "../../components/Modals";
+import useToast from "../../hooks/useToast";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const MeetingDetails:NextPage = ()=>{
     const isLaptop = useMediaQuery({
         query: '(min-width: 524px)'
       })
-      const {status,attendees} = useAppSelector(selectMeetings)
+      const {status,attendees,message} = useAppSelector(selectMeetings)
       const dispatch = useAppDispatch();
-      
+      const [open,setOpenLogout] = useState(false)
+        const handleClose =()=> setOpenLogout(false);
+      const {notify} = useToast()
+    const [note,setNote ] = useState('')
+    const submit =(e:any)=>{
+      e.preventDefault()
+
+      if(!note){
+        notify('Please a note is required','error')
+        return 
+      }
+      const  meeting = JSON.parse(localStorage.getItem('meeting_detail'))
+
+      dispatch(sendMeetingAppology({'meeting':parseInt(meeting.id),note}))
+    }
     useEffect(()=>{
         if(typeof window != 'undefined'){
             const  meeting = JSON.parse(localStorage.getItem('meeting_detail'))
             dispatch(getregisteredmembers_forMeeting(meeting.id))
         }
       },[])
+
+    useEffect(()=>{
+      if(status==='apology_failed'){
+        notify(message,'error')
+      }
+      if(status==='apology_success'){
+        notify(message,'success')
+      }
+    },[status])
     if(typeof window == 'undefined'){
         return <Spinner/>
       }
@@ -94,8 +122,45 @@ const MeetingDetails:NextPage = ()=>{
 
         {/* attendees */}
         <Table prop_columns={prop_columns} custom_data={attendees}/>
+              <br /><br />
+
+              <div style={{'display':'flex','maxWidth':'600px','margin':'0 auto','justifyContent':'space-between'}}>
+                <CustomBtn style={{'width':'40%'}}>
+                  Accept Meeting
+                </CustomBtn>
+
+                <CustomBtn styleType='sec' 
+                onClick={(e)=>setOpenLogout(true)}
+                style={{'width':'40%'}}>
+                  Request Apology 
+                </CustomBtn>
+              </div>
+              <br /><br />
 
         </div>
+        <BasicModal 
+        handleClose={handleClose} open={open} 
+        body={<form style={{'padding':'1rem 1.3rem'}}>
+          <h3 style={{'textAlign':'center'}}>Letter Of Appology Form</h3>
+          <br />
+ <TextField
+         onChange={(e)=>{
+          setNote(e.target.value)
+         }}
+         required
+          id="outlined-required"
+          label="Appology Note"
+          style={{'width':'100%'}}
+        />
+        <br />
+          <CustomBtn style={{'width':'40%','margin':'10px auto'}}
+          onClick={submit}
+          
+          >
+            Submit
+          </CustomBtn>
+        </form>}
+        />
         </DashboardLayout>
     )
 }
