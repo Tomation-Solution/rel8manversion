@@ -19,7 +19,7 @@ const MemberCard = ({member}:Prop)=>{
     return (
         <MemeberCardContainer>
            <div className='MemberCardphotoConainer'>
-              <img src={MemberPlaceholder.src} alt="" />
+              <img src={member.photo} alt="" />
            </div>
 
            <h2>{Name}</h2>

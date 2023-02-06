@@ -119,9 +119,10 @@ const Dues:NextPage = ()=>{
                 Cell:(tableProps:any)=>(
                     <button onClick={()=>{
                         // tableProps.row.original.id
-                        dispatch(payDuesApi(tableProps.row.original.id))
+                        // notify('Please')
+                        // dispatch(payDuesApi(tableProps.row.original.id))
                     }}>
-                        Pay
+                        Pay(Coming soon!)
                     </button>
                 )
             }
