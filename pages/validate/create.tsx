@@ -21,6 +21,7 @@ const CreateNewMember= ()=>{
     const [loading,setLoading] = useState(false)
     const [email,setEmail] = useState<string>()
     const [password,setPassword] = useState<string>()
+    const [isLoading,setIsLoading]= useState(false)
     const {notify} = useToast()
     const route  = useRouter()
     const handleSubmit = async (e:React.MouseEvent)=>{
@@ -37,17 +38,21 @@ const CreateNewMember= ()=>{
         get_profile = JSON.parse(get_profile)
         
         const clean_data:any={ ...get_profile,password,'rel8Email':email}
-
+        setIsLoading(true)
         
         const resp = await axios.post('/tenant/auth/ManageMemberValidation/create_member/',clean_data)
         if(resp.data.status_code == 201){
             notify('Created Success','success')
             notify('Please wait','success')
             localStorage.removeItem('validatedUser');
+            setIsLoading(false)
+    
             route.push('/')
         }else{
             notify('An error occured. if it happens again please reach out to us','error')
         }
+        setIsLoading(false)
+
     }
 
     return (

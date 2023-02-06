@@ -34,7 +34,7 @@ const ValidateUser= ()=>{
             return 
         }
         setLoading(true)
-        const resp = await axios.post(`/tenant/auth/ManageMemberValidation/`,{'email':data})
+        const resp = await axios.post(`/tenant/auth/ManageMemberValidation/`,{'MEMBERSHIP_NO':data})
         const resp_data:ValidateResponseType =resp.data.data
         // setFoundMember(resp.data.data)
         setLoading(false)
@@ -68,7 +68,7 @@ const ValidateUser= ()=>{
           <Grid>
               <>
               <TextField 
-              placeholder=' Email' 
+              placeholder='MEMBERSHIP NO' 
               onChange={e=>setData(e.target.value)}
               // label='Username'  
               style={{width:'100%'}} size='small'
