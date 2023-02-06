@@ -135,8 +135,13 @@ const Login =  () =>{
           <Grid container alignItems='center' justifyContent='space-between' paddingY={1}>
               <Grid item><Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>Forgot Password?</Typography></Grid>
               <Grid item >
-                  <Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>
-                  <Checkbox/>Remember me</Typography>
+                  <Typography className='text' variant='subtitle2' fontWeight='normal' color='grey' style={{'cursor':'pointer'}}
+                  onClick={e=>{
+                    router.push('/validate/')
+                  }}
+                  >
+                  {/* <Checkbox/> */}
+                  Activate Account</Typography>
               </Grid>
           </Grid>
           <SubmitButton  text={status==="loading"?"Loading":'Login'} radius='10px'

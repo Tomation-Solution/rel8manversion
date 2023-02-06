@@ -11,7 +11,7 @@ import { useAppSelector,useAppDispatch} from '../../redux/hooks'
 import { addChat, selectChat,clearChat } from "../../redux/Chat/ChatSlice";
 import { useEffect } from "react";
 import { get_list_members, get_old_chats } from "../../redux/Chat/ChatApi";
-import axios from "../../helpers/axios";
+import axios, { sitename, tenantName } from "../../helpers/axios";
 import Spinner from '../../components/Spinner'
 import { useMediaQuery } from 'react-responsive'
 import BasicModal from '../../components/Modals'
@@ -97,7 +97,7 @@ export default function SingleChat (){
             
             dispatch(get_old_chats(`?room_name=${room_name}`))
 
-            var ws = new WebSocket(`wss://rel8-backend-production.up.railway.app/ws/chat/nimn/${room_name}/`)
+            var ws = new WebSocket(`wss://${sitename}/ws/chat/${tenantName}/${room_name}/`)
             setWeb_socket(ws)
             ws.onopen = (e) => {
                 // connection opened

@@ -38,8 +38,15 @@ const items = [
   {
     href: '/members/chat',
     icon: (<ChatBubble fontSize="small" />),
-    title: 'Chat'
+    title: 'Single Chat'
   },
+  
+  {
+    href: '/members/chat',
+    icon: (<ChatBubble fontSize="small" />),
+    title: 'Group Chat'
+  },
+  
   {
     href: '/members/news',
     icon: (<Info fontSize="small" />),

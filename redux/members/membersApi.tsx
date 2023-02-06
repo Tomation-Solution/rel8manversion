@@ -26,6 +26,7 @@ export type MemberType =       {
     "is_exco": boolean,
     "is_financial": boolean,
     "user": number;
+    'photo'?:string;
 }
 
 
@@ -52,5 +53,4 @@ export const getMembersAndExco = createAsyncThunk(
         }
     }
 )
-
 

@@ -28,12 +28,13 @@ const AllMembers:NextPage = ()=>{
             //get allmemmbers
             dispatch(getMembersAndExco({'get_excos':false}))
         }
-        if(value===0){
+        if(value===1){
             //filter by exco allmemmbers
             dispatch(getMembersAndExco({'get_excos':true}))
 
         }
       },[value])
+      console.log({error})
       return (
         <DashboardLayout>
             {

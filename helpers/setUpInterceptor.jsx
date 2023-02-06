@@ -10,7 +10,6 @@ const setup = (store) => {
       if(window.location.pathname.includes('/admin')|| window.location.pathname.includes('/member')){
         token = getTokenorEmptyString()
       }
-      console.log({"some fuc":getTokenorEmptyString()})
       // Set the auth header before sending the request
       if (token) {
           config.headers["Authorization"] = "Token " + token;
