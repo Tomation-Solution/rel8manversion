@@ -231,7 +231,7 @@ const content = (
         open
         PaperProps={{
           sx: {
-            backgroundColor: ' #075a94',
+            backgroundColor: '#075a94',
             color: '#FFFFFF',
             width: 220,
             borderRadius:"10px"
@@ -253,9 +253,9 @@ const content = (
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: 'neutral.900',
+          backgroundColor: '#075a94',
           color: '#FFFFFF',
-          width: 170
+          width: 250
         }
       }}
       sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
