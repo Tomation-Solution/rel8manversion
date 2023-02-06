@@ -33,7 +33,7 @@ const ChatPage= ()=>{
           cred?
           <ChatEngine
             height='calc(100vh-200px)'
-            projectID='60602c0f-8035-48fb-a26e-87128b62b0c9'
+            projectID='618c0773-5fec-4ff7-aec1-79842b418da0'
             userName={cred.userName}
             userSecret={cred.userSecret}
             renderNewMessageForm={()=><MessageFormSocial/>}
