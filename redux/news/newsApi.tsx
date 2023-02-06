@@ -86,7 +86,7 @@ export const  getNewsComment = createAsyncThunk(
 )
 
 
-type createNwsCommentPropType ={   
+export type createNwsCommentPropType ={   
     "comment":string,
     "news":number
 }

@@ -36,7 +36,7 @@ const items = [
   },
 
   {
-    href: '/members/single-chat',
+    href: '/members/chat',
     icon: (<ChatBubble fontSize="small" />),
     title: 'Chat'
   },

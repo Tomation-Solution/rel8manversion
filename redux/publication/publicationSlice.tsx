@@ -1,6 +1,7 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+import { NewsComment } from "../news/newsSlice";
 import { RootState } from "../store";
-import { createPublication, deletePublication, getPublication } from "./publicationApi";
+import { createPublication, createPublicationComment, deletePublication, deletePublicationComment, getPublication, getPublicationComment } from "./publicationApi";
 
 
 export type PublicationType = {
@@ -23,14 +24,19 @@ export type PublicationType = {
 type initialStateType= {
     status: "idle" | "loading"|"created" | "succeeded" | "failed"|"created"|'deleted';
     error: any;
-    data: null|PublicationType[]
+    data: null|PublicationType[],
+    comment:NewsComment[],
+    commentStatus:'idle'|'loading'|"succeeded" | "failed"|'created'|'deleted'
+
 }
 
 const initialState ={
     status:"idle",
     isLoggedIn:false,
     error:null,
-    data:[]
+    data:[],
+    comment:[],
+    commentStatus:'idle'
 
 }  as  initialStateType
 
@@ -69,6 +75,49 @@ const publication  = createSlice({
     addCase(deletePublication.fulfilled,(state,{payload}:PayloadAction<number>)=>{
         state.status='deleted';
         state.data = state.data.filter(data=>data.id !== payload)
+    })
+
+
+
+
+
+    // "for comment control"
+
+    addCase(createPublicationComment.pending,(state,action)=>{
+        state.commentStatus='loading'
+    })
+
+    addCase(getPublicationComment.rejected,(state,action)=>{
+        state.commentStatus='failed'
+        state.error='Please Check your internet Comment was not loaded'
+    })
+    
+    addCase(getPublicationComment.fulfilled,(state,action)=>{
+        state.commentStatus='succeeded'
+        state.comment = action.payload
+    })
+
+    addCase(getPublicationComment.pending,(state,action)=>{
+        state.commentStatus = 'loading'
+    })
+
+    addCase(createPublicationComment.rejected,(state,action)=>{
+        state.commentStatus = 'failed'
+    })
+    addCase(createPublicationComment.fulfilled,(state,action)=>{
+        state.commentStatus ='created'
+        state.comment= [action.payload,...state.comment]
+    })
+    // deleteNewsComment
+    addCase(deletePublicationComment.pending,(state,action)=>{
+        state.commentStatus = 'loading'
+    })
+    addCase(deletePublicationComment.rejected,(state,action)=>{
+        state.commentStatus = 'failed'
+    })
+    addCase(deletePublicationComment.fulfilled,(state,action)=>{
+        state.commentStatus = 'deleted'
+        state.comment= state.comment.filter(data=>data.id != action.payload)
     })
 
     }

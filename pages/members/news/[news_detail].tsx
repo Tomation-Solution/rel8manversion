@@ -100,7 +100,7 @@ export const NewsDetail:NextPage = ()=>{
                     }))
                 }
             }}/>
-           </div>x
+           </div>
             <br />
             <br />
             </div>

@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../helpers/axios";
+import { createNwsCommentPropType } from "../news/newsApi";
+import { NewsComment } from "../news/newsSlice";
 import { PublicationType } from "./publicationSlice";
 
 
@@ -62,5 +64,47 @@ export const deletePublication = createAsyncThunk(
         catch(err:any){
             return err.response.data
         }
+    }
+)
+
+
+
+export const createPublicationComment = createAsyncThunk(
+    'publication/createPublicationComment',async(data:createNwsCommentPropType)=>{
+        try {
+            const resp = await axios.post(`/tenant/publication/publicationview__comment/`,data)
+            return resp.data as NewsComment
+        } catch (error:any) {
+            console.log({error})            
+            return error.reponse.data
+        } 
+    }
+)
+
+type getPublicationCommentProp ={
+    publication_id:number;
+}
+export const  getPublicationComment = createAsyncThunk(
+    'publication/getPublicationComment',async({publication_id}:getPublicationCommentProp)=>{
+        try {
+            const resp = await axios.get(`/tenant/news/newsview__comment/?publication_id=${publication_id}`,)
+
+            return resp.data.data as NewsComment[]
+        } catch (error:any) {
+            console.log({error})            
+            return error.reponse.data
+        }  
+    }
+)
+export const deletePublicationComment = createAsyncThunk(
+    'publication/deletePublicationComment',async(publicationID:number)=>{
+        try{
+            const resp = await axios.delete(`tenant/publication/publicationview__comment/${publicationID}/`)
+            return publicationID as number 
+        }
+        catch (error:any) {
+            console.log({error})            
+            return error.reponse.data
+        } 
     }
 )
