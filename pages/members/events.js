@@ -28,6 +28,11 @@ export default function Events(){
         <DashboardLayout>
           {status=='pending'&&<Spinner/>}
 
+          {
+            status==='success'&&events.length == 0?
+            <h3 style={{'textAlign':'center'}}>No Event</h3>:''
+          }
+
 <Grid container spacing={2} style={{'padding':'1rem'}}>
 {
             events.map((data,index)=>(
