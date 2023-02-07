@@ -23,7 +23,7 @@ export default function News(props){
 <Grid container spacing={2} style={{'padding':'1rem'}}>
 
 {
-                news.slice(0,3).map((data,index)=>(
+                news.map((data,index)=>(
                   <Newscard
                   key={index}
                   title={data.name}
