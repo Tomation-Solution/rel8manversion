@@ -25,10 +25,13 @@ const ChatPage= ()=>{
     
 
     return (
-             <DashboardLayout>
 
 <div className="background">
       <div className="shadow">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         {
           cred?
           <ChatEngine
@@ -45,7 +48,6 @@ const ChatPage= ()=>{
         }
       </div>
     </div>
-                </DashboardLayout>
 
     )
 }
