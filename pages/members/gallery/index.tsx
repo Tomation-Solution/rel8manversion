@@ -29,10 +29,10 @@ export default function Gallery(){
     return(
         <DashboardLayout>
     {/* <p>hell</p> */}
-    <div style={{'display':'flex','flexWrap':'wrap','padding':'1rem 1.3rem'}}>
+    <div style={{'display':'flex','flexWrap':'wrap','padding':'1rem 1.3rem','gap':'10px'}}>
         {
             images.map((data,index)=>(
-                <div key={index}>
+                <div key={index} style={{'maxWidth':'250px'}}>
                     <img  src={
                     data.images.length!=0?data.images[0].image:''
                 } style={{'display':'block','width':'300px','height':'250px','objectFit':'cover','borderRadius':'10px'}}/>
