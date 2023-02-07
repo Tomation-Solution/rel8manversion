@@ -43,7 +43,7 @@ export default function Home(props){
 
     const getmage =async () =>{
 
-      const resp  = await axios.get('/tenant/extras/galleryview/member_get_gallery/')
+      const resp  = await axios.get('/tenant/extras/gallery_version2/')
       setImages(resp.data.data.data)
 
   }
@@ -259,11 +259,11 @@ else{
               <h2>Latest Updates</h2>
           {
           images.map((img,index)=>(
-            <img className="sideImages" key={index} src={img.photo_file}/>
+            <img className="sideImages" key={index} 
+            src={  img.images.length!=0?img.images[0].image:''}/>
 
           ))
           }
-
             <p
             
             onClick={()=>{
