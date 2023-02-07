@@ -114,7 +114,10 @@ export default function Home(props){
       <br/>
       <br/>
                     <div style={{'padding':'0 1.2rem'}}>
+                      {
+                        meetings.length==0?'':
                     <h2>Meeting</h2>
+                      }
                     </div>
               
    <EventContainerV2>
@@ -151,7 +154,10 @@ export default function Home(props){
 </EventContainerV2>
                 <br/>
                 <div style={{'padding':'0 1.2rem'}}>
+                  {
+                    events.length == 0?'':
                     <h2>Event</h2>
+                  }
                     </div>
       <EventContainerV2>
 
