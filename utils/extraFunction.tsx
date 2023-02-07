@@ -30,3 +30,15 @@ if(typeof name==='string'){
 }
  return `Member (${member.id})`
 }
+
+export const FetchMembershipNo = (member:MemberType):string=>{
+  const name:any = member.member_info.find(d=>{
+    return d.name == 'MEMBERSHIP_NO' 
+})['value']
+
+if(typeof name==='string'){
+  return name
+}
+
+ return `Member (${member.id})`
+}

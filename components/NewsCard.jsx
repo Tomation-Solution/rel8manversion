@@ -13,7 +13,7 @@ export default function Newscard (props){
     }
     return(
         <Grid md={4} padding={'10px'} >
-            <img style={{'width':'100%','height':'150px','objectFit':'cover'}} src={props.image} marginTop={0} className='rounded-corners'/>
+            <img style={{'width':'100%','height':'200px','objectFit':'contain','borderRadius':'10px'}} src={props.image} marginTop={0} className='rounded-corners'/>
            
            <div style={{'padding':'0 10px'}}>
            <Typography fontWeight='bold' marginY={1}>{props.title}</Typography>

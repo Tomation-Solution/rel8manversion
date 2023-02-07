@@ -7,7 +7,7 @@ import { useState } from 'react'
 import Profile from '../Profile/Profile'
 import { useMediaQuery } from 'react-responsive'
 import { MemberType } from '../../redux/members/membersApi'
-import { FetchName } from '../../utils/extraFunction'
+import { FetchName,FetchMembershipNo } from '../../utils/extraFunction'
 
 type Prop ={
     member:MemberType
@@ -16,6 +16,7 @@ const MemberCard = ({member}:Prop)=>{
     const [isOpen, setIsOpen] = useState(false)
     const isPhone = useMediaQuery({ query: '(max-width: 360px)' })
     const Name:string = FetchName(member)
+    const matric_num:string = FetchMembershipNo(member)
     return (
         <MemeberCardContainer>
            <div className='MemberCardphotoConainer'>
@@ -23,7 +24,7 @@ const MemberCard = ({member}:Prop)=>{
            </div>
 
            <h2>{Name}</h2>
-           <p className='member_postion'>{member.email}</p>
+           <p className='member_postion'>{matric_num}</p>
 
            <CustomBtn style={{'padding':'.5rem','width':'40%','margin':'10px auto'}}
            onClick={(e)=>{
