@@ -113,7 +113,7 @@ export default function Home(props){
               }
       <br/>
       <br/>
-                    <div style={{'padding':'0 1.2rem'}}>
+                    <div >
                       {
                         meetings.length==0?'':
                     <h2>Meeting</h2>
@@ -153,7 +153,7 @@ export default function Home(props){
 
 </EventContainerV2>
                 <br/>
-                <div style={{'padding':'0 1.2rem'}}>
+                <div >
                   {
                     events.length == 0?'':
                     <h2>Event</h2>
@@ -263,6 +263,7 @@ else{
 
             <SidePane>
               <h2>Latest Updates</h2>
+          <div style={{'display':'flex','flexWrap':'wrap','gap':'10px'}}>
           {
           images.map((img,index)=>(
             <img className="sideImages" key={index} 
@@ -270,12 +271,14 @@ else{
 
           ))
           }
+          </div>
             <p
             
             onClick={()=>{
               route.push('/members/gallery')
           }}>See More</p>
             </SidePane>
+            
           </HomeLayout>
         </DashboardLayout>
     )

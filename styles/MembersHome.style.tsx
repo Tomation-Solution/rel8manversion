@@ -10,8 +10,9 @@ export const HomeLayout = styled.div`
 @media screen and (min-width: 800px){
         padding: 1.8rem;
         display: flex;
-        max-width: 1200px;
+        max-width: 2000px;
         /* border: 1px solid red; */
+        margin: 0 auto;
         justify-content: space-between;
 }
 `
@@ -23,8 +24,8 @@ export const MeetingHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between  ;
-    max-width: 700px;
-
+    /* max-width: 700px; */
+    width: 100%;
     h3{
         border:10px solid white;
         width: 100px;
@@ -42,17 +43,21 @@ export const MeetingHeader = styled.div`
 `
 
 export const MainPane = styled.div`
-max-width: 800px;
+max-width:900px;
+padding: 1rem;
 
 `
 export const SidePane = styled.aside`
 display: flex;
 flex-direction: column;
+/* border: 1px solid red; */
+
     .sideImages{
         width: 250px;
         border-radius: 10px;
         display: block;
-        margin: 20px 0;
+        margin: 20px auto;
+        
     }
 p{  
     color:#075a94 ;
