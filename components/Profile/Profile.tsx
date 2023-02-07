@@ -69,7 +69,7 @@ const Profile = ({member,can_edit_img=false}:Prop):React.ReactElement=>{
         setIsLoading(true)
         const resp = await axios.post('/tenant/user/memberlist-info/update_profile_img/',form)
         if(resp.data.status_code==200){
-            notify('Photo updated Successfully')
+            notify('Photo updated Successfully','success')
             setPhoto(resp.data.data[0])
         }
         setIsLoading(false)
