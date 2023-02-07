@@ -28,7 +28,7 @@ export default function Publications(props){
         <Grid mx={1}>
            
             <Typography variant='h6' className='text' marginTop={2}>
-                AANI Publications
+                Nimn Publications
             </Typography>
             <Grid container>
                 {
