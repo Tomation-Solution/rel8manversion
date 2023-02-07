@@ -7,6 +7,7 @@ import NewsImage from '../../images/Vectorlanding.png'
 import EventCard from "../../components/EventCard";
 import Newscard from "../../components/NewsCard";
 import GreenButton from "../../components/Buttonn";
+import moment from "moment";
 // import { Box } from "@mui/system";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import Link from "next/link";
@@ -79,16 +80,37 @@ export default function Home(props){
           }
           <HomeLayout>
             <MainPane>
+              {
+                meetings.length!==0?
                 <MeetingHeader>
+              
                   <div>
-                    <h1>Next Meeting</h1>
-                    <p>Dec 23,2022</p>
+                    <h1>{meetings[0].name}</h1>
+                    <p>
+                    {meetings[0].details.slice(0,30)}...
+                    </p>
                   </div>
 
                   <h3>
-                      10<br/>Days
+                  {
+                moment(meetings[0].event_date).format('LLL')
+              }
                   </h3>
                 </MeetingHeader>
+                :
+                <MeetingHeader>
+                  
+                  <div>
+                    <h1>No Meeting</h1>
+                    <p>Nill</p>
+                  </div>
+
+                  <h3>
+                      0<br/>Days
+                  </h3>
+                </MeetingHeader>
+
+              }
       <br/>
       <br/>
                     <div style={{'padding':'0 1.2rem'}}>

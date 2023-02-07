@@ -12,11 +12,12 @@ import Spinner from "../../components/Spinner";
 import { useEffect } from "react";
 import { getMemberPublication } from "../../redux/memberPublication/memberPublicationAPi";
 import moment from "moment";
+import { useRouter } from "next/router";
 export default function Publications(props){
 
     const dispatch = useAppDispatch();
     const { status,publication} = useAppSelector(selectmemberPublication);
-
+    const route = useRouter()
     useEffect(()=>{
         dispatch(getMemberPublication({}))
     },[])
@@ -35,10 +36,13 @@ export default function Publications(props){
                         <ChildNewsCard 
                         key={index}
                         date={moment(data.created_at).format('LLL')}
-                        image={NewImage}                
+                        image={data.image}                
                         title={data.name}
                         data={data}
-                        // click={()=>props.setSelected(10)}
+                        // click={()=>{
+                        //     localStorage.setItem('publication_detail',JSON.stringify(data))
+                        //     route.push('/members/publicationDetail')
+                        // }}
                     />
                     ))
                 }
