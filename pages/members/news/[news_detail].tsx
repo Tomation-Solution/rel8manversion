@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectNews } from '../../../redux/news/newsSlice';
 import { createNwsComment, deleteNewsComment, getNewsComment } from '../../../redux/news/newsApi';
 
-// export const img_url = 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1lZXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
+export const img_url = 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1lZXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
 export const NewsDetail:NextPage = ()=>{
     const isLaptop = useMediaQuery({
         query: '(min-width: 524px)'
