@@ -70,6 +70,16 @@ const items = [
     icon: (<Photo fontSize="small" />),
     title: 'Gallery'
   },
+  {
+    href: '/members/service_request',
+    icon: (<Photo fontSize="small" />),
+    title: 'Service Request'
+  },
+  {
+    href: '/members/fund_a_project',
+    icon: (<Photo fontSize="small" />),
+    title: 'Fund A Project'
+  },
   // {
   //   href: '/members/election/',
   //   icon: (<Person fontSize="small" />),
