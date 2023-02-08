@@ -64,52 +64,53 @@ const Dues:NextPage = ()=>{
     };
     const dispatch = useAppDispatch()
     const {status ,dues,message,due_break_down} = useSelector(selectMemberDues)
-    const {notify } = useToast()
+    const {notify } = useToast();
+    console.log({dues})
       const prop_columns = [
-        {
-            Header:'Email',
-            accessor:'user__email',
-            id:1,
-            },
+        // {
+        //     Header:'Email',
+        //     accessor:'user__email',
+        //     id:1,
+        //     },
             {
-                Header:'Due Name',
+                Header:'Reason',
                 accessor:'due__Name',
             },
-            {
-                Header:'Over Due',
-                accessor:'is_overdue',
-                Cell:(tableProps:any)=>(
-                    <p>
-                          {
-                            tableProps.row.original.is_overdue?
-                            <CheckIcon style={{'color':'#04a9fb'}}/>
-                            :
-                            <PendingIcon style={{'color':'yellow'}}/>
-                          }
-                    </p>
-                )
-            },
+            // {
+            //     Header:'Over Due',
+            //     accessor:'is_overdue',
+            //     Cell:(tableProps:any)=>(
+            //         <p>
+            //               {
+            //                 tableProps.row.original.is_overdue?
+            //                 <CheckIcon style={{'color':'#04a9fb'}}/>
+            //                 :
+            //                 <PendingIcon style={{'color':'yellow'}}/>
+            //               }
+            //         </p>
+            //     )
+            // },
             {
                 Header:'amount',
                 accessor:'amount',
             },
         
+            // {
+            //     Header:'Has Paid',
+            //     accessor:'is_paid',
+            //     Cell:(tableProps:any)=>(
+            //         <p>
+            //               {
+            //                 tableProps.row.original.is_paid?
+            //                 <CheckIcon style={{'color':'#04a9fb'}}/>
+            //                 :
+            //                 <PendingIcon style={{'color':'yellow'}}/>
+            //               }
+            //         </p>
+            //     )
+            // },
             {
-                Header:'Has Paid',
-                accessor:'is_paid',
-                Cell:(tableProps:any)=>(
-                    <p>
-                          {
-                            tableProps.row.original.is_paid?
-                            <CheckIcon style={{'color':'#04a9fb'}}/>
-                            :
-                            <PendingIcon style={{'color':'yellow'}}/>
-                          }
-                    </p>
-                )
-            },
-            {
-                Header:'Pay',
+                Header:'Action',
                 accessor:'id',
                 Cell:(tableProps:any)=>(
                     <button onClick={()=>{
@@ -162,15 +163,15 @@ const Dues:NextPage = ()=>{
                 <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Completed Payment" {...a11yProps(0)} />
           <Tab label="Pending Payment" {...a11yProps(1)} />
+          <Tab label="Completed Payment" {...a11yProps(0)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-                  <Table prop_columns={prop_columns} custom_data={dues.filter((data)=>data.is_paid===true)}/>
+                  <Table prop_columns={prop_columns} custom_data={dues.filter((data)=>data.is_paid===false)}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-                  <Table prop_columns={prop_columns} custom_data={dues.filter((data)=>data.is_paid===false)}/>
+                  <Table prop_columns={prop_columns} custom_data={dues.filter((data)=>data.is_paid===true)}/>
       </TabPanel>
 
     </Box>
