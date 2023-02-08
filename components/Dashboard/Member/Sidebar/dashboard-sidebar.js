@@ -81,6 +81,11 @@ const items = [
     title: 'Account'
   },
   {
+    href: '/members/profile/',
+    icon: (<Person fontSize="small" />),
+    title: 'My profile'
+  },
+  {
     href: '#',
     icon: (<LogoutRounded fontSize="small" />),
     title: 'Logout'

@@ -57,13 +57,8 @@ export  function a11yProps(index: number) {
   
 const Dues:NextPage = ()=>{
     const [value, setValue] = React.useState(0);
-    const [member,setMemeber] = React.useState<null|MemberType>()
 
-    const get_member  = async()=>{
-
-      const resp = await axios.get('/tenant/user/memberlist-info/my_profile/');
-      setMemeber(resp.data.data[0])
-    }
+ 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
@@ -132,7 +127,6 @@ const Dues:NextPage = ()=>{
     useEffect(()=>{
         dispatch(getMemberduesApi())
         dispatch(getMemberDueBreakDown())
-        get_member()
     },[])
 
     useEffect(()=>{
@@ -161,10 +155,7 @@ const Dues:NextPage = ()=>{
                 </div>
                 <br />
                 <br />
-                {
-                  member?
-                  <Profile member={member} can_edit_img={true}/>:''
-                }
+                
 
                 <br />
 

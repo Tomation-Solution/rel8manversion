@@ -16,6 +16,26 @@ export type MemberInfoType =  {
     value:string;
     member_id:number;
 }
+export type memberEducationType ={
+    "member":number,
+    "name_of_institution": string,
+    "major": string,
+    "degree": string,
+    "language": string,
+    "reading": string,
+    "speaking":string,
+    "date":string,
+    "id"?: number,
+    
+}
+export type memberEmploymentHistory = {
+    "member": number,
+    "postion_title": string,
+    "employment_from": string,
+    "employment_to": string,
+    "employer_name_and_addresse":string,
+    "id"?: number
+}
 export type MemberType =       {
     "id": number,
     "member_info": MemberInfoType[],
@@ -27,6 +47,8 @@ export type MemberType =       {
     "is_financial": boolean,
     "user": number;
     'photo'?:string;
+    'member_education':memberEducationType[],
+    'member_employment_history':memberEmploymentHistory[]
 }
 
 
