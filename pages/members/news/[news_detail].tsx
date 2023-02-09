@@ -24,7 +24,6 @@ export const NewsDetail:NextPage = ()=>{
     const  {comment,commentStatus}  = useAppSelector(selectNews)
 
     useEffect(()=>{
-        console.log({window})
         if( localStorage.getItem('news')){
             setData(JSON.parse(localStorage.getItem('news')))
             const news = JSON.parse(localStorage.getItem('news'))

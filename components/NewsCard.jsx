@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 // import NewsImage from '../images/Vectorlanding.png'
 
 export default function Newscard (props){
+    //this is very bad component but u need to know i was in an hurry sorry
     const route = useRouter()
     const saveNews = ()=>{
         localStorage.setItem('news',JSON.stringify(props.data))
@@ -24,7 +25,13 @@ export default function Newscard (props){
                 </Button>
                 <GreenButton/> */}
                 <GreenButton text='More' radius='10px'
-                click={(e)=>saveNews()}
+                click={(e)=>{
+                    if(props.onBtnClick){
+                        props.onBtnClick()
+                    }else{
+                        saveNews()
+                    }
+                }}
                textColor='white' paddingY={1} paddingX={1}  bg='#04a9fb'/>
             </Grid>
            </div>
