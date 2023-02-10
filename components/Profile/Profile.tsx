@@ -13,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {TextField} from '@mui/material'
 import {  Person,  } from "@mui/icons-material"
+import InputFieldView from "../InputFieldView/InputFieldView"
 
 
 type Prop ={
@@ -51,7 +52,7 @@ const schema = yup.object({
         'id':yup.number(),
     }))
 })
-
+const GRIDSTYLE ={'display':'grid','gridTemplateColumns':'repeat(2,1fr)','gap':'10px','alignItems':'center'}
 const Profile = ({member,can_edit_img=false}:Prop):React.ReactElement=>{
     const Name:string = FetchName(member)
     const [editProfile,setEditProfile] =useState(false)
@@ -117,7 +118,7 @@ const Profile = ({member,can_edit_img=false}:Prop):React.ReactElement=>{
     <img className='profile_pics' src={photo} alt=""  />
     {
         can_edit_img?
-        <CustomBtn style={{'padding':'.9rem','margin':'5px auto','width':'50px','height':'50px','border-radius':'50%','position':'relative'}}>
+        <CustomBtn style={{'padding':'.9rem','transform':'translateY(-20px)','margin':'5px auto','width':'50px','height':'50px','border-radius':'50%','position':'relative'}}>
             <label htmlFor="profile_photo" style={{'position':'absolute','top':'0','left':'0','width':'100%','height':'100%','cursor':'pointer'}}>
     </label>
         <MdOutlineAddAPhoto/>
@@ -130,23 +131,26 @@ onChange={(e)=>{
     updateProfile(file)
 }}
 />
+
 {editProfile===false?
 
 <div>
 <br />
-    <h2>{Name}</h2>
+<InputFieldView title="Name" value={Name}/>
+<br />
+<InputFieldView title="Email" value={member.email}/>
 <br />
 {
     member.member_info.length!==0?
     <>
-        <h2>Member Info</h2>
+        <p><strong>Member Info</strong></p>
         <br />
-        <div>
+
+        <div style={GRIDSTYLE}>
             {
                 member.member_info.map((data,index)=>(
                     <div key={index}>
-                        <p><strong>{data.name}</strong></p>
-                        <p><small>{data.value}</small></p>
+                        <InputFieldView title={data.name} value={data.value}/>
                         <br />
                     </div>
                 ))
@@ -160,13 +164,14 @@ onChange={(e)=>{
 {
     member.exco_info.length!==0?
     <>
-        <h2>Exco Info</h2>
-        <div>
+          <p><strong>Member Councils </strong></p><br />
+          
+        <div style={GRIDSTYLE}>
             {
                 member.exco_info.map((data,index)=>(
                     <div key={index}>
-                        <p><strong>{data.name}</strong></p>
-                        <p><small>{data.about}</small></p>
+                      <InputFieldView title={data.name} value={''}/>
+                    <br />
                     </div>
                 ))
             }
@@ -176,6 +181,56 @@ onChange={(e)=>{
     
 }
     <br />
+    {/* EMPLOYMENT HISTORY */}
+    {
+        member.member_education.length!==0?
+        <>
+            <p> <strong>EDUCATION{'(college or university degrees)'}</strong></p>
+            <br />
+            <div>
+            {
+                member.member_education.map((data,index)=>(
+                    <div key={index}  style={GRIDSTYLE}>
+                      <InputFieldView title={'Name Of Insttution'} value={data.name_of_institution}/>
+                      <InputFieldView title={'Major'} value={data.major}/>
+                      <InputFieldView title={'Degree'} value={data.degree}/>
+                      <InputFieldView title={'Date'} value={data.date}/>
+                      <InputFieldView title={'Language'} value={data.language}/>
+                      <InputFieldView title={'Speaking'} value={data.speaking}/>
+                      <InputFieldView title={'Reading'} value={data.reading}/>
+                    <br />
+                    <br />
+                    </div>
+                ))
+            }
+            </div>
+        </>
+        :""
+    }
+    <br />
+    {
+        member.member_employment_history.length!==0?
+        <>
+    <br />
+
+            <p><strong>Employment history</strong></p>
+            <br />
+            <div>
+                    {
+                member.member_employment_history.map((data,index)=>(
+                    <div style={GRIDSTYLE} key={index}>
+                        <InputFieldView title={'Postion Title'} value={data.postion_title}/>
+                        <InputFieldView title={'Employer / Addresse'} value={data.employer_name_and_addresse}/>
+                        <InputFieldView title={'Employment from'} value={data.employment_from}/>
+                        <InputFieldView title={'Employment to'} value={data.employment_to}/>
+                    </div>
+                ))
+                    }
+            </div>
+        </>
+        :
+        ''
+    }
 </div>
 :
 <form
