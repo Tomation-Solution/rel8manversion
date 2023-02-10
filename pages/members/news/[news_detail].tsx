@@ -70,7 +70,7 @@ export const NewsDetail:NextPage = ()=>{
                 
             </div>
 
-            <ContentReactionContainer>
+            {/* <ContentReactionContainer>
                 <div className="" style={{'padding':'0 .4rem'}}>
                     <GoThumbsup/>
                     <p>Like</p>
@@ -79,7 +79,7 @@ export const NewsDetail:NextPage = ()=>{
                     <GoThumbsdown/>
                     <p>Dislike</p>
                 </div>
-            </ContentReactionContainer>
+            </ContentReactionContainer> */}
 <br />
            <div style={{'margin':'0 auto','maxWidth':'500px'}}>
            {

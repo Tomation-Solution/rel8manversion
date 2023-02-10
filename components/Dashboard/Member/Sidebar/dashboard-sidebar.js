@@ -11,7 +11,8 @@ import Image from 'next/image';
 import LogoImage from '../../../../images/logo.png'
 import SwitchLabels from '../../../SwitchLabels';
 import Spinner from "../../../Spinner";
-
+import {BsBriefcaseFill} from 'react-icons/bs'
+import {FaUsers} from 'react-icons/fa'
 const centerSwitch={
          'display':'flex',
          'padding':' 0 .7rem'
@@ -34,7 +35,23 @@ const items = [
     icon: (<PeopleRounded fontSize="small" />),
     title: 'Events'
   },
+  {
 
+    href: '#',
+    isDroppable:true,
+    icon: (<MenuBook fontSize="small" />),
+    title: 'Resources'
+  },
+  {
+    href: '/members/gallery',
+    icon: (<Photo fontSize="small" />),
+    title: 'Gallery'
+  },
+  {
+    href: '/members/service_request',
+    icon: (<BsBriefcaseFill fontSize="small" />),
+    title: 'Services'
+  },
   {
     href: '/members/single-chat',
     icon: (<ChatBubble fontSize="small" />),
@@ -54,37 +71,15 @@ const items = [
   },
   {
     href: '/members/all_members/',
-    icon: (<Info fontSize="small" />),
+    icon: (<FaUsers fontSize="small" />),
     title: 'All Members'
-  },
-  {
-
-    href: '#',
-    isDroppable:true,
-    icon: (<MenuBook fontSize="small" />),
-    title: 'Resources'
-  },
-
-  {
-    href: '/members/gallery',
-    icon: (<Photo fontSize="small" />),
-    title: 'Gallery'
-  },
-  {
-    href: '/members/service_request',
-    icon: (<Photo fontSize="small" />),
-    title: 'Service Request'
   },
   {
     href: '/members/fund_a_project',
     icon: (<Photo fontSize="small" />),
     title: 'Fund A Project'
   },
-  // {
-  //   href: '/members/election/',
-  //   icon: (<Person fontSize="small" />),
-  //   title: 'Election'
-  // },
+
   {
     href: '/members/dues/',
     icon: (<Person fontSize="small" />),
