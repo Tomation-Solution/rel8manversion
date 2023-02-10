@@ -44,7 +44,7 @@ const AllMembers:NextPage = ()=>{
 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="All Members" {...a11yProps(0)} />
-          <Tab label="All Exco" {...a11yProps(1)} />
+          {/* <Tab label="All Exco" {...a11yProps(1)} /> */}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
