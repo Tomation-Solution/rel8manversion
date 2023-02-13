@@ -9,7 +9,7 @@ import { a11yProps, TabPanel } from "../dues";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { selectMemberAndExco } from "../../../redux/members/membersSlice";
 import Spinner from "../../../components/Spinner";
-import { getMembersAndExco } from "../../../redux/members/membersApi";
+import { getCouncilMembers, getMembersAndExco } from "../../../redux/members/membersApi";
 import axios from "../../../helpers/axios";
 
 
@@ -35,16 +35,19 @@ const AllMembers:NextPage = ()=>{
         setCouncil(resp.data.data)
     }
       React.useEffect(()=>{
-        console.log({value})
         if(value===0){
             //get allmemmbers
             dispatch(getMembersAndExco({'get_excos':false}))
+        }else{
+          console.log({'councilid':value})
+          dispatch(getCouncilMembers(value))
         }
-        if(value===1){
-            //filter by exco allmemmbers
-            dispatch(getMembersAndExco({'get_excos':true}))
+        // if(value===1){
+        //     //filter by exco allmemmbers
+        //     dispatch(getMembersAndExco({'get_excos':true}))
 
-        }
+        // }
+        // console.log()
       },[value])
     React.useEffect(()=>{
         get_council_name()
@@ -61,13 +64,13 @@ const AllMembers:NextPage = ()=>{
           {/* <Tab label="All Exco" {...a11yProps(1)} /> */}
           {
             council.map((data,index:number)=>(
-                <Tab label={data.name} {...a11yProps(index+1)} key={index+1} />
+                <Tab label={data.name} {...a11yProps(data.id)} key={index+1} />
             ))
           }
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-                <h1>All Memebers</h1>
+                {/* <h1>All Memebers</h1> */}
 
             <div style={{'display':'flex','flexWrap':'wrap','gap':'5px','padding':'1rem .3rem'}}>
                 {
@@ -77,18 +80,21 @@ const AllMembers:NextPage = ()=>{
                 }
             </div>
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <h1>All Exco</h1>
-
-            <div style={{'display':'flex','flexWrap':'wrap','gap':'5px','padding':'1rem .3rem'}}>
-                {
-                   data.map((data,index)=>(
-                        <MemberCard member={data} key={index}/>
-                    ))
-                }
-            </div>
-      </TabPanel>
-           
+      
+      {
+           council.map((council,index:number)=>(
+             <TabPanel value={value} index={council.id} key={index}>
+       
+                <div style={{'display':'flex','flexWrap':'wrap','gap':'5px','padding':'1rem .3rem'}}>
+                    {
+                      data.map((data,index)=>(
+                            <MemberCard member={data} key={index}/>
+                        ))
+                    }
+                </div>
+             </TabPanel>
+           ))
+      }
 
         </DashboardLayout>
     )

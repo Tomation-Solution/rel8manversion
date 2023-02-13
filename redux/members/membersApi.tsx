@@ -76,3 +76,19 @@ export const getMembersAndExco = createAsyncThunk(
     }
 )
 
+
+
+export const getCouncilMembers  = createAsyncThunk(
+    'member_and_exco/getCouncilMembers',async (concil_id:number)=>{
+        let url=`/tenant/user/council_members/${concil_id}/`
+
+        try {
+            const resp = await axios.post(url);
+            console.log({resp})
+            return resp.data.data as MemberType[]
+        } catch (error) {
+            
+            return error.response.data as any
+        }
+    }
+)

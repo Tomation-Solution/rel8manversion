@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { getMembersAndExco, MemberType } from "./membersApi";
+import { getCouncilMembers, getMembersAndExco, MemberType } from "./membersApi";
 
 
 
@@ -35,6 +35,19 @@ const MembersAndExcoSlice = createSlice({
             state.data =payload;
         })
         addCase(getMembersAndExco.rejected,(state,action)=>{
+            state.status='failed'
+            
+        })
+
+        
+        addCase(getCouncilMembers.pending,(state,action)=>{
+            state.status='loading'
+        })
+        addCase(getCouncilMembers.fulfilled,(state,{payload}:PayloadAction<MemberType[]>)=>{
+            state.status='succeeded'
+            state.data =payload;
+        })
+        addCase(getCouncilMembers.rejected,(state,action)=>{
             state.status='failed'
             
         })
