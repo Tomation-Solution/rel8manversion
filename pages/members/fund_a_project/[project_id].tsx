@@ -117,7 +117,7 @@ const ProjectDetail = ()=>{
                     <CustomBtn styleType="sec" style={{'width':'40%'}} onClick={e=>{
                         notify('Please hold on payment is still in development','error')
                     }}>
-                    Support with Cash
+                    Support In Cash
                     </CustomBtn>
                 </div>
             </div>

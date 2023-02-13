@@ -73,7 +73,7 @@ const Dues:NextPage = ()=>{
         //     id:1,
         //     },
             {
-                Header:'Reason',
+                Header:'Name',
                 accessor:'due__Name',
             },
             // {
@@ -91,9 +91,14 @@ const Dues:NextPage = ()=>{
             //     )
             // },
             {
-                Header:'amount',
+                Header:'Amount',
                 accessor:'amount',
             },
+            {
+              Header:'Due Date',
+              accessor:'amount',
+              id:44
+          },
         
             // {
             //     Header:'Has Paid',

@@ -10,18 +10,30 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { selectMemberAndExco } from "../../../redux/members/membersSlice";
 import Spinner from "../../../components/Spinner";
 import { getMembersAndExco } from "../../../redux/members/membersApi";
+import axios from "../../../helpers/axios";
 
 
 
-
+type CouncilType ={
+    "id": number,
+    "name":string,
+    "about": string,
+    "can_upload_min":boolean,
+    "chapter_id": number|string
+}
 
 const AllMembers:NextPage = ()=>{
     const [value, setValue] = React.useState(0);
     const dispatch = useAppDispatch()
     const {status,error,data} =useAppSelector(selectMemberAndExco)
+    const [council,setCouncil] = React.useState<CouncilType[]>([])
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
       };
+    const get_council_name = async ()=>{
+        const resp:any = await axios.get('/tenant/user/ManageAssigningExos/')
+        setCouncil(resp.data.data)
+    }
       React.useEffect(()=>{
         console.log({value})
         if(value===0){
@@ -34,7 +46,9 @@ const AllMembers:NextPage = ()=>{
 
         }
       },[value])
-      console.log({error})
+    React.useEffect(()=>{
+        get_council_name()
+    },[])
       return (
         <DashboardLayout>
             {
@@ -45,6 +59,11 @@ const AllMembers:NextPage = ()=>{
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="All Members" {...a11yProps(0)} />
           {/* <Tab label="All Exco" {...a11yProps(1)} /> */}
+          {
+            council.map((data,index:number)=>(
+                <Tab label={data.name} {...a11yProps(index+1)} key={index+1} />
+            ))
+          }
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
