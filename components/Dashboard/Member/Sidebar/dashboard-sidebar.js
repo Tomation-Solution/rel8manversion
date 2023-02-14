@@ -36,6 +36,11 @@ const items = [
     title: 'Events'
   },
   {
+    href: '/members/committee',
+    icon: (<EventRounded fontSize="small" />),
+    title: 'My Committee'
+  },
+  {
 
     href: '#',
     isDroppable:true,
@@ -89,6 +94,11 @@ const items = [
     href: '/members/profile/',
     icon: (<Person fontSize="small" />),
     title: 'My profile'
+  },
+  {
+    href: '/members/settings/',
+    icon: (<Person fontSize="small" />),
+    title: 'My Settings'
   },
   {
     href: '#',
@@ -182,40 +192,7 @@ const content = (
       }}
     />
 
-{
-  user_info?
-  
-  <div style={{'height':'100px'}}>
-    {
-      user_info.exco.map((data,index)=>(
-        <div style={centerSwitch} key={index}>
 
-        <SwitchLabels
-        label={data.name}
-        switch={exco == data.id}
-        func={
-        ()=>{
-        //   console.log('Yo Yo')
-          if(exco){
-            if(exco == data.id){
-              localStorage.removeItem('exco')
-            }else{
-              localStorage.setItem('exco',data.id)
-            }
-          }else{
-            localStorage.setItem('exco',JSON.stringify(data.id))
-          }
-
-        window.location.reload()
-        }
-        }
-        />
-        </div>
-  ))
-    }
-  </div>
-  :''
-}
 
 <br/>
     <Box sx={{ flexGrow: 1 }}>

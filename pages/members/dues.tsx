@@ -97,7 +97,7 @@ const Dues:NextPage = ()=>{
             {
               Header:'Due Date',
               accessor:'amount',
-              id:44
+              id:44,
           },
         
             // {
@@ -116,14 +116,19 @@ const Dues:NextPage = ()=>{
             // },
             {
                 Header:'Action',
-                accessor:'id',
+                accessor:'is_paid',
                 Cell:(tableProps:any)=>(
                     <button onClick={()=>{
                         // tableProps.row.original.id
                         // notify('Please')
                         // dispatch(payDuesApi(tableProps.row.original.id))
+                      
                     }}>
-                        Pay(Coming soon!)
+                      {/* {
+                        tableProps.row.original.is_paid ===true?
+                        'Pay(Coming soon!)':'view receipt'
+                      } */}
+                      Pay
                     </button>
                 )
             }

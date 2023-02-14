@@ -16,9 +16,9 @@ export default function Newscard (props){
         <Grid md={4} padding={'10px'} >
             <img style={{'width':'100%','height':'200px','objectFit':'contain','borderRadius':'10px'}} src={props.image} marginTop={0} className='rounded-corners'/>
            
-           <div style={{'padding':'0 10px'}}>
-           <Typography fontWeight='bold' marginY={1}>{props.title}</Typography>
-            <Typography variant="body2" textAlign='justify' marginBottom={2}>{props.body}</Typography>
+           <div style={{'padding':'0 10px','textAlign':'center'}}>
+           <Typography fontWeight='bold'  marginY={1}>{props.title}</Typography>
+            <Typography variant="body2" marginBottom={2}>{props.body}</Typography>
             <Grid md={10} sm={9} style={{margin:'0 auto'}}>
                 {/* <Button variant='contained'  size='small' className={[styles.button, 'button-lower rounded-button'] }>
                     More

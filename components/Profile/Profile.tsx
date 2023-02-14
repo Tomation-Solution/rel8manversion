@@ -143,8 +143,9 @@ onChange={(e)=>{
 {
     member.member_info.length!==0?
     <>
-        <p><strong>Member Info</strong></p>
+        <p style={{'textAlign':'left'}}><strong>Member Info</strong></p>
         <br />
+
 
         <div style={GRIDSTYLE}>
             {
@@ -164,7 +165,7 @@ onChange={(e)=>{
 {
     member.exco_info.length!==0?
     <>
-          <p><strong>Member Councils </strong></p><br />
+          <p style={{'textAlign':'left'}}><strong>Member Councils </strong></p><br />
           
         <div style={GRIDSTYLE}>
             {
@@ -185,7 +186,7 @@ onChange={(e)=>{
     {
         member.member_education.length!==0?
         <>
-            <p> <strong>EDUCATION{'(college or university degrees)'}</strong></p>
+            <p style={{'textAlign':'left'}}> <strong>EDUCATION{'(college or university degrees)'}</strong></p>
             <br />
             <div>
             {
@@ -213,7 +214,7 @@ onChange={(e)=>{
         <>
     <br />
 
-            <p><strong>Employment history</strong></p>
+            <p style={{'textAlign':'left'}}><strong>Employment history</strong></p>
             <br />
             <div>
                     {
@@ -238,8 +239,8 @@ onSubmit={handleSubmit(onSubmit)}
 >
 <br />
     <br />
-       <h2>Education Bio</h2>
-
+       <h2 style={{'textAlign':'left'}}>Education Bio</h2>
+    <br />
     {
         education_fields.map((data,index)=>(
             <div key={index}>
@@ -375,7 +376,8 @@ onSubmit={handleSubmit(onSubmit)}
     </CustomBtn>
     <br />
     <br />
-      <h2>Employment Bio</h2>
+      <h2 style={{'textAlign':'left'}}>Employment Bio</h2>
+      <br />
     {   
         employment_fields.map((data,index)=>(
             <div key={index}>
