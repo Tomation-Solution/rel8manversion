@@ -156,9 +156,7 @@ export default function SingleChat (){
                             'time':'..',
                             date:'',
                             image:'',
-                            name:data.member_info.find(d=>{
-                                return d.name.toLocaleLowerCase() == 'name' ||  d.name.toLocaleLowerCase() == 'first' ||d.name.toLocaleLowerCase() == 'first name' || d.name.toLocaleLowerCase() == 'surname'
-                            })['value']
+                            name:data.full_name
                         }
                     }).map((e,index)=><Grid onClick={()=>{
                         dispatch(clearChat({}))

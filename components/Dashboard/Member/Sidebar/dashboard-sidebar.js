@@ -53,11 +53,11 @@ const items = [
     icon: (<Photo fontSize="small" />),
     title: 'Gallery'
   },
-  {
-    href: '/members/service_request',
-    icon: (<BsBriefcaseFill fontSize="small" />),
-    title: 'Services'
-  },
+  // {
+  //   href: '/members/service_request',
+  //   icon: (<BsBriefcaseFill fontSize="small" />),
+  //   title: 'Services'
+  // },
   {
     href: '/members/single-chat',
     icon: (<ChatBubble fontSize="small" />),
