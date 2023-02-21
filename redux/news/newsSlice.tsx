@@ -25,7 +25,11 @@ export type NewsComment = {
     "id": number,
     "comment":string,
     "news": number,
-    "member": MemberType
+    "member": {
+        "full_name":string,
+        "photo_url": string,
+        "id": number
+    }
 }
 type initialStateType= {
     status: "idle" | "loading"|"created" | "succeeded" | "failed"|"created"|'deleted';

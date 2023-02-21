@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../helpers/axios";
+import { generate_url_params } from "../../utils/extraFunction";
 
 
 
@@ -30,14 +31,8 @@ type getMembersEventProp = {
 }
 export const getMembersEvent = createAsyncThunk(
     'MemberEvent/getMembersEvent',async ({is_chapter=false}:getMembersEventProp,thunkApi)=>{
-        //
-        // ?is_chapter='+is_chapter
-        const chapter:any = localStorage.getItem('chapter')
-        let lookup ='?for_members=True'
-        let exco:any = localStorage.getItem('exco')
-        if(exco){
-            lookup =`?exco=${exco}`
-        }
+        const lookup = generate_url_params()
+        
         try{
             const resp = await axios.get(`/tenant/event/eventview/get_events/${lookup}`);
             console.log({resp},'justin')

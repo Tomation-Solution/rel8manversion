@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../helpers/axios";
+import { generate_url_params } from "../../utils/extraFunction";
 
 
 export type MemberNewsType = {
@@ -30,12 +31,8 @@ export type MemberNewsType = {
 export const getMemberNews = createAsyncThunk(
     'MemberNews/getMemberNews',async (data:any,thunkAPi)=>{
         //
-        const chapter:any = localStorage.getItem('chapter')
-        let lookup ='?for_members=True'
-        let exco:any = localStorage.getItem('exco')
-        if(exco){
-            lookup =`?exco=${exco}`
-        }
+        let lookup =generate_url_params()
+        
         try{
             const resp = await axios.get(`/tenant/news/newsview/get_news/${lookup}`)
             return resp.data.data as MemberNewsType[]

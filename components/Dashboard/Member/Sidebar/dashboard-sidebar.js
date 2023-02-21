@@ -13,6 +13,7 @@ import SwitchLabels from '../../../SwitchLabels';
 import Spinner from "../../../Spinner";
 import {BsBriefcaseFill} from 'react-icons/bs'
 import {FaUsers} from 'react-icons/fa'
+import SimpleAccordion from '../../../Accordion';
 const centerSwitch={
          'display':'flex',
          'padding':' 0 .7rem'
@@ -95,11 +96,11 @@ const items = [
     icon: (<Person fontSize="small" />),
     title: 'My profile'
   },
-  {
-    href: '/members/settings/',
-    icon: (<Person fontSize="small" />),
-    title: 'My Settings'
-  },
+  // {
+  //   href: '/members/settings/',
+  //   icon: (<Person fontSize="small" />),
+  //   title: 'My Settings'
+  // },
   {
     href: '#',
     icon: (<LogoutRounded fontSize="small" />),
@@ -109,35 +110,15 @@ const items = [
 
 export const DashboardSidebar = (props) => {
   const [custom_window,setCustom_window] = useState(null)
-  const [chapter,setChapter] = useState(false);
-  const [exco,setExco]=useState(0)
   const { open, onClose } = props;
   const router = useRouter();
   const theme = useTheme();
   const lgUp = useMediaQuery(theme.breakpoints.up('lg'))
-
-  useEffect(()=>{
-    if(custom_window){
-      //check if chapter is on or not
-     let isChapter  = localStorage.getItem('chapter')
-     let isExco  = localStorage.getItem('exco')
-     if(isChapter){
-      setChapter(true)
-    }
-    if(isExco){
-      setExco(JSON.parse(isExco))
-     }
-    }
-  },[custom_window])
-
-  try{
-    window.localStorage
-      if(!custom_window){
-        setCustom_window(window)
-      }
-  }catch(err){
-    //
-  }
+  const [council,setCouncil] = useState([])
+  const [comittee,setComittee] = useState([])
+  const [chapter,setChapter] = useState(null)
+  const [url_status,setUrl_status] =useState({
+    'status':'general_status','id':0})
   useEffect(
     () => {
       if (!router.isReady) {
@@ -153,14 +134,21 @@ export const DashboardSidebar = (props) => {
   );
 
 
-  if(typeof window == 'undefined'){
-    return <Spinner/>
-  }
+  useEffect(()=>{
+    let localData = localStorage.getItem('token')
+    if(localData){
+      localData = JSON.parse(localStorage.getItem('token'))
+      setCouncil(localData.council)
+      setComittee(localData.commitee)
+      setChapter(localData.chapter)
+    }
+    let urlStatus = localStorage.getItem('url_status')
+    if(urlStatus){
+      urlStatus = JSON.parse(localStorage.getItem('url_status'))
+      setUrl_status(urlStatus)
+    }
+  },[])
 
-  let user_info = null
-      if( localStorage.getItem('token')){
-        user_info  = JSON.parse(localStorage.getItem('token'))
-      }
 
 const content = (
   <>
@@ -191,11 +179,112 @@ const content = (
         my: 1
       }}
     />
-
+<br/>
 
 
 <br/>
     <Box sx={{ flexGrow: 1 }}>
+    <div style={{'color':'white'}}>
+      <SimpleAccordion
+      header='Other Environment'
+      >
+        {
+          council.map((data,index)=>(
+            <div 
+            key={index}
+            style={{'display':'flex','justifyContent':'spaceBetween','fontSize':'.9rem','margin':'.4rem 0'}}
+            >
+                  <p>{data.name}</p>
+                  <SwitchLabels
+                  func={(checked)=>{
+                    let new_url_status = {'status':'general_status','id':0}
+                    if(checked){
+                      //set it back to it orginal state
+                      new_url_status={'status':'council','id':data.id}
+                      // u want to filter by this
+                      setUrl_status(new_url_status)
+                    }else{
+                      setUrl_status(new_url_status)
+                    }
+                    localStorage.setItem('url_status',JSON.stringify(new_url_status))
+                    window.location.reload()
+
+                  }}
+                  label={''}
+                  switch={url_status.status=='council'&&url_status.id==data.id}
+                  />
+
+            </div>
+          ))
+        }
+
+      {
+        chapter?
+        <div 
+        style={{'display':'flex','justifyContent':'spaceBetween','fontSize':'.9rem','margin':'.4rem 0'}}
+        >
+              <p>{chapter.name}</p>
+              <SwitchLabels
+              label={''}
+              switch={url_status.status=='chapter'&&url_status.id==chapter.id}
+              func={(checked)=>{
+                let new_url_status = {'status':'general_status','id':0}
+                if(checked){
+                  //set it back to it orginal state
+                  new_url_status={'status':'chapter','id':chapter.id}
+                  // u want to filter by this
+                  setUrl_status(new_url_status)
+                }else{
+                  setUrl_status(new_url_status)
+                }
+                localStorage.setItem('url_status',JSON.stringify(new_url_status))
+                window.location.reload()
+
+              }}
+              />
+
+        </div>
+        :''
+      }
+      </SimpleAccordion>
+    </div>
+
+    <div style={{'color':'white'}}>
+      <SimpleAccordion
+      header='Commitee Environment'
+      >
+     {
+          comittee.map((data,index)=>(
+            <div 
+            key={index}
+            style={{'display':'flex','justifyContent':'spaceBetween','fontSize':'.9rem',}}
+            >
+                  <p>{data.name}</p>
+                  <SwitchLabels
+                  label={''}
+                  switch={url_status.status=='comittee'&&url_status.id==data.id}
+                  func={(checked)=>{
+                    let new_url_status = {'status':'general_status','id':0}
+                    if(checked){
+                      //set it back to it orginal state
+                      new_url_status={'status':'comittee','id':data.id}
+                      // u want to filter by this
+                      setUrl_status(new_url_status)
+                    }else{
+                      setUrl_status(new_url_status)
+                    }
+                    localStorage.setItem('url_status',JSON.stringify(new_url_status))
+                    window.location.reload()
+
+                  }}
+                  />
+
+            </div>
+          ))
+        }
+      </SimpleAccordion>
+    </div>
+    
       {items.map((item) => (
         <NavItem
           key={item.title}

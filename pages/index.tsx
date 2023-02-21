@@ -62,7 +62,12 @@ const Login =  () =>{
     }
   },[status])
 
-  console.log({"error in front end":error})
+  useEffect(()=>{
+    localStorage.setItem('url_status',JSON.stringify({
+        'status':'general_status',
+        'id':0
+    }))
+  },[])
 
 //   useEffect(()=>{
 

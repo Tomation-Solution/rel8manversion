@@ -52,3 +52,25 @@ if(typeof name==='string'){
 
  return `Member (${member.id})`
 }
+
+
+export const generate_url_params= ():string=>{
+  let url_status:any = localStorage.getItem('url_status')
+  let lookup ='?not_council=True&not_commitee=True&not_chapters=True'
+  if(url_status){
+      url_status = JSON.parse(localStorage.getItem('url_status'))
+
+      if(url_status.status=='council'){
+          lookup = `?council=${url_status.id}`
+      }
+      if(url_status.status=='chapter'){
+          lookup = `?chapters=${url_status.id}`
+      }
+      if(url_status.status=='comittee'){
+          lookup = `?commitee=${url_status.id}`
+      }
+  }
+
+
+  return lookup
+}

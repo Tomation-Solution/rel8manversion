@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../helpers/axios";
+import { generate_url_params } from "../../utils/extraFunction";
 
 
 
@@ -28,12 +29,8 @@ export type MemberPublicationType =  {
 export const getMemberPublication = createAsyncThunk(
     'memberPublication/getMemberPublication',async(data:any,thunkApi)=>{
         //
-        const chapter:any = localStorage.getItem('chapter')
-        let lookup ='?for_members=True'
-        let exco:any = localStorage.getItem('exco')
-        if(exco){
-            lookup =`?exco=${exco}`
-        }
+        let lookup =generate_url_params()
+        
         try{
             const resp = await axios.get(`/tenant/publication/getyourpublication/${lookup}`)
             return resp.data.data as MemberPublicationType[]

@@ -12,12 +12,11 @@ type Prop ={
     deleteItem:(id:number)=>void
 }
 const PostComentDetails= ({data,deleteItem}:Prop):React.ReactElement=>{
-    const name = FetchName(data.member)
     return (
         <PostComentDetailsContainer>
-            <img src={img_url} alt="" />
+            <img src={data.member.photo_url?data.member.photo_url:img_url} alt="" />
             <div>
-                <p><strong>{name}</strong></p>
+                <p><strong>{data.member.full_name}</strong></p>
                 <p>{data.comment}</p>
             <AiFillDelete style={{'color':'red','position':'absolute','bottom':'0','right':'0'}} onClick={(e)=>{
                 deleteItem(data.id)

@@ -54,12 +54,12 @@ const schema = yup.object({
 })
 const GRIDSTYLE ={'display':'grid','gridTemplateColumns':'repeat(2,1fr)','gap':'10px','alignItems':'center'}
 const Profile = ({member,can_edit_img=false}:Prop):React.ReactElement=>{
-    const Name:string = FetchName(member)
+    // const Name:string = FetchName(member)
     const [editProfile,setEditProfile] =useState(false)
     const [photo,setPhoto] = useState(member.photo?member.photo:'')
     const {notify} = useToast()
     const [isLoading,setIsLoading] = useState(false)
-
+    console.log({member})
 
     const { register,control,setValue, watch,handleSubmit,formState: { errors } } = useForm<ProfileTypeForm>({
         resolver: yupResolver(schema),
@@ -136,7 +136,7 @@ onChange={(e)=>{
 
 <div>
 <br />
-<InputFieldView title="Name" value={Name}/>
+<InputFieldView title="Name" value={member?.full_name}/>
 <br />
 <InputFieldView title="Email" value={member.email}/>
 <br />

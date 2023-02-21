@@ -48,7 +48,8 @@ export type MemberType =       {
     "user": number;
     'photo'?:string;
     'member_education':memberEducationType[],
-    'member_employment_history':memberEmploymentHistory[]
+    'member_employment_history':memberEmploymentHistory[],
+    full_name?:string;
 }
 
 
