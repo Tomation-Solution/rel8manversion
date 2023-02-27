@@ -1,5 +1,4 @@
 import { Divider, Grid, Typography } from "@mui/material"
-import Image from "next/image"
 import ProfileImage from '../../images/logo.png'
 import HeadText from "./DashboardHead"
 
@@ -12,7 +11,7 @@ export default function Profile (props){
             
             <Grid container>
                 <Grid item md={5}>
-                    <Image src={ProfileImage}/>
+                    <image src={ProfileImage.src}/>
                 </Grid>
 
                 <Grid item md={7} marginBottom={4}>

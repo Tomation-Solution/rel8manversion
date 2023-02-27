@@ -1,7 +1,6 @@
 import {AppBar,Typography,Box, Container, Button, Drawer, Toolbar, Grid, IconButton} from '@mui/material';
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import Image from 'next/image'
 import Logo from '../images/logo.png'
 import {useState, useEffect} from 'react'
 import Popover from '@mui/material/Popover';
@@ -10,7 +9,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import Button from '@mui/material/Button';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import { ArrowDropDown, MenuRounded } from '@mui/icons-material';
+import  ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import MenuRounded  from '@mui/icons-material/MenuRounded';
 import { style } from '@mui/system';
 import { useTheme, makeStyles } from '@mui/styles';
 
@@ -72,7 +72,7 @@ export default function Navbar(){
    <AppBar className={styles.appbar}  style={{backgroundColor:'#fff', boxShadow:'none'}}>
        <Grid container sx={{width:'100%'}}  justifyContent='space-between'>
                <Grid item sm={4} marginLeft={2} >
-                    <Image src={Logo} height='70px' className={styles.logo}  />
+                    <img src={Logo.src} height='70px' className={styles.logo}  />
                 </Grid>
                 {width < 768 ?
                 <Grid md={11} >

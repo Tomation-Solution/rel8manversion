@@ -1,5 +1,5 @@
 // import React from 'react'
-import { AccountBalanceWalletTwoTone, MoneyOffRounded } from '@mui/icons-material';
+import  AccountBalanceWalletTwoTone from '@mui/icons-material/AccountBalanceWalletTwoTone';
 import {Avatar, Grid, Typography} from '@mui/material';
 
 function IconCard() {

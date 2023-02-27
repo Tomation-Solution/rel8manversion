@@ -15,12 +15,21 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
 import styles from '../../styles/Home.module.css'
-import Image from 'next/image';
 import Logo from "../../images/logo.png"
-import { AccountBalanceWalletRounded, DashboardRounded, Logout, ArrowBack,
-  LogoutRounded, Modal,Person, Dialog, DialogActions , DialogContent, 
-  DialogContentText , DialogTitle , PeopleRounded, ChatBubble, Info, 
-  MenuBook, Photo, Settings, Notifications } from '@mui/icons-material';
+import DashboardRounded from '@mui/icons-material/DashboardRounded'
+import Logout from '@mui/icons-material/Logout'
+import ArrowBack from '@mui/icons-material/ArrowBack'
+// import Modal from '@mui/icons-material/Modal'
+import Person from '@mui/icons-material/Person'
+import Photo from '@mui/icons-material/Photo'
+import LogoutRounded from '@mui/icons-material/LogoutRounded'
+import AccountBalanceWalletRounded from '@mui/icons-material/AccountBalanceWalletRounded'
+import PeopleRounded from '@mui/icons-material/PeopleRounded'
+import ChatBubble from '@mui/icons-material/ChatBubble'
+import Info from '@mui/icons-material/Info'
+import MenuBook from '@mui/icons-material/MenuBook'
+import Settings from '@mui/icons-material/Settings'
+import Notifications from '@mui/icons-material/Notifications'
 import Home from './Home';
 import MyAccount from './MyAccount';
 import MemberDirectory from './MemberDirectory';
@@ -203,7 +212,7 @@ export default function AppDrawer () {
         >
           <DrawerHeader>
             <Link href="/">
-              <Image className='nav-link' src={Logo}/>
+              <img className='nav-link' src={Logo.src}/>
             </Link>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'ltr' ? <ChevronLeftIcon sx={{color:'white'}} /> : <ChevronRightIcon sx={{color:'white'}}/>}

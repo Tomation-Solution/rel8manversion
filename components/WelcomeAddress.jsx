@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { Grid, Typography } from "@mui/material";
 import Picture from '../images/chairman.png'
 
 export default function WelcomeAddress(){
     return(<Grid container md={11} marginTop={3} justifyContent='center' alignItems='center' >
         <Grid item md={3}>
-            <Image src={Picture} alt={'chairman picture'}/>
+            <img src={Picture.src} alt={'chairman picture'}/>
         </Grid>
         <Grid item md={8} sm={11} xs={11}  justifyItems="center" >
             <Typography variant='h6' className='text' fontWeight='bolder'> Chairman’s Opening Remark</Typography>

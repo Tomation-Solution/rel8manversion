@@ -1,5 +1,4 @@
 import { Grid, Typography } from "@mui/material";
-import Image from "next/image";
 import Link from 'next/link'
 import NewImage from '../../images/Vectorlanding.png';
 import ChildNewsCard from "../../components/ChildNewsCard";

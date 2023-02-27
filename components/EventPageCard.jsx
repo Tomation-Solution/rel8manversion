@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Grid, Typography, Button, Modal, Box } from "@mui/material";
 import styles from '../styles/Home.module.css';
 import Link from 'next/link'
-import Image from "next/image";
 import GreenButton from "./Buttonn";
 // import NewsImage from '../images/Vectorlanding.png'
 
@@ -55,7 +54,7 @@ export default function EventPageCard (props){
                     {/* <ChildModal /> */}
                 </Grid>
             </Modal>
-            <Image src={props.image} marginTop={2} height='600px' className='rounded-corners'/>
+            <img src={props.image.src} marginTop={2} height='600px' className='rounded-corners'/>
             <Typography variant='subtitle2' className='light-text'  marginY={1}>{props.date}</Typography>
             <Typography px={1} textAlign='justify' marginBottom={2}>{props.body}</Typography>
             <Grid md={10} sm={9} style={{margin:'0 auto'}}>

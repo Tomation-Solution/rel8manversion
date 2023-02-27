@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { AppBar, Avatar, Badge, Box, IconButton, Toolbar, Typography, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NotificationsRounded } from '@mui/icons-material';
+import NotificationsRounded from '@mui/icons-material/NotificationsRounded';
 import BasicPopover from '../../../PopOver';
 import axios from '../../../../helpers/axios';
 import { useEffect, useState } from 'react';

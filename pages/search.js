@@ -1,7 +1,6 @@
-import Image from "next/image"
 import Banner from '../images/shortBanner.png'
 import { Grid, TextField, Typography, Button, Table, TableRow,TableHead, TableBody, TableCell } from "@mui/material"
-import { SearchRounded } from "@mui/icons-material"
+import SearchRounded from "@mui/icons-material/SearchRounded"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
@@ -9,7 +8,7 @@ export default function Search(){
     return(
         <Grid>
             <Navbar/><br/><br/><br/>
-            <Image src={Banner}/>
+            <img src={Banner.src}/>
             <br/>
             <br/>
             {/* <Typography className='text' textAlign='center' fontWeight='bolder' variant='h5' zIndex='9000' marginTop={-2}  color='whitesmoke'>

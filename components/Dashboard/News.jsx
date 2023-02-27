@@ -1,5 +1,4 @@
 import { Grid, Typography } from "@mui/material";
-import Image from "next/image";
 import Link from 'next/link'
 import NewImage from '../../images/Vectorlanding.png';
 import ChildNewsCard from "../ChildNewsCard";
@@ -13,7 +12,7 @@ export default function News(props){
                </Typography>
                <Grid container justifyContent='space-around'>
                 <Grid item  md={3}  paddingLeft={2}  className='rounded-corners' >
-                  <Image src={NewImage} height='700px'  className='rounded-corners' />
+                  <img src={NewImage.src} height='700px'  className='rounded-corners' />
                 </Grid>
 
                 <Grid item md={9} padding={3}>

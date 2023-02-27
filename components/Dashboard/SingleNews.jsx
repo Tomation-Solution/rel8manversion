@@ -1,12 +1,11 @@
 import { Grid, Typography } from "@mui/material"
-import Image from "next/image"
 import NewsImage from '../../images/Vectorlanding.png'
 
 
 export default function SingleNews(props){
     return(
         <Grid container md={10} justifyContent='center' sx={{margin:'0 auto'}}>
-            <Grid><Image src={NewsImage} className='rounded-corners'/></Grid>
+            <Grid><img src={NewsImage.src} className='rounded-corners'/></Grid>
             <Grid container justifyContent='space-between' py={3}> 
                 <Grid item>
                     <Typography className='text' variant='h6' fontWeight='bold'>

@@ -1,6 +1,5 @@
 
 import Preloader from "../images/preloader.gif"
-import Image from 'next/image'
 
 const Spinner=()=>(
     <div style={
@@ -11,7 +10,7 @@ const Spinner=()=>(
         transform: "translate(-50%, -50%)"
     }
     }>
-        <Image src={Preloader} 
+        <img src={Preloader.src} 
         // style={{"width":"100%","height":"100%"}}
          alt="Loading..."
         />

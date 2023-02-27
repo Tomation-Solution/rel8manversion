@@ -1,5 +1,4 @@
 import { Grid, Typography } from '@mui/material'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import bgImage from '../images/Vectorlanding.png'
 import styles from '../styles/Home.module.css'
@@ -13,8 +12,8 @@ export default function HeroSection(props){
             <br/>
             <br/>
             <br/>
-            <Image
-            src={bgImage}
+            <img
+            src={bgImage.src}
             className={styles.heroImage}
             // width='100%'
             // height={500}  

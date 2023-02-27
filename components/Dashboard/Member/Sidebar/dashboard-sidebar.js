@@ -5,9 +5,18 @@ import PropTypes from 'prop-types';
 import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { NavItem } from '../nav-item';
-import { Person, DashboardCustomize, PeopleRounded, PersonPinRounded, 
-  SettingsSuggest, AccountBalanceWalletRounded, Info, LogoutRounded, EventRounded, ChatBubble, Photo, MenuBook  } from '@mui/icons-material';
-import Image from 'next/image';
+import Person from '@mui/icons-material/Person'
+import DashboardCustomize from '@mui/icons-material/DashboardCustomize'
+import PeopleRounded from '@mui/icons-material/PeopleRounded'
+import PersonPinRounded from '@mui/icons-material/PersonPinRounded'
+import SettingsSuggest from '@mui/icons-material/SettingsSuggest'
+import AccountBalanceWalletRounded from '@mui/icons-material/AccountBalanceWalletRounded'
+import Info from '@mui/icons-material/Info'
+import LogoutRounded from '@mui/icons-material/LogoutRounded'
+import Photo from '@mui/icons-material/Photo'
+import EventRounded from '@mui/icons-material/EventRounded'
+import MenuBook from '@mui/icons-material/MenuBook'
+import ChatBubble from '@mui/icons-material/ChatBubble'
 import LogoImage from '../../../../images/logo.png'
 import SwitchLabels from '../../../SwitchLabels';
 import Spinner from "../../../Spinner";

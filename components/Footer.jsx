@@ -1,7 +1,12 @@
 import styles from '../styles/Home.module.css'
 import Divider from '@mui/material/Divider';
 import {AppBar,Typography,Box, Container, Toolbar, Grid} from '@mui/material';
-import {TwitterIcon, Twitter, LinkedIn, Facebook, Instagram, YouTube} from '@mui/icons-material'
+// import { Twitter, LinkedIn, Facebook, Instagram, YouTube} from '@mui/icons-material'
+import Twitter from '@mui/icons-material/Twitter'
+import LinkedIn from '@mui/icons-material/LinkedIn'
+import Facebook from '@mui/icons-material/Facebook'
+import Instagram from '@mui/icons-material/Instagram'
+import YouTube from '@mui/icons-material/YouTube'
 import Link from 'next/link'
 
 // imoprt

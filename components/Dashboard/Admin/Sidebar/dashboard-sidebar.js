@@ -5,9 +5,15 @@ import PropTypes from 'prop-types';
 import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { NavItem } from './nav-item';
-import { Person, DashboardCustomize, PeopleRounded, PersonPinRounded, 
-  SettingsSuggest, AccountBalanceWalletRounded, Info, LogoutRounded, EventRounded  } from '@mui/icons-material';
-import Image from 'next/image';
+import Person from  '@mui/icons-material/Person'
+import DashboardCustomize from  '@mui/icons-material/DashboardCustomize'
+import PeopleRounded from  '@mui/icons-material/PeopleRounded'
+import AccountBalanceWalletRounded from  '@mui/icons-material/AccountBalanceWalletRounded'
+import PersonPinRounded from  '@mui/icons-material/PersonPinRounded'
+import SettingsSuggest from  '@mui/icons-material/SettingsSuggest'
+import Info from  '@mui/icons-material/Info'
+import LogoutRounded from  '@mui/icons-material/LogoutRounded'
+import EventRounded from  '@mui/icons-material/EventRounded'
 import LogoImage from '../../../../images/logo.png'
 
 const items = [
@@ -108,7 +114,7 @@ export const DashboardSidebar = (props) => {
                 borderRadius: 1
               }}
             >
-              <Image src={LogoImage}/>
+              <image src={LogoImage.src}/>
               {/* <SelectorIcon
                 sx={{
                   color: 'neutral.500',

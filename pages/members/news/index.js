@@ -1,5 +1,4 @@
 import { Grid, Typography } from "@mui/material";
-import Image from "next/image";
 import Link from 'next/link'
 import { DashboardLayout } from "../../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import { getMemberNews } from "../../../redux/memberNews/memberNewsApi";

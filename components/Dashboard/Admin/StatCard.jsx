@@ -1,5 +1,5 @@
 // import React from 'react'
-import { MoneyOffRounded } from '@mui/icons-material';
+import MoneyOffRounded  from '@mui/icons-material/MoneyOffRounded';
 import {Avatar, Grid, IconButton, Typography} from '@mui/material';
 
 function StatCard(props) {

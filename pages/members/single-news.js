@@ -1,6 +1,5 @@
 import { Grid, Typography } from "@mui/material"
 import { fontFamily } from "@mui/system"
-import Image from "next/image"
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout"
 import NewsImage from '../../images/Vectorlanding.png'
 
@@ -10,7 +9,7 @@ export default function SingleNews(props){
         <DashboardLayout px={2}>
             <Grid mx={3}>
         {/* <Grid container md={10} justifyContent='center' sx={{margin:'0 auto'}}> */}
-            <Grid><Image src={NewsImage} className='rounded-corners'/></Grid>
+            <Grid><img src={NewsImage.src} className='rounded-corners'/></Grid>
             <Grid container justifyContent='space-between' py={3}> 
                 <Grid item>
                     <Typography className='text' variant='h6' fontWeight='bold'>

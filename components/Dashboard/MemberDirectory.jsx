@@ -1,6 +1,6 @@
 import { Grid,TextField, Button, Table, TableRow,TableHead, TableBody, TableCell, Typography } from "@mui/material";
 import GreenButton from "../Buttonn";
-import { SearchRounded } from "@mui/icons-material";
+import SearchRounded  from "@mui/icons-material/SearchRounded";
 import HeadText from "./DashboardHead";
 
 export default function MemberDirectory(){

@@ -1,11 +1,10 @@
 import { Grid, Typography } from "@mui/material";
-import Image from "next/image";
 
 export default function ExcoCard (props){
     return (
         <Grid md={3} marginY={2}>
             <Grid md={10}>
-                <Image src={props.image} />
+                <img src={props.image.src} />
                 <Grid container justifyContent='space-around' marginY={1} alignItems='center' >
                     <Grid item>
                         <Typography className='text' fontWeight='600'>

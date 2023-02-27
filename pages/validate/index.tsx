@@ -2,7 +2,10 @@ import styles from '../../styles/Home.module.css'
 import { Card,Box,IconButton, InputAdornment, Typography,TextField, Button,Grid, Checkbox, } from "@mui/material"
 import Logo from '../../images/logo.png'
 
-import { Lock, Person, Visibility, VisibilityOff } from "@mui/icons-material"
+import Lock from '@mui/icons-material/Lock'
+import Person from '@mui/icons-material/Person'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import CustomBtn from '../../components/CustomBtn/Button'
 import axios from '../../helpers/axios'
 import {useState} from 'react'

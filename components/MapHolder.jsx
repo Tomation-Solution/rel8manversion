@@ -2,7 +2,6 @@ import { Grid, Typography } from "@mui/material";
 import styles from '../styles/Home.module.css';
 // import Map from '../images/MAP.PNG';
 import Map from "./Map";
-import Image from "next/image";
 
 
 export default function MapHolder (){

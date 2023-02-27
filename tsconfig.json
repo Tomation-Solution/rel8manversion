@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/MarkoBtn.jsx", "helpers/setUpInterceptor.jsx"  ],
+, "components/MarkoBtn.jsx", "helpers/setUpInterceptor.jsx", "pages/dashboard.js"  ],
   "exclude": [
     "node_modules"
   ]

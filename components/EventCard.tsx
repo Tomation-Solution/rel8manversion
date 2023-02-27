@@ -1,7 +1,6 @@
 import {Grid, Button, Typography} from '@mui/material';
 import styles from '../styles/Home.module.css'
 import GreenButton from './Buttonn';
-import Image from "next/image";
 import { MemberEventType, registerForFreeEvent, registerForPaidEvent } from '../redux/memeberEvents/memeberEventsApi';
 import axios from '../helpers/axios';
 import useToast from '../hooks/useToast';

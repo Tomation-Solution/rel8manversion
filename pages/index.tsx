@@ -3,14 +3,16 @@ import React from 'react'
 import { useState,useRef,useEffect } from "react"
 import { Card,Box,IconButton, InputAdornment, Typography,TextField, Button,Grid, Checkbox } from "@mui/material"
 import { style } from "@mui/system"
-import { Lock, Person, Visibility, VisibilityOff } from "@mui/icons-material"
+import  Lock from '@mui/icons-material/Lock'
+import  Person from '@mui/icons-material/Person'
+import  Visibility from '@mui/icons-material/Visibility'
+import  VisibilityOff from '@mui/icons-material/VisibilityOff'
 import HeroSection from "../components/HeroSection"
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from '../styles/Home.module.css'
 import Navbar from "../components/Navbar"
 import Logo from '../images/logo.png'
 
-import Image from "next/image"
 import Footer from "../components/Footer"
 import GreenButton from "../components/Buttonn"
 import { useRouter } from "next/router"

@@ -1,4 +1,5 @@
-import { AddToPhotos, SendRounded } from "@mui/icons-material"
+import  AddToPhotos from "@mui/icons-material/AddToPhotos"
+import  SendRounded  from "@mui/icons-material/SendRounded"
 import { Typography, Grid, TextField, IconButton } from "@mui/material"
 import { useState } from "react"
 import GreenButton from "../Buttonn";

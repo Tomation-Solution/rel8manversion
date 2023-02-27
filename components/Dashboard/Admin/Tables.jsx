@@ -7,8 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid,Button, IconButton } from '@mui/material';
-import { Close, DeleteForeverRounded,Delete,Edit} from '@mui/icons-material';
-import Image from 'next/image';
+import  DeleteForeverRounded from '@mui/icons-material/Close';
+import  Delete from '@mui/icons-material/Delete';
+import  Edit from '@mui/icons-material/Edit';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useState} from 'react'
@@ -508,7 +509,7 @@ export function GalleryTable(props) {
               {/* <StyledTableCell className='light-text' >{row.post}</StyledTableCell> */}
               <StyledTableCell className='light-text' >
                 {/* <Image src={row.image} height={'50px'} width={'50px'}/> */}
-                <img src={row.image} height={'50px'} width={'50px'}/>
+                <img src={row.image.src} height={'50px'} width={'50px'}/>
                </StyledTableCell>
               <StyledTableCell className='light-text' >{row.title}</StyledTableCell>
               <StyledTableCell className='light-text' >{row.action}</StyledTableCell>

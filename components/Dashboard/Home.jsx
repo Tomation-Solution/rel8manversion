@@ -1,6 +1,5 @@
 import { Grid, Typography, Button } from "@mui/material"
-import { AccountBalanceWalletRounded } from "@mui/icons-material";
-import Image from "next/image";
+import  AccountBalanceWalletRounded  from "@mui/icons-material/AccountBalanceWalletRounded";
 import NewsImage from '../../images/Vectorlanding.png'
 import EventCard from "../EventCard";
 import Newscard from "../NewsCard";

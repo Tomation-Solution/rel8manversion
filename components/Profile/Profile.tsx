@@ -12,7 +12,7 @@ import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {TextField} from '@mui/material'
-import {  Person,  } from "@mui/icons-material"
+import Person from "@mui/icons-material/Person"
 import InputFieldView from "../InputFieldView/InputFieldView"
 
 

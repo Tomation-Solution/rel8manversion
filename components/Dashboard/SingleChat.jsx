@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { AddToPhotos, SendRounded } from "@mui/icons-material";
+import  AddToPhotos  from "@mui/icons-material/AddToPhotos";
+import  SendRounded from "@mui/icons-material/SendRounded";
 import { Grid, Typography, IconButton, TextField, InputAdornment, Icon } from "@mui/material";
 import GreenButton from "../Buttonn";
 import Router,{withRouter} from "next/router"

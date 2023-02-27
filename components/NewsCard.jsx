@@ -1,6 +1,5 @@
 import { Grid, Typography, Button } from "@mui/material";
 import styles from '../styles/Home.module.css';
-import Image from "next/image";
 import GreenButton from "./Buttonn";
 import { useRouter } from "next/router";
 // import NewsImage from '../images/Vectorlanding.png'

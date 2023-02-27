@@ -1,4 +1,3 @@
-import Image from "next/image"
 import BannerImage from '../../images/Vectorlanding.png';
 import { Grid, Table, TableRow,TableHead, TableBody, TableCell, Typography } from "@mui/material";
 import IconCard from "../../components/IconCard";
@@ -10,7 +9,7 @@ export default function Account(props){
     return(
         <DashboardLayout>
         <Grid>
-            <Image src={BannerImage}/>
+            <img src={BannerImage.src}/>
             <br/>
             <br/>
             <Grid container md={12} justifyContent='space-around'>

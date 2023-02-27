@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import { AddToPhotos, SendRounded } from "@mui/icons-material";
+import SendRounded from '@mui/icons-material/SendRounded'
+import AddToPhotos from '@mui/icons-material/AddToPhotos'
 import { Grid, Typography, IconButton, TextField, InputAdornment, Icon } from "@mui/material";
 import GreenButton from "../../components/Buttonn";
-import Image from "next/image";
 import ChatImage from '../../images/logo.png'
 import ChatCard from "../../components/ChatCard";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";

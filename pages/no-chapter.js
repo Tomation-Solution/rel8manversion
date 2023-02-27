@@ -1,5 +1,4 @@
 import { Typography, Grid } from "@mui/material";
-import Image from 'next/image';
 import { useRouter } from "next/router";
 import GreenButton from "../components/Buttonn";
 import Navbar from '../components/Navbar'
@@ -12,7 +11,7 @@ export default function NoChapter(){
             <Navbar/>
             {/* <Grid sx={{height:}} */}
                 <Grid item  md={4} sm={10} >
-                    <Image src={FolderImage} style={{margin:"0 auto"}} />
+                    <img src={FolderImage.src} style={{margin:"0 auto"}} />
                 </Grid>
                 <Grid item md={12} mb={4}>
                     <Typography textAlign='center' style={{color:'grey'}} className='text' variant='h4'>Oops!</Typography>
