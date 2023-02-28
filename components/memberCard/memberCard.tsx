@@ -15,7 +15,7 @@ type Prop ={
 const MemberCard = ({member}:Prop)=>{
     const [isOpen, setIsOpen] = useState(false)
     const isPhone = useMediaQuery({ query: '(max-width: 360px)' })
-    const Name:string = FetchName(member)
+    const Name:string = member.full_name
     const matric_num:string = FetchMembershipNo(member)
     return (
         <MemeberCardContainer>
