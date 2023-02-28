@@ -35,13 +35,13 @@ const CommiteeDetail:NextPage = ()=>{
         },
         {
             Header:'Name',
-            accessor:'member_info',
+            accessor:'full_nam',
             id:2,
-            Cell:(tableProps:any)=>{
-                return  <p>
-                    {FetchNameByMemberInfo(tableProps.row.original.member_info)}
-                </p>
-            }
+            // Cell:(tableProps:any)=>{
+            //     return  <p>
+            //         {FetchNameByMemberInfo(tableProps.row.original.member_info)}
+            //     </p>
+            // }
         },
         {
             Header:'more',
