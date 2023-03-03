@@ -65,7 +65,8 @@ export const DashboardNavbar = (props) => {
 <Box style={{'justifyContent':'space-between','display':'flex','width':'80%','margin':'0 auto','alignItem':'center'}}>
 
           <Typography className='text' fontWeight='bold' sx={{color:'black'}} >
-            {type} Dashboard
+            {type}
+             {/* Dashboards */}
           </Typography>
           {/* <Tooltip title="Search">
             <IconButton sx={{ ml: 1 }}>

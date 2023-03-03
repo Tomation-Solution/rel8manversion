@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import CustomBtn from "../../../components/CustomBtn/Button";
 import { useRouter} from 'next/router'
+import Spinner from "../../../components/Spinner";
 
 
 export type GalleryV2Type = {
@@ -16,9 +17,12 @@ export type GalleryV2Type = {
 export default function Gallery(){
     const [images,setImages] = useState<GalleryV2Type[]>([])
     const route = useRouter()
+    const [loading,setLoading] = useState(false)
     const getmage =async () =>{
-
+        setLoading(true)
         const resp  = await axios.get('/tenant/extras/gallery_version2/')
+        setLoading(false)
+
         setImages(resp.data.data.data)
 
     }
@@ -28,7 +32,11 @@ export default function Gallery(){
     },[])
     return(
         <DashboardLayout>
-    {/* <p>hell</p> */}
+    {
+        loading?
+        <Spinner/>
+        :''
+    }
     <div style={{'display':'flex','flexWrap':'wrap','padding':'1rem 1.3rem','gap':'10px'}}>
         {
             images.map((data,index)=>(

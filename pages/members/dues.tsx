@@ -96,7 +96,7 @@ const Dues:NextPage = ()=>{
             },
             {
               Header:'Due Date',
-              accessor:'amount',
+              accessor:'due__startDate',
               id:44,
           },
         

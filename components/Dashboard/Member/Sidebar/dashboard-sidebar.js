@@ -94,7 +94,11 @@ const items = [
     icon: (<Photo fontSize="small" />),
     title: 'Fund A Project'
   },
-
+  {
+    href: '/members/services',
+    icon: (<Photo fontSize="small" />),
+    title: 'Service Request'
+  },
   {
     href: '/members/dues/',
     icon: (<Person fontSize="small" />),
