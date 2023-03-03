@@ -13,7 +13,7 @@ type Prop =React.PropsWithChildren<{
 const  SimpleAccordion =({header,children}:Prop):React.ReactElement=> {
   return (
     <div>
-      <Accordion style={{'backgroundColor':'#075a94'}}>
+      <Accordion style={{'backgroundColor':'#2e3715'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon style={{'color':'white'}}/>}
           aria-controls="panel1a-content"

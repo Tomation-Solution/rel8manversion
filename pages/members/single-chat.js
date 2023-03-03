@@ -3,7 +3,7 @@ import SendRounded from '@mui/icons-material/SendRounded'
 import AddToPhotos from '@mui/icons-material/AddToPhotos'
 import { Grid, Typography, IconButton, TextField, InputAdornment, Icon } from "@mui/material";
 import GreenButton from "../../components/Buttonn";
-import ChatImage from '../../images/logo.png'
+import ChatImage from '../../images/logo.svg'
 import ChatCard from "../../components/ChatCard";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import Router from "next/router";
@@ -122,7 +122,7 @@ export default function SingleChat (){
             <Grid container justifyContent='space-between' paddingY={2}>
                 <Typography marginBottom={2} className='text' style={{'textAlign':'center'}}>Private Chatroom</Typography>
                 {/* <GreenButton text='General Chat' click={()=>Router.back()} radius='10px'
-                textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'
+                textColor='white' paddingY={1} paddingX={2} bg='#2e3715'
                 /> */}
             </Grid>
 

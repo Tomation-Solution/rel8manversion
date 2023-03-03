@@ -43,7 +43,7 @@ export default function EventCard (props:Prop){
                             localStorage.setItem('event_detail',JSON.stringify(props.data))
                             route.push('/members/event_detail/')
                         }}
-textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
+textColor='white' paddingY={1} paddingX={2} bg='#2e3715'/>
                         :
                         <GreenButton text='Register to Attend' radius='10px'
                         click={(e)=>{
@@ -65,7 +65,7 @@ textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
                             } 
                         
                         }}
-                    textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
+                    textColor='white' paddingY={1} paddingX={2} bg='#2e3715'/>
                    
                    }
                 </Grid>

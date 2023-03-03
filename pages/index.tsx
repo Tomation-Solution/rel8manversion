@@ -11,7 +11,7 @@ import HeroSection from "../components/HeroSection"
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from '../styles/Home.module.css'
 import Navbar from "../components/Navbar"
-import Logo from '../images/logo.png'
+import Logo from '../images/logo.svg'
 
 import Footer from "../components/Footer"
 import GreenButton from "../components/Buttonn"
@@ -152,7 +152,7 @@ const Login =  () =>{
               </Grid>
           </Grid>
           <SubmitButton  text={status==="loading"?"Loading":'Login'} radius='10px'
-         textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'
+         textColor='white' paddingY={1} paddingX={2} bg='#2e3715'
          
          />
          </form>

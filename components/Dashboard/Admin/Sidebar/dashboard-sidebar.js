@@ -14,7 +14,7 @@ import SettingsSuggest from  '@mui/icons-material/SettingsSuggest'
 import Info from  '@mui/icons-material/Info'
 import LogoutRounded from  '@mui/icons-material/LogoutRounded'
 import EventRounded from  '@mui/icons-material/EventRounded'
-import LogoImage from '../../../../images/logo.png'
+import LogoImage from '../../../../images/logo.svg'
 
 const items = [
   {
@@ -111,7 +111,7 @@ export const DashboardSidebar = (props) => {
                 justifyContent: 'space-between',
                 px: 3,
                 py: '11px',
-                borderRadius: 1
+                borderRadius: 1,
               }}
             >
               <image src={LogoImage.src}/>

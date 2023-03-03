@@ -230,7 +230,7 @@ else{
     <p>
       {pub.paragraphs.length!=0?pub.paragraphs[0].paragragh.slice(0,50):''}..
     </p>
-    <a href="#"style={{'color':'#075a94'}}
+    <a href="#"style={{'color':'#2e3715'}}
       onClick={()=>{
         localStorage.setItem('publication_detail',JSON.stringify(pub))
         route.push('/members/publicationDetail')

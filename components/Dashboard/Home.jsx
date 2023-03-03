@@ -12,16 +12,16 @@ export default function Home(props){
             <Grid container md={12} justifyContent='space-around'>
             <Grid item md={3}>
               <GreenButton text='Exco Dashboard' radius='10px'
-               textColor='white' paddingY={1} paddingX={1} bg='#04a9fb'/>
+               textColor='white' paddingY={1} paddingX={1} bg='#2e3715'/>
             </Grid>
             <Grid item md={3} sm={10}>
               <GreenButton text='Committee Dashboard' radius='10px'
-                textColor='white' paddingY={1} paddingX={1} bg='#04a9fb'
+                textColor='white' paddingY={1} paddingX={1} bg='#2e3715'
               />
             </Grid>
             <Grid item md={3} sm={10}>
             <GreenButton text='Sub-Committee Dashboard' radius='10px'
-               textColor='white' paddingY={1} paddingX={1} bg='#04a9fb'/>
+               textColor='white' paddingY={1} paddingX={1} bg='#2e3715'/>
             </Grid>
           </Grid>
           <br/>
@@ -49,7 +49,7 @@ export default function Home(props){
 
                 <Grid md={4} marginRight={2} marginTop={2} style={{float:'right'}}>
                 <GreenButton text='Register to Attend' radius='10px'
-               textColor='white' paddingY={1} paddingX={2} bg='#04a9fb'/>
+               textColor='white' paddingY={1} paddingX={2} bg='#2e3715'/>
                   {/* <Button variant='contained' size='small' className={[styles.button, 'button-lower'] }>Register to Attend</Button>    */}
                 </Grid>
 
@@ -69,7 +69,7 @@ export default function Home(props){
                     <Grid item md={8}>
                     <br/>
                     <GreenButton text='Pay' radius='10px'
-                      textColor='white' paddingY={1} paddingX={1} marginX={2} bg='#04a9fb'/>
+                      textColor='white' paddingY={1} paddingX={1} marginX={2} bg='#2e3715'/>
                       {/* <Button variant='contained' size='small' className={[styles.button, 'button-lower'] }>
                         Pay
                       </Button> */}
