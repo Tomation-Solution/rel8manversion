@@ -38,13 +38,13 @@ const EventDetail:NextPage = ()=>{
         id:1,},
         {
             Header:'Full Name',
-            accessor:'member_info',
-            Cell:(tableProps:any)=>(
-                <p>
-                {
-                    tableProps.row.original.member_info.find(d=>{
-                        return d.name.toLocaleLowerCase() == 'name' ||  d.name.toLocaleLowerCase() == 'first' ||d.name.toLocaleLowerCase() == 'first name' || d.name.toLocaleLowerCase() == 'surname'
-                    })['value']}</p>)
+            accessor:'full_name',
+        //     Cell:(tableProps:any)=>(
+        //         <p>
+        //         {
+        //             tableProps.row.original.member_info.find(d=>{
+        //                 return d.name.toLocaleLowerCase() == 'name' ||  d.name.toLocaleLowerCase() == 'first' ||d.name.toLocaleLowerCase() == 'first name' || d.name.toLocaleLowerCase() == 'surname'
+        //             })['value']}</p>)
         }
       ]
     return (
