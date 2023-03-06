@@ -82,7 +82,7 @@ const items = [
   {
     href: '/members/news',
     icon: (<Info fontSize="small" />),
-    title: 'Nimn News'
+    title: 'News'
   },
   {
     href: '/members/all_members/',
@@ -169,19 +169,19 @@ const content = (
     sx={{
       display: 'flex',
       flexDirection: 'column',
-      height: '100%'
+      // height: '100%'
     }}
   >
-    <div style={{'backgroundColor':'white'}}>
-      <br/>
+    <div style={{'backgroundColor':'white','height':'80px'}}>
+      {/* <br/> */}
       <img 
           src={LogoImage.src}
           alt='logo'
           style={{
-            'width':'80px',
+            'width':'100%',
             'margin':'0 auto',
             'display':'block',
-            'height':'40px'
+            'height':'100%'
 
           }}
           />
