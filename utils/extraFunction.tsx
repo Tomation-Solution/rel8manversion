@@ -1,5 +1,40 @@
 import { MemberType } from "../redux/members/membersApi"
 
+
+
+
+
+export type UserType = {
+  "token": string,
+  "user_type": "members"|'admin'|'super_admin',
+  "chapter": {
+      "name": string,
+      "id": number
+  }[],
+  "council": {
+          "name": string,
+          "id": number,
+          "chapter": any
+      }[],
+  "commitee": 
+      {
+          "name": string,
+          "id": number
+      }[]
+  ,
+  "user_id": number,
+  "member_id": string,
+  "profile_image":string | null
+}
+
+
+
+
+
+
+
+
+
 export type StyleTpe =  {
     'style'?:{
       [Key:string]:string,
@@ -74,3 +109,16 @@ export const generate_url_params= ():string=>{
 
   return lookup
 }
+
+
+type getUserOrNullResponse = null | UserType
+export const getUserOrNull = ():getUserOrNullResponse=>{
+  const user  = localStorage.getItem('token')
+  if (user) {
+    return JSON.parse(user)
+  }
+  return null
+
+}
+
+

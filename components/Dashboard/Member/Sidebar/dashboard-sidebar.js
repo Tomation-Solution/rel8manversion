@@ -74,7 +74,7 @@ const items = [
   },
   
   {
-    href: '/members/chat',
+    href: '/members/groupchat',
     icon: (<ChatBubble fontSize="small" />),
     title: 'Group Chat'
   },

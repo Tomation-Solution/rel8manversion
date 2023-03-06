@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import SendRounded from '@mui/icons-material/SendRounded'
 import AddToPhotos from '@mui/icons-material/AddToPhotos'
-import { Grid, Typography, IconButton, TextField, InputAdornment, Icon } from "@mui/material";
+import { Grid, Typography, IconButton, TextField, InputAdornment, Icon, Box } from "@mui/material";
 import GreenButton from "../../components/Buttonn";
-import ChatImage from '../../images/logo.svg'
+import ChatImage from '../../images/logo.png'
 import ChatCard from "../../components/ChatCard";
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import Router from "next/router";
@@ -35,13 +35,9 @@ export default function SingleChat (){
     const [text, setText] = useState('')
     const [user, setUser] = useState('')
     const [logged_in_user,setLoggedInUser] = useState(null)
-    const [messages, setMessages]=useState([])
     const [web_socket,setWeb_socket] = useState(null)
-
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
-
+    const [connecting,setConnecting] = useState(false)
+ 
     const getLoggedInUser =async ()=>{
 
         try{
@@ -69,7 +65,44 @@ export default function SingleChat (){
              console.log('catch',e)
            }
 
-           web_socket.onmessage = (e) => {
+           
+
+    }
+
+    useEffect(()=>{
+        getLoggedInUser()
+        dispatch(get_list_members({}))
+    },[])
+    
+
+    useEffect(()=>{
+        if(web_socket){
+        web_socket.close()}
+        
+        if(user){
+            //get users message
+            const room_name = logged_in_user.user>user.more.user?`${logged_in_user.user}and${user.more.user}`:`${user.more.user}and${logged_in_user.user}`
+            
+            dispatch(get_old_chats(`?room_name=${room_name}`))
+
+            var ws = new WebSocket(`wss://${sitename}/ws/chat/${tenantName}/${room_name}/`)
+            setWeb_socket(ws)
+            ws.onopen = (e) => {
+                // connection opened
+                console.log('connected',e)
+                setConnecting(false)
+              };
+        
+             
+        
+              ws.onclose = (e) => {
+                console.log('err',e)
+              }
+        }
+    },[user])
+
+    if(web_socket){
+        web_socket.onmessage = (e) => {
 
             // a message was received
             const response = JSON.parse(e.data)
@@ -81,54 +114,17 @@ export default function SingleChat (){
             // setAllmessages(prevState => [...prevState, response])
             // inputRef.current.clear()
           };
-
     }
-
-    useEffect(()=>{
-        getLoggedInUser()
-        dispatch(get_list_members({}))
-    },[])
-    
-
-    useEffect(()=>{
-        if(user){
-            //get users message
-            const room_name = logged_in_user.user>user.more.user?`${logged_in_user.user}and${user.more.user}`:`${user.more.user}and${logged_in_user.user}`
-            
-            dispatch(get_old_chats(`?room_name=${room_name}`))
-
-            var ws = new WebSocket(`wss://${sitename}/ws/chat/${tenantName}/${room_name}/`)
-            setWeb_socket(ws)
-            ws.onopen = (e) => {
-                // connection opened
-                console.log('connecting',e)
-              };
-        
-             
-        
-              ws.onclose = (e) => {
-                console.log('err',e)
-              }
-        }
-    },[user])
-
-
-    
     return(
-        <DashboardLayout>
+        <DashboardLayout title='Private Cha'>
             { !logged_in_user&&<Spinner/>}
-            
+            {connecting?<Spinner/>:''}
         <Grid mx={1}>
-            <Grid container justifyContent='space-between' paddingY={2}>
-                <Typography marginBottom={2} className='text' style={{'textAlign':'center'}}>Private Chatroom</Typography>
-                {/* <GreenButton text='General Chat' click={()=>Router.back()} radius='10px'
-                textColor='white' paddingY={1} paddingX={2} bg='#2e3715'
-                /> */}
-            </Grid>
+            
 
-            <Grid container>
+            <Box  style={{'display':'flex'}}> 
                 
-                <Grid item lg={3} marginRight={2} sx={{height:'75vh'}} className='rounded-corners ' paddingY={2}>
+                <Grid item lg={3} marginRight={2} sx={{height:'75vh','width':'20%'}} className='rounded-corners ' paddingY={2}>
                     <Grid className='light-grey-bg rounded-corners' paddingX={2} marginBottom={1} paddingY={1} >
                         <TextField 
                             variant='standard' 
@@ -141,12 +137,7 @@ export default function SingleChat (){
                         />
                     </Grid>
                     {
-                    //  [
-                    //     {id:1 , 'time':'10:40 am', date:'Feb.2, 2022', image:ChatImage, name:'Ola James', message:'Hello, how are you'},
-                    //     {id:2 ,'time':'10:51 am', date:'Feb.2, 2022', image:ChatImage, name:'Abubakar Yusuf', message:'How have you been'},
-                    //     {id:3 ,'time':'09:30 pm', date:'Feb.2, 2022', image:ChatImage, name:'Chukwu Mike', message:'Are you still up for nominations?'},
-                    //     {id:4 ,'time':'10:51 am', date:'Feb.2, 2022', image:ChatImage, name:'Justice Jane', message:'How about the exxcuive meeting'}
-                    // ]
+                    
                     logged_in_user?
                     members.filter((value)=>logged_in_user.user !=value.user).map(data=>{
                         return {
@@ -162,26 +153,28 @@ export default function SingleChat (){
                         dispatch(clearChat({}))
                         setOpen(true)
                         setUser(e)
+                        setConnecting(true)
 
                     }} key={index}>
-                        <ChatCard bg={e.id == user.id ?'light-green-bg':'light-grey-bg'} time={e.time} date={e.date} image={e.image} name={e.name} message={e.message} />
+                        <ChatCard bg={e.id == user.id ?'light-green-bg':'light-grey-bg'} 
+                        time={e.time} date={e.date} image={e.image} name={e.name} message={e.message} />
                     </Grid>):''
-                    // <ChatCard time='10:43 am' date='Feb.2, 2022' image={ChatImage} name='Abubakar Yusuf' message='How have you been' />
-                    // <ChatCard time='09:30 pm' date='Feb.2, 2022' image={ChatImage} name='Chukwu Mie' message='Are ou still up for nominations?' />
-                    // <ChatCard time='05:30 am' date='Feb.3, 2022' image={ChatImage} name='Justice Jane' message='How about the exxcuive meeting' />
                     }
                     
                 </Grid>
                     {
                         isLaptop?
-                        <ChatPane
+                        <Box style={{'width':'80%'}}>
+                             <ChatPane
                         logged_in_user={logged_in_user}
                         status={status}
                                 user={user}
                                 chat={chat}
                                 setText={setText}
                                 sendMessage={sendMessage}
-                        />:
+                        />
+                        </Box>
+                        :
                         <BasicModal
                         open={open}
                         handleClose={handleClose}
@@ -198,7 +191,7 @@ export default function SingleChat (){
                         >
                         </BasicModal>
                     }
-            </Grid>
+            </Box>
             
         </Grid>
         </DashboardLayout>
@@ -212,14 +205,14 @@ export default function SingleChat (){
 const ChatPane = (props)=>{
     
     const ref = useRef()
-    
+    console.log(props)
     return (
-    <Grid item lg={8} >
-    {props.user ?
+    <Grid item   style={{'width':'100%'}}>
+    {/* {props.user ?
     <ChatCard image={props.user.image} name={props.user.name} message='sddsdsds' header={true}/>
     :''
-    }
-    <Grid item lg={12} sx={{height:'75vh'}} className='rounded-corners light-green-bg' style={{'padding':'0px'}}>
+    } */}
+    <Grid item  sx={{height:'75vh','width':'100%'}} className='rounded-corners ' style={{'padding':'0px','backgroundColor':'#f5f5f4'}}>
     { props.status=='pending'&&<Spinner/>}
 
         { props.user ?
