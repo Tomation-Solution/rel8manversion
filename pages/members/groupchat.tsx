@@ -79,11 +79,11 @@ const GroupChat:NextPage = ()=>{
                 url = `wss://${sitename}/ws/chat/${tenantName}/general/`
             }
             if(chatroom.type==='commitee'){
-                dispatch(get_old_chats(`?room_name=${chatroom.value}`))
+                dispatch(get_old_chats(`?room_name=${chatroom.value}commitee`))
                 url = `wss://${sitename}/ws/commitee_chat/${tenantName}/${chatroom.value}/`
             }
             if(chatroom.type==='exco'){
-                dispatch(get_old_chats(`?room_name=${chatroom.value}`))
+                dispatch(get_old_chats(`?room_name=${chatroom.value}exco`))
             }
 
             const ws = new WebSocket(url)
