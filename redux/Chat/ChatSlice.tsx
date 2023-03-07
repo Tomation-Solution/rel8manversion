@@ -9,6 +9,11 @@ import {get_list_members} from './ChatApi'
 type State = {
     status:'pending'| 'error' | 'success'|'idle';
     members:MembersType[];
+    // chat:{
+    //     'full_name'?:string|null;
+    //     'message':string;
+    //     'send_user_id':number;
+    // }[];
     chat:any;
     errorMessage:any;
 }

@@ -103,9 +103,11 @@ const GroupChat:NextPage = ()=>{
         web_socket.onmessage = (e) => {
             // a message was received
             const response = JSON.parse(e.data)
+            console.log({response})
             dispatch(addChat({
                 'user__id':response.send_user_id,
-                'message':response.message
+                'message':response.message,
+                'full_name':response.full_name
             }))
           };
     }
@@ -223,7 +225,9 @@ const GroupChatPane = ({status,
             (e.user__id==logged_in_user.user_id ?
                 <Grid container marginX={3} marginY={1} sx={{maxWidth:'60%', minWidth:'10%', borderRadius:'10px', float:'right'}} paddingX={1} paddingBottom={1} className='dark-green-bg'>
                     <Grid container >
-                        <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='white-text' > </Typography>
+                        <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='white-text' >
+                            {e?.full_name}
+                             </Typography>
                     </Grid>
                     <Grid container>
                         <Typography variant='body2' fontWeight='300' className='white-text' > {e.message} </Typography>
@@ -235,7 +239,7 @@ const GroupChatPane = ({status,
                             <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='light-text' > {sender} </Typography>
                         </Grid> */}
                         <Grid item>
-                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='text' > </Typography>
+                            <Typography textAlign='right' variant='caption' sx={{size:'7px', width:'100%'}}  fontWeight='300' className='text' >    {e?.full_name} </Typography>
                         </Grid>
                     </Grid>
                     <Grid container>
