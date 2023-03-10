@@ -35,39 +35,13 @@ export default function EventCard (props:Prop){
                     {/* <Button  variant='contained'  size='small' className={[styles.button, 'button-lower rounded-button'] }>
                         
                     </Button> */}
-                    {
-                        props.data?.event_access.has_paid?
-                        <GreenButton text='Attend' radius='10px'
+                   <GreenButton text='Attend' radius='10px'
                         click={()=>{
                             console.log('Click')
                             localStorage.setItem('event_detail',JSON.stringify(props.data))
                             route.push('/members/event_detail/')
                         }}
-textColor='white' paddingY={1} paddingX={2} bg='#2e3715'/>
-                        :
-                        <GreenButton text='Register to Attend' radius='10px'
-                        click={(e)=>{
-                            if(props.data.is_paid_event){
-                                registerForPaidEvent({
-                                    'id':props.data.id,
-                                    'notify':notify,
-                                    setisLoading
-                                })
-                            }   
-                            else{
-
-                                registerForFreeEvent({
-                                    'id':props.data.id,
-                                    'notify':notify,
-                                    setisLoading
-                                
-                                })
-                            } 
-                        
-                        }}
-                    textColor='white' paddingY={1} paddingX={2} bg='#2e3715'/>
-                   
-                   }
+                textColor='white' paddingY={1} paddingX={2} bg='#2e3715'/>
                 </Grid>
             </Grid>
         </Grid>
