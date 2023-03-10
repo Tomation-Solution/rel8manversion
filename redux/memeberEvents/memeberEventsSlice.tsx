@@ -1,11 +1,12 @@
 import { createSlice ,PayloadAction} from "@reduxjs/toolkit";
+import { registerForEventApi } from "../events/eventsApi";
 import { RootState } from "../store";
 import { getEventAttendies, getEventAttendiesResponse, getMembersEvent, MemberEventType } from "./memeberEventsApi";
 
 
 
 type State ={
-    status:'pending'|'success'|'error'
+    status:'pending'|'success'|'error'|'created'
     events:MemberEventType[],
     attendies:getEventAttendiesResponse[]
     errorMessage:any
@@ -23,6 +24,22 @@ const memeberEventsSlice= createSlice({
     reducers:{},
     extraReducers:({addCase})=>{
         //
+
+
+        addCase(registerForEventApi.pending,(state,{payload})=>{
+            state.status = 'pending'
+        })
+        addCase(registerForEventApi.fulfilled,(state,{payload})=>{
+            state.status = 'created'
+
+        })
+
+        addCase(registerForEventApi.rejected,(state,{payload}:any)=>{
+            state.status = 'error'
+            if(payload.response.status==400){
+                state.errorMessage='You have Already Registered'
+            }
+        })
 
         addCase(getMembersEvent.pending,(state,action)=>{
             state.status='pending'

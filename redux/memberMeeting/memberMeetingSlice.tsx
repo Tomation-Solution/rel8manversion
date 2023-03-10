@@ -49,9 +49,12 @@ const MeetingSlice =createSlice({
             //
             state.status='registration_success'
         })
-        addCase(registerForMeeting.rejected,(state,action)=>{
+        addCase(registerForMeeting.rejected,(state,action:any)=>{
 
             state.status='error';
+            if(action.payload.response.status==400){
+                state.message='You have Already Registered'
+            }
             // state.
 
         })

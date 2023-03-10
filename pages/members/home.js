@@ -131,12 +131,11 @@ export default function Home(props){
     <h4><small>{data.name}</small></h4>
     <p>{data.details.slice(0,30)}..</p>
     <div className="btn_container">
-      <button className="main" onClick={()=>{
+      {/* <button className="main" onClick={()=>{
         localStorage.setItem('meeting_detail',JSON.stringify(data))
         dispatch(registerForMeeting(data.id))
         route.push('/members/meeting_details/')
-        // notify('You have successfully registed for this meeting','success')
-      }}>Accept</button>
+      }}>Accept</button> */}
 
       <button className="not_main" onClick={()=>{
         localStorage.setItem('meeting_detail',JSON.stringify(data))
@@ -175,37 +174,13 @@ data.is_paid_event?
 }
 </p>
 <div className="btn_container">
-  {
-    data?.event_access.has_paid?
- 
- <button className='not_main'
+<button className='not_main'
  onClick={()=>{
 localStorage.setItem('event_detail',JSON.stringify(data))
 route.push('/members/event_detail/')
  }}
- >Attend</button>
+ >View</button>
  
- :
- <button className="main" onClick={()=>{
-  if(data.is_paid_event){
-    // paid_event()
-    registerForPaidEvent({
-      'id':data.id,
-      'notify':notify,
-      setisLoading
-  })
-}   
-else{
-
-    registerForFreeEvent({
-        'id':data.id,
-        'notify':notify,
-        setisLoading
-    })
-} 
-}}>Register</button>
-  }
-
 </div>
 </EventV2>
 ))
@@ -262,7 +237,7 @@ else{
             </MainPane>
 
             <SidePane>
-              <h2>Latest Updates</h2>
+              <h2>Gallery</h2>
           <div style={{'display':'flex','flexWrap':'wrap','gap':'10px'}}>
           {
           images.map((img,index)=>(

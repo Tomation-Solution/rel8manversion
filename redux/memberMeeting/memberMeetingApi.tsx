@@ -39,13 +39,22 @@ export const getMeetings = createAsyncThunk(
     }
 )
 
-
+type registerForMeetingProp ={
+    meetingID:number;
+    proxy_participants?:{
+        full_name:string;
+        email:string; 
+    }[]
+}
 export const registerForMeeting = createAsyncThunk(
-    'meetings/registerForMeeting',async(meeting:number,thunkApi)=>{
+    'meetings/registerForMeeting',async({proxy_participants=[],meetingID}:registerForMeetingProp,thunkApi)=>{
         //
+        const form = new FormData()
+        form.append('proxy_participants',JSON.stringify(proxy_participants))
+        form.append('meeting',meetingID.toString())
 
         try{
-            const resp = await axios.post('/tenant/meeting/meeting_member/',{meeting})
+            const resp = await axios.post('/tenant/meeting/meeting_member/',form)
             return resp.data.data 
         }
         catch(err:any){

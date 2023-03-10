@@ -81,3 +81,30 @@ export const deleteEventApi = createAsyncThunk(
         }
     }
 )
+
+
+type registerForEventProp={
+    event_id:number;
+    proxy_participants?:{
+        full_name:string;
+        email:string; 
+    }[]
+}
+export const registerForEventApi = createAsyncThunk(
+    'event/registerForEventApi',async(data:registerForEventProp,thunkApi)=>{
+
+        const form = new FormData()
+        if(data.proxy_participants){
+            form.append('proxy_participants',JSON.stringify(data.proxy_participants))
+        }
+        form.append('event_id',data.event_id.toString())
+
+        try{
+            const resp = await axios.post('/tenant/event/eventview/register_for_free_event/',form)
+            return resp.data.data
+        }
+        catch(err:any){
+            return thunkApi.rejectWithValue(err)
+        }
+    }
+)

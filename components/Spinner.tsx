@@ -7,7 +7,8 @@ const Spinner=()=>(
         { position: "fixed",
         top: "50%",
         left: "50%",
-        transform: "translate(-50%, -50%)"
+        transform: "translate(-50%, -50%)",
+        'zIndex':'100000000000000000000'
     }
     }>
         <img src={Preloader.src} 
