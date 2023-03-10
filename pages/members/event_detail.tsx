@@ -155,6 +155,7 @@ const EventDetail:NextPage = ()=>{
         handleClose={setOpenAcceptMeeting}
         open={acceptMeeting}
         body={<MeetingRegistration
+        heading="Participant Registration"
           Submit={(value)=>{
             console.log(value)
             // const  meeting = JSON.parse(localStorage.getItem('meeting_detail'))

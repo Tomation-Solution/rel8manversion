@@ -23,8 +23,9 @@ const schema = yup.object({
 })
 type Prop = {
     Submit:(data:Iform)=>void;
+    heading?:string;
 }
-const MeetingRegistration =({Submit}:Prop):React.ReactElement=>{
+const MeetingRegistration =({Submit,heading='Proxy Registration'}:Prop):React.ReactElement=>{
     const {register,control, handleSubmit, setValue,formState: { errors } }  =  useForm<Iform>({resolver: yupResolver(schema),})
     const {fields,append,remove} = useFieldArray({
         name:'participant',control
@@ -37,7 +38,7 @@ const MeetingRegistration =({Submit}:Prop):React.ReactElement=>{
         onSubmit={handleSubmit(onSubmit)}
         >
             <div style={{'textAlign':'center'}}>
-                <h2>Proxy Registration</h2>
+                <h2>{heading}</h2>
                 <p>Kindly input the names and email address of every participant that you are about to pay for</p>
             </div>
             <br />
