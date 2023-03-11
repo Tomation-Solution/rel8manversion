@@ -15,7 +15,8 @@ export type FundAProjectType={
     "heading": string,
     "about":string,
     "id": number,
-    "image": null|string 
+    "image": null|string ,
+    what_project_needs:string[]
 }
 const FundAProject:NextPage=()=>{
     const [projects,setProjects] = useState<FundAProjectType[]>();
@@ -52,7 +53,6 @@ const FundAProject:NextPage=()=>{
                 body={data.about.length==0?'....':data.about.slice(0,50)+'...'}
                 data={data}
                 onBtnClick={()=>{
-                    console.log('Buyll shit code')
                     localStorage.setItem('fund_project',JSON.stringify(data))
                     route.push(`fund_a_project/${data.id}`)
                 }}

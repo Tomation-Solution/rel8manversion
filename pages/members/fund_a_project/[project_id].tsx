@@ -8,8 +8,13 @@ import useToast from "../../../hooks/useToast";
 import {useRouter} from 'next/router'
 import axios from "../../../helpers/axios";
 import Spinner from "../../../components/Spinner";
+import SelectWithLabel from "../../../components/forms/SelectWithLable";
 
-const FundProjectInKindForm = ():React.ReactElement=>{
+
+type FundProjectInKindFormProp = {
+    what_project_needs:string[]
+}
+const FundProjectInKindForm = ({what_project_needs}:FundProjectInKindFormProp):React.ReactElement=>{
     const [heading,setHeading] = useState('')
     const [body,setBody] = useState('')
     const {notify} = useToast()
@@ -48,13 +53,25 @@ const FundProjectInKindForm = ():React.ReactElement=>{
             {isLoading?<Spinner/>:''}
             <h2 style={{'textAlign':'center'}}>Support in Kind</h2>
             <br /><br />
-             <TextField
+             {/* <TextField
               placeholder='Title'
               // label='Password'
               size='small'
               style={{width:'100%'}}
               onChange={e=>setHeading(e.target.value)}
               InputLabelProps={{ shrink: true,  }}
+              /> */}
+              <label style={{'color':'#838080'}}>What Project Needs</label>
+              <SelectWithLabel
+              Label=''
+              name='title'
+              options={what_project_needs.map((data,index)=>({
+                'name':data,
+                'value':data,
+              }))}
+              setValue={(name,value)=>{
+                setHeading(value)
+              }}
               />
             <br /><br />
             <TextField
@@ -86,6 +103,7 @@ const ProjectDetail = ()=>{
             setProjects(JSON.parse(localStorage.getItem('fund_project')))
         }
     },[])
+    console.log(projects)
     return (
         <DashboardLayout>
 
@@ -123,7 +141,7 @@ const ProjectDetail = ()=>{
             </div>
 
       <BasicModal handleClose={handleClose} open={openLogout} body={
-        <FundProjectInKindForm/>
+        <FundProjectInKindForm what_project_needs={projects.what_project_needs}/>
       }/>
 
         </DashboardLayout>
