@@ -115,7 +115,7 @@ const MeetingDetails:NextPage = ()=>{
             <p style={{'padding':'0 .7rem'}}>
               {
                 data.addresse.includes('https')?
-                <a href={data.addresse} style={{'color':'green','textDecoration':'underline','cursor':'pointer'}}>Vist meeting lin</a>
+                <a href={data.addresse} style={{'color':'green','textDecoration':'underline','cursor':'pointer'}}>Vist meeting link</a>
                 :
                 data.addresse
               }
