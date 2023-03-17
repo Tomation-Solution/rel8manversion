@@ -46,6 +46,12 @@ const items = [
     title: 'Events'
   },
   {
+    href: '/members/meetings',
+    icon: (<ChatBubble fontSize="small" />),
+    title: 'Meetings'
+  },
+  
+  {
     href: '/members/committee',
     icon: (<EventRounded fontSize="small" />),
     title: 'My Committee'
@@ -78,7 +84,7 @@ const items = [
     icon: (<ChatBubble fontSize="small" />),
     title: 'Group Chat'
   },
-  
+
   {
     href: '/members/news',
     icon: (<Info fontSize="small" />),

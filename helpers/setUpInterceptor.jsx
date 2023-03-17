@@ -12,7 +12,11 @@ const setup = (store) => {
       }
       // Set the auth header before sending the request
       if (token) {
-          config.headers["Authorization"] = "Token " + token;
+          if(window.location.pathname.includes('/mailing')){
+
+          }else{
+            config.headers["Authorization"] = "Token " + token;
+          }
         }
       return config;
     },
