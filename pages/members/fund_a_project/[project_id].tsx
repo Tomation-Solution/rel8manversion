@@ -68,7 +68,7 @@ const ProjectDetail:NextPage = ()=>{
             </div>
 
       <BasicModal handleClose={handleClose} open={openLogout} body={
-        <FundProjectInKindForm what_project_needs={projects.what_project_needs}/>
+        <FundProjectInKindForm what_project_needs={projects?.what_project_needs}/>
       }/>
 
         </DashboardLayout>
