@@ -268,10 +268,15 @@ const EventDetail:NextPage = ()=>{
             <div  style={{'display':'flex','maxWidth':'600px','margin':'0 auto','justifyContent':'space-between'}}>
                     <CustomBtn 
                         onClick={e=>{
+                          if(data.is_paid_event){
+                            notify('payment gateway not available now')
+                          return
+                          }
+        
                         setAskQuetion(true)
                         }}
                         style={{'width':'25%'}}>
-                        Accept Meeting
+                        Accept Event
                         </CustomBtn>
 
                         {/* <CustomBtn styleType='sec' 

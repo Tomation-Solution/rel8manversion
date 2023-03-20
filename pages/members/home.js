@@ -166,7 +166,7 @@ events.slice(0,3).map((data,index)=>(
 <img
 src={data.image}
 />
-<h4><small>{data.name}</small></h4>
+<h4><small>{data.name.slice(0,43)}..</small></h4>
 <p>
 {
 data.is_paid_event?
@@ -200,10 +200,10 @@ route.push('/members/event_detail/')
     <Publicationv2 key={index}>
     <img src={pub.image}/>
     <h3>
-      {pub.name}
+      {pub.name.slice(0,23)}..
     </h3>
     <p>
-      {pub.paragraphs.length!=0?pub.paragraphs[0].paragragh.slice(0,50):''}..
+      {pub.paragraphs.length!=0?pub.paragraphs[0].paragragh.slice(0,100):''}..
     </p>
     <a href="#"style={{'color':'#2e3715'}}
       onClick={()=>{
@@ -225,9 +225,9 @@ route.push('/members/event_detail/')
   news.slice(0,3).map((data,index)=>(
     <Newscard
       key={index}
-      title={data.name}
+      title={data.name.slice(0,23)+'..'}
       image={data.image}
-      body={data.paragraphs.length==0?'....':data.paragraphs[0].paragragh.slice(0,50)}
+      body={data.paragraphs.length==0?'....':data.paragraphs[0].paragragh.slice(0,100)}
       data={data}
       />
   ))
