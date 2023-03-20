@@ -276,7 +276,7 @@ const EventDetail:NextPage = ()=>{
                         setAskQuetion(true)
                         }}
                         style={{'width':'25%'}}>
-                        Accept Event
+                        Join
                         </CustomBtn>
 
                         {/* <CustomBtn styleType='sec' 
@@ -292,7 +292,8 @@ const EventDetail:NextPage = ()=>{
                     window.open(data.meeting_docs,'_blank')
                 }}
                 >
-                    Dowload Meeting Doc
+                                Attachment doc
+
                 </CustomBtn>:''
             }   
 
