@@ -2,10 +2,10 @@ import axios from "axios"
 import { useRouter } from "next/dist/client/router"
 import { NextPage } from "next/types"
 import { useState } from "react"
-import CustomBtn from "../../../../components/CustomBtn/Button"
-import Spinner from "../../../../components/Spinner"
-import { baseURL } from "../../../../helpers/axios"
-import useToast from "../../../../hooks/useToast"
+import CustomBtn from "../../components/CustomBtn/Button"
+import Spinner from "../../components/Spinner"
+import { baseURL } from "../../helpers/axios"
+import useToast from "../../hooks/useToast"
 
 
 
@@ -21,10 +21,14 @@ const ActivateAccount:NextPage = ()=>{
   
     const handleValidate = async( )=>{
         //
+        const params:any = new Proxy(new URLSearchParams(window.location.search), {
+          get: (searchParams, prop:any) => searchParams.get(prop),
+        });
+
         window.localStorage.clear() // clear any info that we have on the site so it wont conflit with theEmail Verirfaction
         setStatus('loading')
         try{
-          const resp =await  axios.get(`${baseURL}/mailing/activate/${uidb64}/${token}/`)
+          const resp =await  axios.get(`${baseURL}/mailing/activate/${params.uidb64}/${params.token}/`)
           setStatus('okay')
           notify('Email Verfication Successfull','success')
           //mission acomplised
