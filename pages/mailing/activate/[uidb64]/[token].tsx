@@ -13,7 +13,7 @@ const ActivateAccount:NextPage = ()=>{
     const route = useRouter()
     const {uidb64, token} = route.query
     const {notify} = useToast()
-    const [status,setStatus] = useState<'loading'|'error'|'okay'|'idle'>('error')
+    const [status,setStatus] = useState<'loading'|'error'|'okay'|'idle'>('idle')
     const handleRoute = (value:string)=>{
       //
       route.push(value)
