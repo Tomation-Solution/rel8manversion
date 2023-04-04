@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive'
 import Table from '../../components/Table/Table'
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectMemberEvent } from "../../redux/memeberEvents/memeberEventsSlice";
-import {getEventAttendies} from '../../redux/memeberEvents/memeberEventsApi'
+import {getEventAttendies, registerForPaidEventApi} from '../../redux/memeberEvents/memeberEventsApi'
 import CustomBtn from "../../components/CustomBtn/Button";
 import BasicModal from "../../components/Modals";
 import { Box, TextField } from "@material-ui/core";
@@ -14,6 +14,7 @@ import { registerForEventApi } from "../../redux/events/eventsApi";
 import useToast from "../../hooks/useToast";
 import MeetingRegistration from "../../components/Meeting/MeetingRegistration/MeetingRegistration";
 import axios from "../../helpers/axios";
+import { useMutation } from "react-query";
 export const RequestRescheduleForm = (event_id:any):React.ReactElement=>{
   const [date,setDate] = useState<any>();
   const [time,setTime] = useState<any>();
@@ -92,7 +93,12 @@ const EventDetail:NextPage = ()=>{
       const [acceptMeeting,setOpenAcceptMeeting] = useState(false)
       const [askQuetion,setAskQuetion] = useState(false)
       const [openReSchedule,setOpenReSchedule] = useState(false)
-    useEffect(()=>{
+    const {mutate,isLoading} = useMutation(registerForPaidEventApi,{
+      onError:(d)=>{
+        notify('You Have Paid For This Event','error')
+      },
+    })
+      useEffect(()=>{
         if(typeof window != 'undefined'){
             const  event = JSON.parse(localStorage.getItem('event_detail'))
             dispatch(getEventAttendies({'event_id':event.id}))
@@ -133,9 +139,9 @@ const EventDetail:NextPage = ()=>{
       ]
     return (
         <DashboardLayout>
-
+          
         {
-            status==='pending'?
+          (  status==='pending'||isLoading)?
             <Spinner/>:''
         }
 {/* RequestRescheduleForm */}
@@ -269,7 +275,8 @@ const EventDetail:NextPage = ()=>{
                     <CustomBtn 
                         onClick={e=>{
                           if(data.is_paid_event){
-                            notify('payment gateway not available now')
+                            notify('please hold on we proccessing the payment portal')
+                            mutate({'id':data.id})
                           return
                           }
         

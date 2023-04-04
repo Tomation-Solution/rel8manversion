@@ -29,7 +29,7 @@ export const DashboardLayout = (props) => {
             width: '100%'
           }}
         >
-          <div style={{'padding':'.9rem'}}>
+          <div style={{'padding':'1.5rem'}}>
           {children}
           </div>
         </Box>

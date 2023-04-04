@@ -81,6 +81,10 @@ export const getregisteredmembers_forMeeting = createAsyncThunk(
     }
 )
 
+
+
+// please note am slowly migrating this code base to react query
+
 type PropSendMeetingAppology={
     "meeting":number,
     "note":string,
@@ -98,3 +102,29 @@ export const sendMeetingAppology= createAsyncThunk(
         }
     }
 )
+
+export const getMemberMeetingAPi= async():Promise<MeetingType[]>=>{
+    let lookup =generate_url_params()
+    const resp = await axios.get('/tenant/meeting/meeting_member/'+lookup)
+    return resp.data.data 
+}
+
+export const regsiterMeetingApi = async ({proxy_participants=[],meetingID}:registerForMeetingProp)=>{
+
+    const form = new FormData()
+
+    const data = {
+        'meeting':meetingID,
+        proxy_participants:proxy_participants
+    }
+    // form.append('proxy_participants',JSON.stringify(proxy_participants))
+    // form.append('meeting',meetingID.toString())
+    const resp = await axios.post('/tenant/meeting/meeting_member/',data)
+    return resp.data.data 
+
+}
+
+export const sendMeetApplolgyApi = async (data:PropSendMeetingAppology)=>{
+    const resp = await axios.post('/tenant/meeting/meeting_member/appologise_for_not_attending/',data)
+    return resp.data.data 
+}
