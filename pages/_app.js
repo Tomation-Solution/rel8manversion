@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
     <Provider store={store}>
-    <NextNProgress color={'#2e3715'} />
+    <NextNProgress color={'#045696'} />
     <ToastContainer />
 
     <Component {...pageProps} />
