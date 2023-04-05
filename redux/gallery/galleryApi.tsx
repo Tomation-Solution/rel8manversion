@@ -60,3 +60,10 @@ export const deleteGallery = createAsyncThunk(
         }
     }
 )
+
+export const getImagesForLayout = async ()=>{
+
+    const resp =  await axios.get(`/tenant/extras/gallery_version2/`)
+    console.log({resp})
+    return  resp.data.data.data
+}

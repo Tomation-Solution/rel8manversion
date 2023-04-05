@@ -4,13 +4,17 @@ import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashb
 import { HomeLayout, MainPane, SidePane } from "../../styles/MembersHome.style"
 import RandomImage from '../../images/Vectorlanding.png'
 import { useMediaQuery } from 'react-responsive'
+import { useQuery } from "react-query"
+import { getImagesForLayout } from "../../redux/gallery/galleryApi"
 
 
 
 type Prop = React.PropsWithChildren<{}>
 const LatestUpdateAndGallery = ({children}:Prop)=>{
     const isPhone = useMediaQuery({ query: '(max-width: 500px)' })
-
+    const {data:images} = useQuery('images_preview',getImagesForLayout,{
+      'refetchOnWindowFocus':false
+    })
     return (
         <DashboardLayout>
             <HomeLayout>
@@ -25,9 +29,9 @@ const LatestUpdateAndGallery = ({children}:Prop)=>{
               <h2>Gallery</h2>
           <div style={{'display':'flex','flexWrap':'wrap','gap':'2px'}}>
           {
-          [...new Array(2)].map((img,index)=>(
+         images?.map((img,index)=>(
             <img className="sideImages" key={index} 
-            src={'https://res.cloudinary.com/du9oqsosk/image/upload/v1/media/gallery_v2/Photo_1_ujzc9i' }/>
+            src={  img.images.length!=0?img.images[0].image:''}/>
 
           ))
           }
