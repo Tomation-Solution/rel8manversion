@@ -4,9 +4,12 @@ import styled from "styled-components";
 
 export const EventMeetDisplayContainer = styled.div`
     padding:10px 0;
-img{
-    border-radius:10px;
-}
+    .image_preview{
+        width: 90%;
+        height: 300px;
+        border-radius:10px;
+    }
+
 h3{
     font-size:17px;
     color:#2B3513;

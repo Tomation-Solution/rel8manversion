@@ -144,7 +144,7 @@ export default function Home(props){
 
       <button className="not_main" onClick={()=>{
         localStorage.setItem('meeting_detail',JSON.stringify(data))
-        route.push('/members/meeting_details/')
+        route.push(`/members/meetings/${data.id}/`)
       }}>
         View
       </button>

@@ -39,7 +39,7 @@ const MeetingRegistration =({Submit,heading='Proxy Registration'}:Prop):React.Re
         >
             <div style={{'textAlign':'center'}}>
                 <h2>{heading}</h2>
-                <p>Kindly input the names and email address of every participant that you are about to pay for</p>
+                <p>Kindly input the names and email address of every participant that you want to invite</p>
             </div>
             <br />
             {

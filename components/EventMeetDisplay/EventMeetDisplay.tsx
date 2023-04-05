@@ -113,7 +113,11 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                         </div>
                         <div className="event_location_info">
                             <TiLocation/>
-                            <p> {meeting.addresse.includes('https')?'Remote':'On Site'}  </p>
+                            <p> {meeting.addresse.includes('https')?'Remote':'On Site'}: {
+                                    meeting.addresse.includes('https')?
+                                    <CustomBtn style={{'padding':'.3rem'}}>Join</CustomBtn>:
+                                    <>{ meeting.addresse}</>
+                                } </p>
                         </div>
                         <br />
                         <div className="host_container">
