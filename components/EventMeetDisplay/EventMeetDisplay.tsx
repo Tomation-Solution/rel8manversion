@@ -80,7 +80,7 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                 onClick={e=>{
                 setAskQuetion(false)
                 setAcceptProxyMeeting(true)}}
-                >Register and invite proxy</CustomBtn>
+                >Register and invite other individuals</CustomBtn>
             </div>
             </Box>}
             />

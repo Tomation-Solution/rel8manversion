@@ -1,4 +1,4 @@
-import { MemberEventType, registerForPaidEventApi } from "../../redux/memeberEvents/memeberEventsApi"
+import { MemberEventType, registerForPaidEvent, registerForPaidEventApi } from "../../redux/memeberEvents/memeberEventsApi"
 import { EventMeetDisplayContainer } from "../EventMeetDisplay/EventMeetDisplay.style"
 import ClipImage from '../../images/clip.png'
 import {GoCalendar} from 'react-icons/go'
@@ -23,6 +23,7 @@ type Prop = {
 const MeetDisplay = ({event}:Prop)=>{
     const {attendies,status,errorMessage} = useAppSelector(selectMemberEvent)
 
+    const [gateWayLoading,setGateWayLoading] = useState(false)
 
     const [open,setOpenLogout] = useState(false)
     const [acceptMeeting,setOpenAcceptMeeting] = useState(false)
@@ -40,7 +41,7 @@ const MeetDisplay = ({event}:Prop)=>{
     return (
         <div>
             {
-                status==='pending'?
+                (status==='pending'||gateWayLoading)?
                 <Spinner/>:''
             }
 <BasicModal 
@@ -60,6 +61,7 @@ const MeetDisplay = ({event}:Prop)=>{
         open={acceptMeeting}
         body={<MeetingRegistration
         heading="Participant Registration"
+        detail="Kindly input the names and email address of every proxy that you want to invite"
           Submit={(value)=>{
             console.log(value)
             // const  meeting = JSON.parse(localStorage.getItem('meeting_detail'))
@@ -99,7 +101,7 @@ const MeetDisplay = ({event}:Prop)=>{
             onClick={e=>{
               setAskQuetion(false)
               setOpenAcceptMeeting(true)}}
-            >Register and invite proxy</CustomBtn>
+            >Register and invite other individuals</CustomBtn>
           </div>
         </Box>}
         />
@@ -164,10 +166,21 @@ const MeetDisplay = ({event}:Prop)=>{
                     </CustomBtn>:
                     <CustomBtn
                     onClick={e=>{
+                        if(event.is_paid_event){
+                            registerForPaidEvent({'id':event.id,'notify':notify,'setisLoading':setGateWayLoading})
+    
+                          return
+                          }
                         setAskQuetion(true)
                     }}
+                    
                     style={{'borderRadius':'30px'}}>
-                        Register
+                        
+                        {
+                            event.is_paid_event?
+                            `Pay ${parseInt(event?.amount).toFixed(2)} ₦`:
+                            'Register'
+                        }
                     </CustomBtn>
                     
                 }
