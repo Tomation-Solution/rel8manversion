@@ -35,7 +35,7 @@ const EventCardV2 = ({ data}:Prop)=>{
         handleClose={setOpenAcceptMeeting}
         open={acceptMeeting}
         body={<MeetingRegistration
-        detail='Kindly input the names and email address of every proxy that you want to invite'
+        detail='Kindly input the names and email address of every participant  that you want to invite'
         heading="Participant Registration"
           Submit={(value)=>{
             console.log(value)

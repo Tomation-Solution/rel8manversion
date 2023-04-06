@@ -61,7 +61,7 @@ const MeetDisplay = ({event}:Prop)=>{
         open={acceptMeeting}
         body={<MeetingRegistration
         heading="Participant Registration"
-        detail="Kindly input the names and email address of every proxy that you want to invite"
+        detail="Kindly input the names and email address of every participant  that you want to invite"
           Submit={(value)=>{
             console.log(value)
             // const  meeting = JSON.parse(localStorage.getItem('meeting_detail'))
