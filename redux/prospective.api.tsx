@@ -7,9 +7,12 @@ import { PropsPectiveFormOneType, PropsPectiveFormTwoType } from "../pages/prosp
 export const submitProspectiveMemberFormOneApi = async (data:PropsPectiveFormOneType)=>{
     const submitdata:any = {
         'data':[
-            {name:'full_name','value':data.full_name},
-            {name:'address','value':data.address},
-            {name:'mobile','value':data.mobile},
+            /* @ts-ignore */
+            {name:'full_name','value':data?.full_name},
+            /* @ts-ignore */
+            {name:'address','value':data?.address},
+            /* @ts-ignore */
+            {name:'mobile','value':data?.mobile},
         ]
     }
     const resp = await axios.post('/tenant/prospectivemember/general_propective_member_manage_form_one/',submitdata)
