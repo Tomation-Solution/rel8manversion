@@ -121,7 +121,9 @@ const Page:NextPage =()=>{
                     />
                               <br/>
                     <div>
-                    <Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>
+                    <Typography className='text' variant='subtitle2'
+                    //  color='grey'
+                     >
                       Already have an account?<span style={{'color':'#045696','cursor':'pointer'}} onClick={e=>{
                         router.push('/prospective/')
                       }}>{' '}Login</span>
