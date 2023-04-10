@@ -7,7 +7,7 @@ const setup = (store) => {
       // check if request is made from tenant or service account
       let token;
     
-      if(window.location.pathname.includes('/admin')|| window.location.pathname.includes('/member')){
+      if(window.location.pathname.includes('/admin')|| window.location.pathname.includes('/member')|| window.location.pathname.includes('/prospective')){
         token = getTokenorEmptyString()
       }
       // Set the auth header before sending the request

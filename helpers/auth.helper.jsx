@@ -23,5 +23,5 @@ export const getTokenorEmptyString  =()=>{
     if(user){
         return user?.token
     }
-    return "."
+    return null
 }

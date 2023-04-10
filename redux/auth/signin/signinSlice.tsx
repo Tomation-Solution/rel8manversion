@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import {signinApi} from "./signinApi"
+/* @ts-ignore */
+import cookieCutter from 'cookie-cutter'
 interface siginDataType{
     user_type:string;
     token:string;
