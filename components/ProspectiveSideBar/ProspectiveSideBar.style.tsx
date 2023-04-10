@@ -14,6 +14,7 @@ export const ProspectiveSideBarContainer = styled.div`
         display: block;
         object-fit: contain;
         border-bottom: 1px solid #ffffff38;
+        background-color: white;
     }
 
 .ProspectiveSideBarContainer__body{

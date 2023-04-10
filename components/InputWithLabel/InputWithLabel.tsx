@@ -9,14 +9,20 @@ type Prop ={
     Icon?:React.ReactElement
     label:string,
     errorMessage?:string;
-    type?:'text'|'password'
+    type?:'text'|'password'|'file',
+    isShowLabel?:boolean
 }
 
-const InputWithLabel = ({register,Icon,label,errorMessage,type='text'}:Prop)=>{
+const InputWithLabel = ({register,Icon,label,errorMessage,type='text',isShowLabel}:Prop)=>{
     const [showPassword, setShowPassword]= useState(true);
 
     return (
         <div>
+          {
+            isShowLabel?
+            <label htmlFor="" style={{'textTransform':'capitalize','padding':'.4rem 0','display':'inline-block','fontWeight':'bold'}}>{label.replaceAll('_',' ')}</label>
+            :''
+          }
             <TextField
               placeholder={label} 
               // label='Username'  

@@ -13,7 +13,7 @@ import OffCanvas from "../../components/OffCanvas/OffCanvas"
 import Spinner from "../../components/Spinner"
 import HandleProspectiveRegistrationPayment from "../../components/HandleProspectiveRegistrationPayment"
 type Prop = React.PropsWithChildren<{}>
-const PropectiveMemberLayout = ({children}:Prop)=>{
+const   PropectiveMemberLayout = ({children}:Prop)=>{
     // const user = getPropspectiveMemberOrNull()
     const {notify} = useToast()
     const router = useRouter()
