@@ -29,7 +29,7 @@ const HandleProspectiveRegistrationPayment = ():React.ReactElement=>{
                 <Spinner/>:''
             }
             <br /><br /><br />
-            <h2>It appears you have not paid the registration fee</h2>
+            <h2>To proceed with your registration, you will need to pay a registration fee. (#90,000)</h2>
                 <br />
 
             <CustomBtn style={{'width':'200px','margin':'0 auto'}} onClick={e=>{
