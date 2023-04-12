@@ -5,17 +5,8 @@ import { PropsPectiveFormOneType, PropsPectiveFormTwoType } from "../pages/prosp
 
 
 export const submitProspectiveMemberFormOneApi = async (data:PropsPectiveFormOneType)=>{
-    const submitdata:any = {
-        'data':[
-            /* @ts-ignore */
-            {name:'full_name','value':data?.full_name},
-            /* @ts-ignore */
-            {name:'address','value':data?.address},
-            /* @ts-ignore */
-            {name:'mobile','value':data?.mobile},
-        ]
-    }
-    const resp = await axios.post('/tenant/prospectivemember/general_propective_member_manage_form_one/',submitdata)
+   
+    const resp = await axios.post('/tenant/prospectivemember/general_propective_member_manage_form_one/',data)
     return resp.data
 }
 
@@ -46,5 +37,16 @@ type getStatusResponse = {
 }
 export const getStatusApi = async():Promise<getStatusResponse>=>{
     const resp = await axios.get('/tenant/prospectivemember/general_propective_member_manage_form_two/get_status/')
+    return resp.data.data
+}
+
+
+type getAdminRulesType = {
+    "amount": number,
+    "text_fields":string[]
+    "file_fields": string[];
+}
+export const get_admin_rules = async():Promise<getAdminRulesType>=>{
+    const resp = await axios.get('/tenant/prospectivemember/general_propective_member_manage_form_one/get_admin_rules/')
     return resp.data.data
 }

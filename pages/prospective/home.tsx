@@ -6,7 +6,7 @@ import { SubmitHandler, useForm ,useFieldArray} from 'react-hook-form';
 import InputWithLabel from "../../components/InputWithLabel/InputWithLabel";
 import CustomButton from '../../components/CustomBtn/Button'
 import { useMutation, useQuery } from "react-query";
-import { createForm2Api, getFormoneDataApi, submitProspectiveMemberFormOneApi } from "../../redux/prospective.api";
+import { createForm2Api, getFormoneDataApi, get_admin_rules, submitProspectiveMemberFormOneApi } from "../../redux/prospective.api";
 import Spinner from "../../components/Spinner";
 import useToast from "../../hooks/useToast";
 import { useEffect,useState } from "react";
@@ -39,9 +39,7 @@ const Home = ()=>{
         register,control,handleSubmit, formState: { errors },setValue,reset,
     } = useForm<PropsPectiveFormOneType>({resolver:yupResolver(schema1),defaultValues:{
         'data':[
-            {'name':'full_name',value:''},
-            {'name':'address',value:''},
-            {'name':'mobile',value:''},
+            
         ]
     }})
 
@@ -50,7 +48,15 @@ const Home = ()=>{
         name:'data',control
     })
 
+    const {mutate:getAdminRules,isLoading:loadingRuules} = useMutation(get_admin_rules,{
+        'onSuccess':(data)=>{
+            console.log({'rules':data})
+            reset({'data':data.text_fields.map((name,index)=>{
+                return {name,'value':'empty'}
+            })})
 
+        }
+    })
     const {isLoading,mutate} = useMutation(submitProspectiveMemberFormOneApi,{
         'onSuccess':()=>{
             notify('Form One Saved','success')
@@ -62,6 +68,7 @@ const Home = ()=>{
 
     const submitData:SubmitHandler<PropsPectiveFormOneType>=(data)=>{
         mutate(data)
+        // console.log('Net Thing',data)
     }
 
     const {
@@ -84,10 +91,11 @@ const Home = ()=>{
 
 
     useEffect(()=>{
-        console.log(data)
         if(data){
-            // reset('data',data.info)
             reset({'data':data.info})
+        }else{
+            // get structure
+            getAdminRules()
         }
     },[data])
 
@@ -97,7 +105,7 @@ const Home = ()=>{
             
             <div style={{'maxWidth':'700px','margin':'0 auto'}}>
             {
-                    (isLoading||loadingformone||creatingform2)?<Spinner/>:''
+                    (isLoading||loadingformone||creatingform2||loadingRuules)?<Spinner/>:''
                 }
                 <StepsDisplay count={2} currentNumber={step}/>
               
@@ -108,21 +116,33 @@ const Home = ()=>{
                 {
                     step==0?
                 <form onSubmit={handleSubmit(submitData)} >
-                    <h2>Form One</h2>
                     <br />
 
-                   <div style={{'display':'grid','gridTemplateColumns':'1fr 1fr','gap':'20px'}}>
+                   <div >
                    {
                         fields.map((data,index)=>(
-                            <div key={index}>
+                            <div key={index} style={{'display':'grid','gridTemplateColumns':'1fr 1fr','gap':'20px','margin':'10px 0'}}>
                                 <InputWithLabel 
                                 isShowLabel={true}
-                                label={data.name}
+                                label={'Name'}
+                                register={register(`data.${index}.name`)}
+                                />
+
+                                <InputWithLabel 
+                                isShowLabel={true}
+                                label={'Value'}
                                 register={register(`data.${index}.value`)}
                                 />
                             </div>        
                         ))
                     }
+                    <CustomButton styleType="sec" style={{'width':'150px'}} onClick={e=>{
+                        e.preventDefault()
+                        append({'name':'empty name','value':'empty name'})
+                    }}>
+                        Append
+                    </CustomButton>
+                    <br />
                    </div>
                    <br />
                    <div style={{'display':'flex','justifyContent':'space-between','maxWidth':'400px','margin':'0 auto'}}>
@@ -138,7 +158,6 @@ const Home = ()=>{
                 {
                     step==1?
                     <form onSubmit={handleSubmitForm2(submitDataForm2)}>
-                    <h2>Form two</h2>
                     <br />
                     
                     <div style={{'display':'grid','gridTemplateColumns':'1fr 1fr','gap':'20px'}}>
