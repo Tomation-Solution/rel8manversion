@@ -1,5 +1,5 @@
 import React from "react"
-import Logo from '../../images/logo.png'
+import Logo from '../../images/logo.svg'
 import { Card,Box,IconButton, InputAdornment, Typography,TextField, Button,Grid, Checkbox } from "@mui/material"
 import styles from '../../styles/Home.module.css'
 

@@ -78,7 +78,7 @@ const Service_request=()=>{
 
             {/* <Grid container spacing={2} style={{'padding':'1rem'}}>
                 <div style={{'padding':'1rem','border':'1px solid blackSS','width':'300px','textAlign':'center'}}>
-                    <IoIosPaper style={{"fontSize":'2rem','color':'#045696'}}/>
+                    <IoIosPaper style={{"fontSize":'2rem','color':'#2e3715'}}/>
                     <p style={{'fontSize':'1.5rem'}}>Reissuance of certificate</p>
                     <CustomBtn style={{'width':'150px','margin':'5px auto'}} onClick={e=>setOpenLogout(true)}>Apply</CustomBtn>
                 </div>

@@ -4,9 +4,9 @@ body {
   margin: 0;
   font-family: poppins;
 }
-/* light blue - #045696
+/* light blue - #2e3715
 
-thick blue - #045696
+thick blue - #2e3715
 */
 *{
   overflow-x: hidden;
@@ -36,7 +36,7 @@ a {
 }
 
 .green-text{
-  color: #045696;
+  color: #2e3715;
   font-family: poppins;
   font-size: small;
 }
@@ -50,7 +50,7 @@ a {
 
 .selectedNav{
   background-color: #E1F1DC;
-  color: #045696;
+  color: #2e3715;
   border-radius:8px;
   margin: 2px 8px;
   font-size: 14;
@@ -67,7 +67,7 @@ a {
 }
 
 .dark-green-bg{
-  background-color:  #045696;
+  background-color:  #2e3715;
 }
 
 
@@ -130,11 +130,11 @@ a {
   }
 
   ::-webkit-scrollbar-thumb {
-    background:  #045696; 
+    background:  #2e3715; 
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb {
-    background:  #045696; 
+    background:  #2e3715; 
     border-radius: 10px;
   }
 
@@ -150,13 +150,13 @@ a {
    
   /* Handle */
   .chat-bg::-webkit-scrollbar-thumb {
-    background:  #045696; 
+    background:  #2e3715; 
     border-radius: 10px;
   }
   
   /* Handle on hover */
   .chat-bg::-webkit-scrollbar-thumb:hover {
-    background:  #045696; 
+    background:  #2e3715; 
   }
   #map { height: '100px'; width:'100%'; z-index:9000 }
    /*scrollbar for chat ends here*/

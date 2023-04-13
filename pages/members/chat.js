@@ -115,7 +115,7 @@ export default ChatPage
 //                 <Typography marginBottom={2} className='text'>General Chatroom</Typography>
 //                 {/* <Link href='/members/single-chat'> */}
 //                 <GreenButton text='Private Chat' radius='10px' click={()=>Router.push({ pathname: '/members/single-chat', query: { name: 'Someone' }})}
-//                 textColor='white' paddingY={1} paddingX={2} bg='#045696'
+//                 textColor='white' paddingY={1} paddingX={2} bg='#2e3715'
 //                 />
 //                 {/* </Link> */}
 //             </Grid>

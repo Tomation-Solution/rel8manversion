@@ -14,14 +14,14 @@ export const StepsDisplayContainer = styled.div`
         height: 2px;
         width: 96%;
         position: absolute;
-        background-color: #045696;
+        background-color: #2e3715;
     }
 
     
         .display_ball{
             height: 50px;
             width: 50px;
-            border: 1px dotted #045696;
+            border: 1px dotted #2e3715;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -33,7 +33,7 @@ export const StepsDisplayContainer = styled.div`
             background-color: white;
             position: relative;
             &.active{
-                background-color: #045696;
+                background-color: #2e3715;
                 color: white;
             }
 

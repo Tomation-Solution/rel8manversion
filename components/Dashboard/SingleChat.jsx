@@ -4,7 +4,7 @@ import  SendRounded from "@mui/icons-material/SendRounded";
 import { Grid, Typography, IconButton, TextField, InputAdornment, Icon } from "@mui/material";
 import GreenButton from "../Buttonn";
 import Router,{withRouter} from "next/router"
-import ChatImage from '../../images/logo.png'
+import ChatImage from '../../images/logo.svg'
 import ChatCard from "../ChatCard";
 
 
@@ -51,7 +51,7 @@ export default function SingleChat (){
             <Grid container justifyContent='space-between' paddingY={2}>
                 <Typography marginBottom={2} className='text' style={{'textAlign':'center'}}>Private Chatroom</Typography>
                 {/* <GreenButton text='General Chat' click={()=>Router.back} radius='10px'
-                textColor='white' paddingY={1} paddingX={2} bg='#045696'
+                textColor='white' paddingY={1} paddingX={2} bg='#2e3715'
                 /> */}
             </Grid>
 

@@ -1,4 +1,4 @@
-import Logo from '../../images/logo.png'
+import Logo from '../../images/logo.svg'
 import CustomBtn from '../CustomBtn/Button'
 import { ProspectiveSideBarContainer } from './ProspectiveSideBar.style'
 import {useRouter} from 'next/router'

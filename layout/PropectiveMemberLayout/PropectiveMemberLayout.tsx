@@ -7,7 +7,7 @@ import useToast from "../../hooks/useToast"
 import ProspectiveSideBar from "../../components/ProspectiveSideBar/ProspectiveSideBar"
 import { PropectiveMemberLayoutContainer } from "./PropectiveMemberLayout.style"
 import { useMediaQuery } from 'react-responsive'
-import Logo from '../../images/logo.png'
+import Logo from '../../images/logo.svg'
 import {FaBars} from 'react-icons/fa'
 import OffCanvas from "../../components/OffCanvas/OffCanvas"
 import Spinner from "../../components/Spinner"

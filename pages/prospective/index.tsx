@@ -95,7 +95,7 @@ const Page:NextPage =()=>{
                               <br/>
                     <div>
                     <Typography  className='text' variant='subtitle2'>
-                       Dont have an account?<span style={{'color':'#045696','cursor':'pointer'}} onClick={e=>{
+                       Dont have an account?<span style={{'color':'#2e3715','cursor':'pointer'}} onClick={e=>{
                         router.push('prospective/create/')
                        }}>{' '}create</span>
                     </Typography>

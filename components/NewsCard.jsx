@@ -31,7 +31,7 @@ export default function Newscard (props){
                         saveNews()
                     }
                 }}
-               textColor='white' paddingY={1} paddingX={1}  bg='#045696'/>
+               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>
             </Grid>
            </div>
         </Grid>

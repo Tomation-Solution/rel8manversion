@@ -17,7 +17,7 @@ import Photo from '@mui/icons-material/Photo'
 import EventRounded from '@mui/icons-material/EventRounded'
 import MenuBook from '@mui/icons-material/MenuBook'
 import ChatBubble from '@mui/icons-material/ChatBubble'
-import LogoImage from '../../../../images/logo.png'
+import LogoImage from '../../../../images/logo.svg'
 import SwitchLabels from '../../../SwitchLabels';
 import Spinner from "../../../Spinner";
 import {BsBriefcaseFill} from 'react-icons/bs'
@@ -325,7 +325,7 @@ const content = (
         open
         PaperProps={{
           sx: {
-            backgroundColor: '#045696',
+            backgroundColor: '#2e3715',
             color: '#FFFFFF',
             width: 220,
             borderRadius:"10px"
@@ -347,7 +347,7 @@ const content = (
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: '#045696',
+          backgroundColor: '#2e3715',
           color: '#FFFFFF',
           width: 250
         }

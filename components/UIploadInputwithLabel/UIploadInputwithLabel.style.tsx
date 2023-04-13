@@ -11,7 +11,7 @@ export const UIploadInputwithLabelContainer = styled.div`
     label{
         display: block;
         padding: .5rem 1rem;
-        border: 1.5px dashed #045696;
+        border: 1.5px dashed #2e3715;
         border-radius: 5px;
         svg{
             pointer-events: none;

@@ -19,7 +19,7 @@ export default function Logout(props){
             
 
             <Grid md={12} mt={1} container justifyContent='space-around'>
-                <GreenButton text='Logout' textColor='#fff' paddingY={1} radius={3} paddingX={7} bg='#045696' 
+                <GreenButton text='Logout' textColor='#fff' paddingY={1} radius={3} paddingX={7} bg='#2e3715' 
                 click={
                     ()=>{
                         localStorage.clear()
@@ -27,7 +27,7 @@ export default function Logout(props){
                     }
                 }
                 />
-                <GreenButton text='Cancel' textColor='#203719' paddingY={1} radius={3} paddingX={7} bg='#045696' click={()=>props.handleClose()} />
+                <GreenButton text='Cancel' textColor='#203719' paddingY={1} radius={3} paddingX={7} bg='#2e3715' click={()=>props.handleClose()} />
             </Grid>
         </Grid>
     )

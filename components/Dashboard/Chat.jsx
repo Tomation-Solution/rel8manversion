@@ -49,7 +49,7 @@ export default function Chat (props){
             <Grid container justifyContent='space-between' paddingY={2}>
                 <Typography marginBottom={2} className='text'>General Chatroom</Typography>
                 {/* <GreenButton text='Private Chat' click={()=>props.setSelected(9)} radius='10px'
-                textColor='white' paddingY={1} paddingX={2} bg='#045696'
+                textColor='white' paddingY={1} paddingX={2} bg='#2e3715'
                 /> */}
             </Grid>
 
