@@ -71,8 +71,8 @@ const Page:NextPage =()=>{
                 <Spinner/>:''
             }
             <ReUseAbleTranspParentCard
-            title="Prospective Member Login"
-            intro="login as a propspective member"
+            title="Prospective Member"
+            intro="Create propspective member account"
             >
                 <form  onSubmit={handleSubmit(submitData)}>
 
@@ -131,7 +131,7 @@ const Page:NextPage =()=>{
                     </div>
           
                      <br />
-                    <CustomBtn>Login</CustomBtn>
+                    <CustomBtn>Submit</CustomBtn>
                 </form>
             </ReUseAbleTranspParentCard>
         </Grid>
