@@ -44,7 +44,9 @@ export const payDuesApi = createAsyncThunk(
         try {
             const resp = await axios.post(`/tenant/dues/process_payment/due/${due_id}/`)
             console.log('resp err')
-            return resp.data.data as DuePaymentResponse
+        window.location.href=resp.data.data.data.authorization_url
+
+            return resp.data.data
         } catch (err:any) {
             console.log({err})
             return thunkApi.rejectWithValue(err)
@@ -62,3 +64,10 @@ export const getMemberDueBreakDown = createAsyncThunk(
                 return thunkAPi.rejectWithValue(err)
         }
     })
+
+
+    //this one does not use asynkthunk
+export const  payDuesApi2 =async(due_id:number):Promise<DuePaymentResponse>=>{
+    const resp = await axios.post(`/tenant/dues/process_payment/due/${due_id}/`)
+    return resp.data.data as DuePaymentResponse
+}

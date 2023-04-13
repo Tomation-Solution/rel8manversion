@@ -178,17 +178,16 @@ const content = (
       // height: '100%'
     }}
   >
-    <div style={{'backgroundColor':'white','height':'80px'}}>
+    <div style={{'backgroundColor':'white',}}>
       {/* <br/> */}
       <img 
           src={LogoImage.src}
           alt='logo'
           style={{
-            'width':'100%',
+            'width':'40%',
             'margin':'0 auto',
             'display':'block',
             'height':'100%'
-
           }}
           />
     </div>

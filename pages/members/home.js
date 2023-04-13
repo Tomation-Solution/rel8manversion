@@ -28,6 +28,8 @@ import { selectmemberPublication } from "../../redux/memberPublication/memberPub
 import { useRouter } from "next/router";
 import { selectMeetings } from "../../redux/memberMeeting/memberMeetingSlice";
 import { getMeetings, registerForMeeting } from "../../redux/memberMeeting/memberMeetingApi";
+import { useQuery } from "react-query";
+import { getImagesForLayout } from "../../redux/gallery/galleryApi";
 
 
 export default function Home(props){
@@ -36,23 +38,26 @@ export default function Home(props){
     const { status,events} = useAppSelector(selectMemberEvent)
     const {news,status:news_status} = useAppSelector(selectMemberNews)
     const { status:meeting_status,meetings } =useAppSelector(selectMeetings) 
-    const [images,setImages] = useState([])
+    // const [images,setImages] = useState([])
     const {status:pub_status,publication} = useAppSelector(selectmemberPublication)
     const {notify} = useToast()
     const [isLoading,setisLoading]= useState(false)
 
-    const getmage =async () =>{
+  //   const getmage =async () =>{
 
-      const resp  = await axios.get('/tenant/extras/gallery_version2/')
-      setImages(resp.data.data.data)
+  //     const resp  = await axios.get('/tenant/extras/gallery_version2/')
+  //     setImages(resp.data.data.data)
 
-  }
+  // }
 
+
+    const {data:images} = useQuery('images_preview',getImagesForLayout,{
+      'refetchOnWindowFocus':false
+    })
 
     useEffect(()=>{
       dispatch(getMembersEvent({}))
       dispatch(getMeetings({}))
-      getmage()
       dispatch(getMemberNews({}))
       dispatch(getMemberPublication({}))
     },[])
@@ -70,7 +75,7 @@ export default function Home(props){
       }
     },[meeting_status])
 
-   
+    console.log({images})
  
     return(
         <DashboardLayout>
@@ -139,7 +144,7 @@ export default function Home(props){
 
       <button className="not_main" onClick={()=>{
         localStorage.setItem('meeting_detail',JSON.stringify(data))
-        route.push('/members/meeting_details/')
+        route.push(`/members/meetings/${data.id}/`)
       }}>
         View
       </button>
@@ -240,9 +245,9 @@ route.push('/members/event_detail/')
               <h2>Gallery</h2>
           <div style={{'display':'flex','flexWrap':'wrap','gap':'10px'}}>
           {
-          images.map((img,index)=>(
+          images?.map((img,index)=>(
             <img className="sideImages" key={index} 
-            src={  img.images.length!=0?img.images[0].image:''}/>
+            src={  images.length!=0?img.images[0].image:''}/>
 
           ))
           }

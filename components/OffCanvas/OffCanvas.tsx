@@ -42,7 +42,7 @@ const OffCanvas = ({children,isOpen,setIsOpen,size=40,direction='left',btnClick=
       >
         <div 
         style={{
-          'backgroundColor':'$thickBlue'
+          'backgroundColor':' #2e3715'
         }}
         >
 

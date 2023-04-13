@@ -117,3 +117,11 @@ notify('Payment Gateway processing','success')
     window.location.href=resp.data.data.data.authorization_url
     setisLoading(false)
 }
+
+
+export const registerForPaidEventApi = async ({id})=>{
+
+    const resp = await axios.post(`/tenant/dues/process_payment/event_payment/${id}/`,)
+    window.location.href=resp.data.data.data.authorization_url
+    return resp.data
+}

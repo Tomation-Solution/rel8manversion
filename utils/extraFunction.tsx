@@ -1,5 +1,6 @@
 import { MemberType } from "../redux/members/membersApi"
-
+/* @ts-ignore */
+import cookieCutter from 'cookie-cutter'
 
 
 
@@ -113,6 +114,22 @@ export const generate_url_params= ():string=>{
 
 type getUserOrNullResponse = null | UserType
 export const getUserOrNull = ():getUserOrNullResponse=>{
+  const user  = localStorage.getItem('token')
+  if (user) {
+    return JSON.parse(user)
+  }
+  return null
+
+}
+
+export type ProspectiveMember = {
+  user_type:'prospective_members';
+  token:string;
+  has_paid:boolean;
+  prospective_member_id:3;
+}
+type getPropspectiveMemberOrNullResponse = null | ProspectiveMember
+export const getPropspectiveMemberOrNull = ():getPropspectiveMemberOrNullResponse=>{
   const user  = localStorage.getItem('token')
   if (user) {
     return JSON.parse(user)

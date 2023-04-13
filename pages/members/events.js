@@ -12,7 +12,7 @@ import EventCard from "../../components/EventCard";
 import Spinner from "../../components/Spinner";
 import { useEffect } from "react";
 import { getMembersEvent } from "../../redux/memeberEvents/memeberEventsApi";
-
+import EventCardV2 from '../../components/EventCardV2/EventCardV2'
 
 export default function Events(){
     const [value, onChange] = useState(new Date());
@@ -33,20 +33,21 @@ export default function Events(){
             <h3 style={{'textAlign':'center'}}>No Event</h3>:''
           }
 
-<Grid container spacing={2} style={{'padding':'1rem'}}>
-{
+
+          <div style={{'display':'flex','gap':'30px','flexWrap':'wrap','padding':'1rem'}}>
+          {
             events.map((data,index)=>(
-              <EventCard 
-              key={index}
-              title={data.name}
-              body={data.startDate +"  "+data.startTime}
-              data={data}
-              img={data.image}
-              />
+              // <EventCard 
+              // key={index}
+              // title={data.name}
+              // body={data.startDate +"  "+data.startTime}
+              // data={data}
+              // img={data.image}
+              // />
+              <EventCardV2 data={data} key={index}/>
             ))
           }
-
-</Grid>
+          </div>
         </DashboardLayout>
     )
 }

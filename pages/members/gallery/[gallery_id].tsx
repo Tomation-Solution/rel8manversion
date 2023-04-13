@@ -45,7 +45,7 @@ const GalleryDetails = ()=>{
     <div style={{'display':'flex','flexWrap':'wrap','gap':'10px','padding':'5px 10px'}}>
         {
             galleryDetail.images.map((data,index)=>(
-                <img key={index}  src={data.image} style={{'display':'block','width':'300px','height':'250px','objectFit':'cover','borderRadius':'10px'}}/>
+                <img key={index}  src={data.image} style={{'display':'block','width':'300px','height':'250px','objectFit':'contain','borderRadius':'10px'}}/>
             ))
         }
     </div>
