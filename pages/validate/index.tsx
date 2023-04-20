@@ -33,7 +33,7 @@ const ValidateUser= ()=>{
         //     return 
         // }
         if(!data){
-            notify("Email Can't be blant",'error')
+            notify("Membership Number can't Can't be blant",'error')
             return 
         }
         setLoading(true)
