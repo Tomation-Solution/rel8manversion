@@ -28,10 +28,10 @@ const ValidateUser= ()=>{
     const [data,setData]= useState<string>()
     const [loading,setLoading] = useState(false)
     const checkValidatedMember = async ()=>{
-        if(getTokenorEmptyString()!=='.'){
-            notify('You Have Been Verified already','error')
-            return 
-        }
+        // if(getTokenorEmptyString()!=='.'){
+        //     notify('You Have Been Verified already','error')
+        //     return 
+        // }
         if(!data){
             notify("Email Can't be blant",'error')
             return 
