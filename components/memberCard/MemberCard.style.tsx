@@ -7,6 +7,7 @@ margin: 0 auto;
 text-align: center;
 /* border: 1px solid red; */
 max-width: 400px;
+border-radius: 5px;
 box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 /* width: 250px; */
 h2{

@@ -76,11 +76,11 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                 // dispatch(registerForMeeting({'meetingID':meeting.id}))
                 }}
                 >Register Only</CustomBtn>
-                <CustomBtn styleType="sec"
+                {/* <CustomBtn styleType="sec"
                 onClick={e=>{
                 setAskQuetion(false)
                 setAcceptProxyMeeting(true)}}
-                >Register and invite other individuals</CustomBtn>
+                >Register and invite other individuals</CustomBtn> */}
             </div>
             </Box>}
             />

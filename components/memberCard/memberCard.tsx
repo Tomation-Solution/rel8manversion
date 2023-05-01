@@ -23,16 +23,16 @@ const MemberCard = ({member}:Prop)=>{
               <img src={member.photo} alt="" />
            </div>
 
-           <h2>{Name}</h2>
-           <p className='member_postion'>{matric_num}</p>
+           <h2 style={{'padding':'0 1rem'}}>{Name}</h2>
+           {/* <p className='member_postion'>{matric_num}</p> */}
 
-           <CustomBtn style={{'padding':'.5rem','width':'40%','margin':'10px auto'}}
+           {/* <CustomBtn style={{'padding':'.5rem','width':'40%','margin':'10px auto'}}
            onClick={(e)=>{
             setIsOpen(true)
            }}
            >
             View
-           </CustomBtn>
+           </CustomBtn> */}
            <OffCanvas
             size={isPhone?90:40}
            setIsOpen={setIsOpen}

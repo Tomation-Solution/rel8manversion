@@ -136,9 +136,9 @@ onChange={(e)=>{
 
 <div>
 <br />
-<InputFieldView title="Name" value={member?.full_name}/>
+<InputFieldView title="Company name" value={member?.full_name}/>
 <br />
-<InputFieldView title="Email" value={member.email}/>
+<InputFieldView title="User Email" value={member.email}/>
 <br />
 {
     member.member_info.length!==0?
@@ -150,9 +150,16 @@ onChange={(e)=>{
         <div style={GRIDSTYLE}>
             {
                 member.member_info.map((data,index)=>(
+                    
                     <div key={index}>
-                        <InputFieldView title={data.name} value={data.value}/>
+                    {
+                        data.name =='names'?<></>:
+                    <>
+                        <InputFieldView title={data.name=='chapter'?'Branch':data.name} value={data.value}/>
                         <br />
+                    </>
+                    }
+
                     </div>
                 ))
             }

@@ -10,7 +10,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '100%',
+  // width: '100%',
   bgcolor: 'background.paper',
 //   border: '2px solid #000',
   boxShadow: 24,
@@ -28,7 +28,7 @@ export default function BasicModal(props) {
         onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        style={{'padding':'0'}}
+        style={{'padding':'0','minWidth':'400px','margin':'0 auto'}}
       >
         <Grid md={4} sm={10} sx={style}>
         <CancelIcon fontSize="small" style={{'color':'red'}} onClick={()=>props.handleClose()}/>

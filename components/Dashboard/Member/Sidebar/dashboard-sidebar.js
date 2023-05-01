@@ -54,7 +54,7 @@ const items = [
   {
     href: '/members/committee',
     icon: (<EventRounded fontSize="small" />),
-    title: 'My Committee'
+    title: 'My Committees'
   },
   {
 
