@@ -1,8 +1,7 @@
-import React from 'react'
+import React,{useMemo} from 'react'
 
 import { useState,useRef,useEffect } from "react"
 import { Card,Box,IconButton, InputAdornment, Typography,TextField, Button,Grid, Checkbox } from "@mui/material"
-import { style } from "@mui/system"
 import  Lock from '@mui/icons-material/Lock'
 import  Person from '@mui/icons-material/Person'
 import  Visibility from '@mui/icons-material/Visibility'
@@ -23,22 +22,28 @@ import {useAppDispatch,useAppSelector} from "../redux/hooks";
 import {selectSignIn} from "../redux/auth/signin/signinSlice"
 import {signinApi} from "../redux/auth/signin/signinApi"
 import useToast from "../hooks/useToast"
+import Select from 'react-select';
+import listOfCompanys from '../utils/list-of-companys'
 interface LoginType{
     email:string;
     password:string;
+    company_name:string;
 }
 
 
 const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Email is invalid'),
     password: yup.string().required('Password is required').min(2, 'Password must be at least 2 characters'),
+    company_name:yup.string().required()
   });
   
 
 
 
 const Login =  () =>{
-
+    const  listOfCompanysState = useMemo(() => listOfCompanys.map((data,index)=>(
+      { value: data, label:data }
+    )), [])
     const [showPassword, setShowPassword]= useState(true);
     const router = useRouter()
     const form = useRef(null);
@@ -46,13 +51,17 @@ const Login =  () =>{
     const dispatch = useAppDispatch();
     const  { error,status} = useAppSelector(selectSignIn)
     const {
-        register,handleSubmit, formState: { errors },
+        register,handleSubmit,setValue ,formState: { errors },
     } = useForm<LoginType>({resolver:yupResolver(schema)})
     
     
     const submitData:SubmitHandler<LoginType>= (data)=>{
 
         dispatch(signinApi(data))
+    }
+
+    const  handleChange = (selectedOption) => {
+      setValue('company_name',selectedOption.value)
     }
   useEffect(()=>{
     if(status ==="failed"){
@@ -71,21 +80,38 @@ const Login =  () =>{
     }))
   },[])
 
-//   useEffect(()=>{
 
-//   },[status])
+
+
+
+  console.log({errors})
     return(
-      <Grid className={styles.loginBg}>
+      <Grid 
+      className={styles.loginBg}
+      >
       
-   <div className={styles.card}>
+   <div 
+   className={styles.card}
+   >
       <div style={{'width':'80px','margin':'0 auto'}}>
          <img src={Logo.src} style={{'width':'100%','height':'100%'}}/>
      </div>
           <Typography className='text' textAlign='center' marginBottom={2} fontWeight='bolder' >USER LOGIN</Typography>
-         <Typography className='text' fontWeight='normal' textAlign='center' marginBottom={2} variant='subtitle2' color='InactiveCaption'>
+         <Typography className='text'
+         style={{'color':'rgb(46, 55, 21)'}}
+          fontWeight='normal' textAlign='center' marginBottom={2} variant='subtitle2' color='InactiveCaption'>
          Click here to login into your Dashboard </Typography>
          <br/>
                   <form onSubmit={handleSubmit(submitData)} >
+                 <Select
+            // value={selectedOption}
+            onChange={handleChange}
+         
+            options={listOfCompanysState}
+            className="basic-single"
+            classNamePrefix="select"
+            />
+           <br />
           <Grid>
               <>
               <TextField 
@@ -106,6 +132,7 @@ const Login =  () =>{
               </>
               
           </Grid>
+           
           {/* <br/> */}
           <Grid container marginY={2}>
               <>
@@ -159,7 +186,7 @@ const Login =  () =>{
           {/* <GreenButton text='Login' /> */}
           {/* <Button variant='contained' size='large' className={styles.button}>Login</Button> */}
       </div>
-      
+     
       </Grid>
     )
 }

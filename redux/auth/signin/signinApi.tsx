@@ -4,11 +4,11 @@ import axios from "../../../helpers/axios"
 
 
 export const signinApi =createAsyncThunk(
-    "signin/signinApi",async ({email,password}:{email:string,password:string},thunkApi)=>{
+    "signin/signinApi",async (data:{email:string,password:string,company_name:string},thunkApi)=>{
 
     
         try{
-            const resp = await axios.post(`tenant/auth/login/`,{email,password})
+            const resp = await axios.post(`tenant/auth/login/`,data)
 
             console.log({resp,data:resp.data})
 

@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+// import '../styles/globals.css'
 import {Provider} from "react-redux"
 import {store} from '../redux/store'
 import { ToastContainer } from 'react-toastify';
@@ -12,7 +12,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
-
 const queryClient = new QueryClient()
 function MyApp({ Component, pageProps }) {
   return (

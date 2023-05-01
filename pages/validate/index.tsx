@@ -26,6 +26,7 @@ const ValidateUser= ()=>{
     const {notify } = useToast();
     const route = useRouter()
     const [data,setData]= useState<string>()
+    const [email,setEmail]= useState<string>()
     const [loading,setLoading] = useState(false)
     const checkValidatedMember = async ()=>{
         // if(getTokenorEmptyString()!=='.'){
@@ -36,18 +37,32 @@ const ValidateUser= ()=>{
             notify("Membership Number can't Can't be blant",'error')
             return 
         }
+        if(!email){
+            notify("Email can't be empty",'error')
+            return 
+        }
         setLoading(true)
-        const resp = await axios.post(`/tenant/auth/ManageMemberValidation/`,{'MEMBERSHIP_NO':data})
-        const resp_data:ValidateResponseType =resp.data.data
-        // setFoundMember(resp.data.data)
-        setLoading(false)
-        if(resp_data[0].isValid==false){
-            notify('Member Not Found','error')
-        }else{
-            notify('Validation Successfull','success')
-            notify('Please hold on','success')
-            localStorage.setItem('validatedUser',JSON.stringify(resp_data[0].user))
-            route.push('/validate/create')
+        try{
+            const resp:any = await axios.post(`/tenant/auth/ManageMemberValidation/validate_email/`,{'MEMBERSHIP_NO':data,email})
+            const resp_data:ValidateResponseType =resp.data.data
+            // setFoundMember(resp.data.data)
+            setLoading(false)
+            if(resp_data[0].isValid==false){
+                notify('Member Not Found','error')
+            }
+       
+            else{
+                notify('Validation Successfull','success')
+                notify('Please hold on','success')
+                localStorage.setItem('validatedUser',JSON.stringify(resp_data[0].user))
+                localStorage.setItem('validatedEmail',email)
+                route.push('/validate/create')
+            }
+        }
+        catch(err:any){
+            setLoading(false)
+            console.log(err)
+            notify(err.response.data.message.error as string,'error')
         }
     }
     return (
@@ -63,7 +78,9 @@ const ValidateUser= ()=>{
          <img src={Logo.src} style={{'width':'100%','height':'100%'}}/>
      </div>
           <Typography className='text' textAlign='center' marginBottom={2} fontWeight='bolder' >Validate Acct</Typography>
-         <Typography className='text' fontWeight='normal' textAlign='center' marginBottom={2} variant='subtitle2' color='InactiveCaption'>
+         <Typography 
+         style={{'color':'rgb(46, 55, 21)'}}
+         className='text' fontWeight='normal' textAlign='center' marginBottom={2} variant='subtitle2' color='InactiveCaption'>
         You must validate as a member to proceed registeration
          </Typography>
          <br/>
@@ -81,9 +98,21 @@ const ValidateUser= ()=>{
                       <Person color='disabled'  fontSize={'medium'}/>
                   )
               }}
-            //   {...register("email")}
               />
-              {/* <Typography >{errors.email?.message}</Typography> */}
+    <br />
+    <br />
+            <TextField 
+              placeholder='Recognize company  mail' 
+              onChange={e=>setEmail(e.target.value)}
+              // label='Username'  
+              style={{width:'100%'}} size='small'
+              InputProps={{
+              
+                  startAdornment:(
+                      <Person color='disabled'  fontSize={'medium'}/>
+                  )
+              }}
+              />
               </>
               
           </Grid>

@@ -27,26 +27,28 @@ const CreateNewMember= ()=>{
     const {notify} = useToast()
     const route  = useRouter()
     const handleSubmit = async (e:React.MouseEvent)=>{
+        if(!window.confirm('Are you sure about your password')) return
         let get_profile:any =  localStorage.getItem('validatedUser');
-        if(!get_profile){
+        let email:any =  localStorage.getItem('validatedEmail');
+        if((!get_profile)||(!email)){
             notify('Something Went wrong please revalidate your acct')
             route.back()
             return 
         }
-        if(!email.match(validRegex)){
-            notify('Please Enter valid Email')
-            return 
-        }
+       
         get_profile = JSON.parse(get_profile)
-        
-        const clean_data:any={ ...get_profile,password,'rel8Email':email}
+        email = JSON.stringify(email)
+        // ...get_profile
+        const clean_data:any={'MEMBERSHIP_NO':get_profile.MEMBERSHIP_NO, password,'email':JSON.parse(email)}
         setIsLoading(true)
         
-        const resp = await axios.post('/tenant/auth/ManageMemberValidation/create_member/',clean_data)
+        try{
+            const resp = await axios.post('/tenant/auth/ManageMemberValidation/create_member/',clean_data)
         if(resp.data.status_code == 201){
             notify('Created Success','success')
             notify('Please wait','success')
             localStorage.removeItem('validatedUser');
+            localStorage.removeItem('validatedEmail');
             setIsLoading(false)
     
             route.push('/')
@@ -54,13 +56,18 @@ const CreateNewMember= ()=>{
             notify('An error occured. if it happens again please reach out to us','error')
         }
         setIsLoading(false)
+        }
+        catch(err:any){
+            setIsLoading(false)
+            notify(err.response.data.message.error as string,'error')
+        }
 
     }
 
     return (
         <Grid className={styles.loginBg}  style={{'height':'100vh'}}  >
         {
-            loading?
+            (loading||isLoading)?
             <Spinner/>:''
         }
   <br/>
@@ -76,20 +83,10 @@ const CreateNewMember= ()=>{
      <br/>
               
       <Grid>
+      
           <>
           <TextField 
-          placeholder=' Email' 
-          type='email'
-          onChange={e=>setEmail(e.target.value)}
-          style={{width:'100%'}} size='small'
-          InputProps={{startAdornment:( <Person color='disabled'  fontSize={'medium'}/>)}}
-          />
-          </>
-<br />
-<br />
-          <>
-          <TextField 
-          placeholder=' Password' 
+          placeholder='Password' 
           onChange={e=>setPassword(e.target.value)}
           style={{width:'100%'}} size='small'
           InputProps={{startAdornment:( <Person color='disabled'  fontSize={'medium'}/>)}}
