@@ -13,6 +13,9 @@ import { ContentReactionContainer } from "../../styles/news.style";
 import {GoThumbsup,GoThumbsdown} from 'react-icons/go'
 import PostComentDetails from "../../components/PostComentDetails/PostComentDetails";
 import CommentInputWIthLabel from "../../components/CommentInputWIthLabel/CommentInputWIthLabel";
+import CustomBtn from "../../components/CustomBtn/Button";
+import { useMutation } from "react-query";
+import { dynamicPaymentApi } from "../../redux/payment.api";
 
 
 const NewsDetail:NextPage=()=>{
@@ -21,7 +24,8 @@ const NewsDetail:NextPage=()=>{
       })
     const [data,setData] = useState<any|MemberNewsType>()
     const dispatch = useAppDispatch()
-     
+    const {isLoading,mutate} = useMutation(dynamicPaymentApi)
+    
     const  {comment,commentStatus}  = useAppSelector(selectPublication)
     
     useEffect(()=>{
@@ -44,7 +48,7 @@ const NewsDetail:NextPage=()=>{
              style={{'display':'block','borderRadius':'10px','width':'400px','height':'300px','margin':'0 auto'}}
              />
 {
-commentStatus=='loading'?<Spinner/>:''
+(commentStatus=='loading'||isLoading)?<Spinner/>:''
 }
 
 
@@ -64,6 +68,7 @@ commentStatus=='loading'?<Spinner/>:''
                 }
                 
             </div>
+            
 
             {/* <ContentReactionContainer>
                 <div className="" style={{'padding':'0 .4rem'}}>
@@ -86,8 +91,30 @@ commentStatus=='loading'?<Spinner/>:''
                     data={data} key={index}/>
                 ))
             }
+
+
             <br />
             <br />
+            <div>
+                {
+                data?.is_paid?
+                <CustomBtn 
+                onClick={e=>{
+                    mutate({'payment_id':data.id,'payment_type':'paid_publication'})
+                }}
+                style={{'width':'300px','margin':'0 auto'}} >
+                    Pay for publication: ₦{data?.amount}
+                </CustomBtn>:
+                <CustomBtn 
+                onClick={e=>{
+                    window.location.href=data.danload
+                }}
+                style={{'width':'300px','margin':'0 auto'}} >
+                    Download Publication
+                </CustomBtn>
+                }
+            </div>
+            <br /><br />
             <CommentInputWIthLabel submit={(value)=>{
                 console.log({'value':value})
                 if(data){
