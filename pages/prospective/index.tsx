@@ -43,7 +43,7 @@ const Page:NextPage =()=>{
 
     const submitData:SubmitHandler<PropectiveLogin>=(data)=>{
         console.log('submmited',data)
-        dispatch(signinApi(data))
+        dispatch(signinApi({...data,'company_name':'e'}))
         
 
     }
