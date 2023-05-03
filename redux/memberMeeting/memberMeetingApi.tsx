@@ -14,7 +14,9 @@ export type MeetingType =        {
             "organiserName": string,
             "organiserDetails":string,
             "exco": null | number,
-            "chapters": null | number
+            "chapters": null | number,
+            event_docs?:string|null
+            meeting_docs?:string|null
 }
 
 export type RegisteredMeetingMembers ={

@@ -138,7 +138,7 @@ const EventDetail:NextPage = ()=>{
     return (
       <LatestUpdateAndGallery>
         <p style={{'cursor':'pointer',}} onClick={e=>{
-                route.push('/members/meetings/')
+                route.push('/members/events/')
             }}>Back  to Events</p>
               {
                 data?

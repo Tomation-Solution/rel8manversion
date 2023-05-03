@@ -115,9 +115,16 @@ const MeetDisplay = ({event}:Prop)=>{
                 <div className="sub_header__container">
                     <p><strong>Details</strong></p>
                 <div style={{'display':'flex','justifyContent':'center','alignItems':'center'}}>
-                    <img src={ClipImage.src} alt="" />
-                    
-                    <a href={''} style={{'margin':'0 10px'}}><strong>Get Event Document</strong></a>
+                {   
+                // @ts-ignore
+                            (event?.event_docs||event?.meeting_docs)?
+                        <>
+                            <img src={ClipImage.src} alt="" />
+                {/* // @ts-ignore */}
+                            <a href={ event?.event_docs||event.meeting_docs} style={{'margin':'0 10px','color':'rgb(46, 55, 21)'}}><strong>Get Event Document</strong></a>
+                        </>
+                            :''
+                        }
                 </div>
                 </div>
 
