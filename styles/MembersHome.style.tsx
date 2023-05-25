@@ -47,14 +47,14 @@ export const MainPane = styled.div`
 max-width:900px;
 width:70%;
 padding: 1rem;
-border: 1px solid green;
+/* border: 1px solid green; */
 
 `
 export const SidePane = styled.aside`
 display: flex;
 flex-direction: column;
 /* border: 1px solid red; */
-border: 1px solid red;
+/* border: 1px solid red; */
 width:20%;
 
     .sideImages{
