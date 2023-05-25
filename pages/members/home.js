@@ -203,12 +203,12 @@ route.push('/members/event_detail/')
 {
   publication.map((pub,index)=>(
     <Publicationv2 key={index}>
-    <img src={pub.image}/>
+    <img src={pub.image} style={{'object-fit':'contain'}}/>
     <h3>
       {pub.name.slice(0,23)}..
     </h3>
     <p>
-      {pub.paragraphs.length!=0?pub.paragraphs[0].paragragh.slice(0,100):''}..
+      {pub?.paragraphs?.length!=0?pub?.paragraphs[0]?.paragragh.slice(0,100):''}..
     </p>
     <a href="#"style={{'color':'#2e3715'}}
       onClick={()=>{

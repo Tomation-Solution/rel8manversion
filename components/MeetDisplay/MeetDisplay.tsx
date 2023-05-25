@@ -121,7 +121,9 @@ const MeetDisplay = ({event}:Prop)=>{
                         <>
                             <img src={ClipImage.src} alt="" />
                 {/* // @ts-ignore */}
-                            <a href={ event?.event_docs||event.meeting_docs} style={{'margin':'0 10px','color':'rgb(46, 55, 21)'}}><strong>Get Event Document</strong></a>
+            <a href={ event?.event_docs||event.meeting_docs} 
+                    target="_blank"
+            style={{'margin':'0 10px','color':'rgb(46, 55, 21)'}} rel="noreferrer"><strong>Get Event Document</strong></a>
                         </>
                             :''
                         }

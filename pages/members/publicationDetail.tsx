@@ -107,7 +107,8 @@ const NewsDetail:NextPage=()=>{
                 </CustomBtn>:
                 <CustomBtn 
                 onClick={e=>{
-                    window.location.href=data.danload
+                    window.open(data.danload,'_blank')
+
                 }}
                 style={{'width':'300px','margin':'0 auto'}} >
                     Download Publication

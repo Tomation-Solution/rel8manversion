@@ -7,10 +7,11 @@ thick blue - #2e3715
 */
 export const HomeLayout = styled.div`
     /* margin: 0 auto; */
+
 @media screen and (min-width: 800px){
         padding: 1.8rem;
         display: flex;
-        max-width: 2000px;
+        max-width: 1500px;
         /* border: 1px solid red; */
         margin: 0 auto;
         justify-content: space-between;
@@ -44,13 +45,17 @@ export const MeetingHeader = styled.div`
 
 export const MainPane = styled.div`
 max-width:900px;
+width:70%;
 padding: 1rem;
+border: 1px solid green;
 
 `
 export const SidePane = styled.aside`
 display: flex;
 flex-direction: column;
 /* border: 1px solid red; */
+border: 1px solid red;
+width:20%;
 
     .sideImages{
         width: 250px;

@@ -11,6 +11,7 @@ import Spinner from "../../../components/Spinner";
 import SelectWithLabel from "../../../components/forms/SelectWithLable";
 import FundProjectInKindForm from "../../../components/forms/FundProjectInKindForm";
 import { NextPage } from "next";
+import { dynamicPaymentApi } from "../../../redux/payment.api";
 
 
 export type FundProjectInKindFormProp = {
@@ -21,9 +22,11 @@ const ProjectDetail:NextPage = ()=>{
     const [projects,setProjects] = useState<null|FundAProjectType>();
     const {notify} = useToast()
     const [openLogout, setOpenLogout] = useState(false);
-
+    const [openPayment, setOpenPayment] = useState(false);
+    const [isLoading,setIsloading]= useState(false)
     const handleClose =()=> setOpenLogout(false);
-  
+    const h1andleClose =()=> setOpenPayment(false);
+    const [amount,setAmount] = useState(0)
   
     useEffect(()=>{
         if( localStorage.getItem('fund_project')){
@@ -33,7 +36,10 @@ const ProjectDetail:NextPage = ()=>{
     console.log(projects)
     return (
         <DashboardLayout>
-
+            {
+                isLoading?
+                <Spinner  />:''
+            }
             <div style={{'padding':'4rem 0',}}>
                 {
                     projects?
@@ -60,7 +66,9 @@ const ProjectDetail:NextPage = ()=>{
                     Support in Kind
                     </CustomBtn>
                     <CustomBtn styleType="sec" style={{'width':'40%'}} onClick={e=>{
-                        notify('Please hold on payment is still in development','error')
+                        // notify('Please hold on payment is still in development','error')
+                        setOpenPayment(true)
+                        // dynamicPaymentApi({'payment_id':projects.id,'payment_type':'fund_a_project','query_param':'?donated_amount='})
                     }}>
                     Support In Cash
                     </CustomBtn>
@@ -69,6 +77,33 @@ const ProjectDetail:NextPage = ()=>{
 
       <BasicModal handleClose={handleClose} open={openLogout} body={
         <FundProjectInKindForm what_project_needs={projects?.what_project_needs}/>
+      }/>
+
+<BasicModal handleClose={h1andleClose} open={openPayment} body={
+        <div style={{'minWidth':'300px','padding':'10px'}}>
+           <TextField
+              placeholder='Amount to donate' 
+              // label='Username'  
+              style={{width:'100%'}} size='small'
+              InputProps={{}}
+              onChange={e=>{
+                setAmount(parseInt(e.target.value))
+              }}
+              />
+    <br />
+    <br />
+            <CustomBtn styleType="sec" style={{}} onClick={e=>{
+
+                // @ts-ignore
+                if(amount?.length!==0){
+                    dynamicPaymentApi({'payment_id':projects.id,'payment_type':'fund_a_project','query_param':'?donated_amount='+amount,'setIsloading':setIsloading})
+                }
+
+
+            }}>
+            Pay
+            </CustomBtn>
+        </div>
       }/>
 
         </DashboardLayout>

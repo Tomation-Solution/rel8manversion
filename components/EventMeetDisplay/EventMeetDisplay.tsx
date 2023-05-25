@@ -98,7 +98,9 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                             (meeting?.event_docs||meeting?.meeting_docs)?
                         <>
                             <img src={ClipImage.src} alt="" />
-                            <a href={ meeting?.event_docs||meeting.meeting_docs} style={{'margin':'0 10px','color':'rgb(46, 55, 21)'}}><strong>Get Event Document</strong></a>
+                            <a href={ meeting?.event_docs||meeting.meeting_docs}
+                            target="_blank"
+                            style={{'margin':'0 10px','color':'rgb(46, 55, 21)'}} rel="noreferrer"><strong>Get Event Document</strong></a>
                         </>
                             :''
                         }

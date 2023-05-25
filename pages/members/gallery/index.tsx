@@ -43,7 +43,7 @@ export default function Gallery(){
                 <div key={index} style={{'maxWidth':'250px'}}>
                     <img  src={
                     data.images.length!=0?data.images[0].image:''
-                } style={{'display':'block','width':'300px','height':'250px','objectFit':'contain','borderRadius':'10px'}}/>
+                } style={{'display':'block','width':'250px','objectFit':'contain','borderRadius':'10px'}}/>
                 <br />
                 <p style={{'textAlign':'center'}}>{data.name.slice(0,100)}</p>
                 <CustomBtn style={{'width':'100px','padding':'.5rem 1rem','margin':'10px auto'}} styleType='sec'

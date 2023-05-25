@@ -45,7 +45,7 @@ const CreateNewMember= ()=>{
         try{
             const resp = await axios.post('/tenant/auth/ManageMemberValidation/create_member/',clean_data)
         if(resp.data.status_code == 201){
-            notify('Created Success','success')
+            notify('Please check your email for confirmation','success')
             notify('Please wait','success')
             localStorage.removeItem('validatedUser');
             localStorage.removeItem('validatedEmail');
