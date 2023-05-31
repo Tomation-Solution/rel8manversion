@@ -37,28 +37,29 @@ const CommiteeDetail:NextPage = ()=>{
             Header:'Name',
             accessor:'full_nam',
             id:2,
-            // Cell:(tableProps:any)=>{
-            //     return  <p>
-            //         {FetchNameByMemberInfo(tableProps.row.original.member_info)}
-            //     </p>
-            // }
+            Cell:(tableProps:any)=>{
+                return  <p>
+
+                    {tableProps.row.original?.full_name}
+                </p>
+            }
         },
-        {
-            Header:'more',
-            accessor:'id',
-            id:3,
-            Cell:(tableProps:any)=>(
-                <CustomBtn style={{'width':'100px'}} 
-                onClick={(e)=>{
-                    const members:MemberType[] = data.connected_members.filter(d=>d.id===tableProps.row.original.id)
-                    if(members.length==1){
-                        setCurrentMember(members[0])
-                        setIsOpen(true)
-                    }
-                }} 
-                styleType='sec'>View profile</CustomBtn>
-            )
-        },
+        // {
+        //     Header:'more',
+        //     accessor:'id',
+        //     id:3,
+        //     Cell:(tableProps:any)=>(
+        //         <CustomBtn style={{'width':'100px'}} 
+        //         onClick={(e)=>{
+        //             const members:MemberType[] = data.connected_members.filter(d=>d.id===tableProps.row.original.id)
+        //             if(members.length==1){
+        //                 setCurrentMember(members[0])
+        //                 setIsOpen(true)
+        //             }
+        //         }} 
+        //         styleType='sec'>View profile</CustomBtn>
+        //     )
+        // },
     ]
     const isLaptop = useMediaQuery({
         query: '(min-width: 524px)'
@@ -136,7 +137,7 @@ const CommiteeDetail:NextPage = ()=>{
 
                
            
-           <OffCanvas
+           {/* <OffCanvas
             size={isPhone?90:40}
            setIsOpen={setIsOpen}
            isOpen={isOpen}>
@@ -144,7 +145,7 @@ const CommiteeDetail:NextPage = ()=>{
                 current_member?
                 <Profile member={current_member} />:''
             }
-           </OffCanvas>
+           </OffCanvas> */}
         </DashboardLayout>
     )
 }

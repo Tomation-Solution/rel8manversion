@@ -144,15 +144,16 @@ const MeetDisplay = ({event}:Prop)=>{
                     </div>
                     <div className="event_location_info">
                         <TiLocation/>
-                        {
-                            event.event_access.has_paid?
+                        {/* {
+                            event.event_access.has_paid? */}
                             <p>
                                 {event.event_access.link.includes('https')?
                                 <CustomBtn style={{'padding':'.3rem'}} onClick={e=>location.href=event.event_access.link}>Join Now</CustomBtn>
                                 :event.event_access.link}
-                            </p>:
-                            <p>You need to pay to access the event info</p>
-                        }
+                            </p>
+                            {/* : */}
+                            {/* <p>You need to pay to access the event info</p>
+                        } */}
                         <p>   </p>
                     </div>
                     <br />
