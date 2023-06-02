@@ -14,6 +14,7 @@ import * as yup from "yup";
 import {TextField} from '@mui/material'
 import Person from "@mui/icons-material/Person"
 import InputFieldView from "../InputFieldView/InputFieldView"
+import UpdateMemberModal from "./EditMembersInfomation"
 
 
 type Prop ={
@@ -110,7 +111,9 @@ const Profile = ({member,can_edit_img=false}:Prop):React.ReactElement=>{
     }
 
     return  (
-<ProfileContainer>
+<ProfileContainer
+
+style={editProfile?{'maxWidth':'900px'}:{}}>
     {
         isLoading?
         <Spinner/>:''
@@ -159,6 +162,7 @@ onChange={(e)=>{
                         <br />
                     </>
                     }
+                   
 
                     </div>
                 ))
@@ -241,260 +245,266 @@ onChange={(e)=>{
     }
 </div>
 :
-<form
-onSubmit={handleSubmit(onSubmit)}
->
-<br />
-    <br />
-       <h2 style={{'textAlign':'left'}}>Education Bio</h2>
-    <br />
-    {
-        education_fields.map((data,index)=>(
-            <div key={index}>
-                <br />
-                <label htmlFor="">Name of Institution</label>
-                <TextField 
-              placeholder={'Name of Institution'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+// {/* <form
+// onSubmit={handleSubmit(onSubmit)}
+// >
+// <br />
+//     <br />
+//        <h2 style={{'textAlign':'left'}}>Education Bio</h2>
+//     <br />
+//     {
+//         education_fields.map((data,index)=>(
+//             <div key={index}>
+//                 <br />
+//                 <label htmlFor="">Name of Institution</label>
+//                 <TextField 
+//               placeholder={'Name of Institution'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_education.${index}.name_of_institution`)}
-              />
-              <br />
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_education.${index}.name_of_institution`)}
+//               />
+//               <br />
 
-            <br />
-            <label htmlFor="">Major</label>
-              <TextField 
-              placeholder={'Major'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+//             <br />
+//             <label htmlFor="">Major</label>
+//               <TextField 
+//               placeholder={'Major'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_education.${index}.major`)}
-              />
-              <br />
-            <label htmlFor="">Degree</label>
-              <TextField 
-              placeholder={'Degree'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_education.${index}.major`)}
+//               />
+//               <br />
+//             <label htmlFor="">Degree</label>
+//               <TextField 
+//               placeholder={'Degree'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_education.${index}.degree`)}
-              />
-            <br />
-            <label htmlFor="">Language</label>
-              <TextField 
-              placeholder={'Language'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_education.${index}.degree`)}
+//               />
+//             <br />
+//             <label htmlFor="">Language</label>
+//               <TextField 
+//               placeholder={'Language'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_education.${index}.language`)}
-              />
-               <br />
-            <label htmlFor="">Reading</label>
-              <TextField 
-              placeholder={'Reading'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_education.${index}.language`)}
+//               />
+//                <br />
+//             <label htmlFor="">Reading</label>
+//               <TextField 
+//               placeholder={'Reading'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_education.${index}.reading`)}
-              />
-               <br />
-            <label htmlFor="">Speaking</label>
-              <TextField 
-              placeholder={'Speaking'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_education.${index}.reading`)}
+//               />
+//                <br />
+//             <label htmlFor="">Speaking</label>
+//               <TextField 
+//               placeholder={'Speaking'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_education.${index}.speaking`)}
-              />
-               <br />
-            <label htmlFor="">Date</label>
-              <TextField 
-              placeholder={'date'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              type='date'
-              InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_education.${index}.speaking`)}
+//               />
+//                <br />
+//             <label htmlFor="">Date</label>
+//               <TextField 
+//               placeholder={'date'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               type='date'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_education.${index}.date`)}
-              />
-              <CustomBtn style={{'backgroundColor':'crimson','padding':'.5rem','width':'30%'}}
-               onClick={(e:any)=>remove(index)}
-              >
-                Remove
-              </CustomBtn>
-              <br />
-    <br />
-            </div>
-        ))
-    }
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_education.${index}.date`)}
+//               />
+//               <CustomBtn style={{'backgroundColor':'crimson','padding':'.5rem','width':'30%'}}
+//                onClick={(e:any)=>remove(index)}
+//               >
+//                 Remove
+//               </CustomBtn>
+//               <br />
+//     <br />
+//             </div>
+//         ))
+//     }
    
-    <CustomBtn styleType="sec"
-    style={{'width':'40%'}}
-    onClick={(e) =>{
-        e.preventDefault()
-        append({
-            'member':1,
-            'name_of_institution':'',
-            'major':'',
-            'degree':'',
-            'language':'',
-            'reading':'',
-            'speaking':'English',
-            'date':'',
-        })
-      }}
-    >
-        Add More Education
-    </CustomBtn>
-    <br />
-    <br />
-      <h2 style={{'textAlign':'left'}}>Employment Bio</h2>
-      <br />
-    {   
-        employment_fields.map((data,index)=>(
-            <div key={index}>
-            <br />
-            <label htmlFor="">Postion Title</label>
-                <TextField 
-              placeholder={'Postion Title'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+//     <CustomBtn styleType="sec"
+//     style={{'width':'40%'}}
+//     onClick={(e) =>{
+//         e.preventDefault()
+//         append({
+//             'member':1,
+//             'name_of_institution':'',
+//             'major':'',
+//             'degree':'',
+//             'language':'',
+//             'reading':'',
+//             'speaking':'English',
+//             'date':'',
+//         })
+//       }}
+//     >
+//         Add More Education
+//     </CustomBtn>
+//     <br />
+//     <br />
+//       <h2 style={{'textAlign':'left'}}>Employment Bio</h2>
+//       <br />
+//     {   
+//         employment_fields.map((data,index)=>(
+//             <div key={index}>
+//             <br />
+//             <label htmlFor="">Postion Title</label>
+//                 <TextField 
+//               placeholder={'Postion Title'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_employment_history.${index}.postion_title`)}
-              />
-    <br />
-            <label htmlFor="">Employment From</label>
-              <TextField 
-              placeholder={'Employment From'} 
-              label='Employment from'  
-              style={{width:'100%'}} size='small'
-              type={'date'}
-              InputProps={{
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_employment_history.${index}.employment_from`)}
-              />
-              <br />
-              <br />
-            <label htmlFor="">Employment To</label>
-              <TextField 
-              placeholder={'Employment To'} 
-            //   label='Employment to'  
-              style={{width:'100%',}} size='small'
-              type={'date'}
-              InputProps={{
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_employment_history.${index}.employment_to`)}
-              />
-              <br />
-            <label htmlFor="">Employer name and addresse</label>
-              <TextField 
-              placeholder={'Employer name and addresse'} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`member_employment_history.${index}.employer_name_and_addresse`)}
-              />
-              <CustomBtn style={{'backgroundColor':'crimson','padding':'.5rem','width':'30%'}}
-               onClick={(e:any)=>employment_remove(index)}
-              >
-                Remove
-              </CustomBtn>
-              <br />
-            </div>
-        ))
-    }
-      <CustomBtn styleType="sec"
-    style={{'width':'40%'}}
-    onClick={(e) =>{
-        e.preventDefault()
-        employment_append({
-            "member": -1,
-            "postion_title": '',
-            "employment_from": '',
-            "employment_to": '',
-            "employer_name_and_addresse":'',
-        })
-      }}
-    >
-        Add More Employment
-    </CustomBtn>
-    {/* {
-        fields.map((data,index)=>{
-            return (
-                <div key={index}>
-<TextField 
-              placeholder={data.name} 
-              // label='Username'  
-              style={{width:'100%'}} size='small'
-              InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_employment_history.${index}.postion_title`)}
+//               />
+//     <br />
+//             <label htmlFor="">Employment From</label>
+//               <TextField 
+//               placeholder={'Employment From'} 
+//               label='Employment from'  
+//               style={{width:'100%'}} size='small'
+//               type={'date'}
+//               InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_employment_history.${index}.employment_from`)}
+//               />
+//               <br />
+//               <br />
+//             <label htmlFor="">Employment To</label>
+//               <TextField 
+//               placeholder={'Employment To'} 
+//             //   label='Employment to'  
+//               style={{width:'100%',}} size='small'
+//               type={'date'}
+//               InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_employment_history.${index}.employment_to`)}
+//               />
+//               <br />
+//             <label htmlFor="">Employer name and addresse</label>
+//               <TextField 
+//               placeholder={'Employer name and addresse'} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`member_employment_history.${index}.employer_name_and_addresse`)}
+//               />
+//               <CustomBtn style={{'backgroundColor':'crimson','padding':'.5rem','width':'30%'}}
+//                onClick={(e:any)=>employment_remove(index)}
+//               >
+//                 Remove
+//               </CustomBtn>
+//               <br />
+//             </div>
+//         ))
+//     }
+//       <CustomBtn styleType="sec"
+//     style={{'width':'40%'}}
+//     onClick={(e) =>{
+//         e.preventDefault()
+//         employment_append({
+//             "member": -1,
+//             "postion_title": '',
+//             "employment_from": '',
+//             "employment_to": '',
+//             "employer_name_and_addresse":'',
+//         })
+//       }}
+//     >
+//         Add More Employment
+//     </CustomBtn>
+//     {/* {
+//         fields.map((data,index)=>{
+//             return (
+//                 <div key={index}>
+// <TextField 
+//               placeholder={data.name} 
+//               // label='Username'  
+//               style={{width:'100%'}} size='small'
+//               InputProps={{
               
-                  startAdornment:(
-                      <Person color='disabled'  fontSize={'medium'}/>
-                  )
-              }}
-              {...register(`memberData.${index}.value`)}
-              />
-                </div>
-            )
-        })
-    } */}
-    <br />
-    <CustomBtn style={{'width':'40%','margin':'0 auto'}} 
-styleType={'pry'}
->
-    Update
-</CustomBtn>
-</form>
+//                   startAdornment:(
+//                       <Person color='disabled'  fontSize={'medium'}/>
+//                   )
+//               }}
+//               {...register(`memberData.${index}.value`)}
+//               />
+//                 </div>
+//             )
+//         })
+//     } */}
+//     <br />
+//     <CustomBtn style={{'width':'40%','margin':'0 auto'}} 
+// styleType={'pry'}
+// >
+//     Update
+// </CustomBtn>
+// </form> */}
+''
+}
+
+{(editProfile==true && member.id)?
+<UpdateMemberModal  memberid={member.id}/>
+:''
 }
 <br />
 {
