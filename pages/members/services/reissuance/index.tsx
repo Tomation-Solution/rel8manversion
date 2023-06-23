@@ -198,6 +198,12 @@ const ReIssuance = ()=>{
             if(nextpage ==='section-b'){
                 route.push('/members/services/reissuance/section-b/')
             }
+            if(nextpage==='deactivation_or_suspension_of_membership'){
+                route.push('/members/services/deactivation_or_suspension_of_membership')
+            }
+            if(nextpage==='update_on_product_manufactured'){
+                route.push('/members/services/update_on_product_manufactured')
+            }
         },
         'onError':(error:any)=>{
             notify('Please check your network conntection')

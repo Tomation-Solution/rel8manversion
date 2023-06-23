@@ -73,7 +73,9 @@ const SecondBatchCert= ()=>{
         following in addition to the above A(1-5)`}>
         <div  style={{'margin':'0 auto','maxWidth':'900px'}}>
             <p style={{'border':'5px solid green','display':'inline-block','padding':'.4rem','borderRadius':'10px'}}>
+            <strong>
             {data?.status}
+            </strong>
             </p>
             {/* <p></p> */}
         <form 

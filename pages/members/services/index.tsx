@@ -41,6 +41,14 @@ const ListOfService:NextPage=()=>{
     ]
     const route = useRouter();
     const handleRequestRoute = (page_name:string)=>{
+        if(page_name==='deactivation_or_suspension_of_membership'){
+            route.push('/members/services/reissuance?nextpage='+'deactivation_or_suspension_of_membership')
+            return
+        }
+        if(page_name==='update_on_product_manufactured'){
+            route.push('/members/services/reissuance?nextpage='+'update_on_product_manufactured')
+            return 
+        }
         route.push(`/members/services/${page_name}/`)
     }
     return (

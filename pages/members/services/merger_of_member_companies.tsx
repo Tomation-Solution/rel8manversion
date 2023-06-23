@@ -86,12 +86,6 @@ const MergerOfMemberCompanies: NextPage  =()=>{
 
                 <div>
 
-                <GreenButton text='Updated Re Issuance Form' radius='10px'
-                click={(e)=>{
-                    route.push('/members/services/reissuance/')
-                }}
-                style={{'width':'30%'}}
-               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>   
                 </div>
  {
                 isLoading?
@@ -101,17 +95,6 @@ const MergerOfMemberCompanies: NextPage  =()=>{
 <div   style={{'margin':'0 auto','maxWidth':'500px'}}>
                 <form    onSubmit={handleSubmit(submitData)}>
                 <br />
-<br />
-                <label htmlFor="">Note</label>
-                <TextField
-                variant='standard'
-                label=""
-                // accept=''
-                fullWidth
-                InputLabelProps={{className:'light-text'}}
-                {...register("note")}
-            />
-<br />
 <br />
 <label htmlFor="">Upload request letter requesting for the merger of the companies under
 the membership of the Association,</label>

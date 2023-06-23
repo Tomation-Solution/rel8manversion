@@ -14,139 +14,100 @@ import Spinner from "../../../components/Spinner";
 import useToast from "../../../hooks/useToast";
 import { useRouter } from "next/router";
 import GreenButton from "../../../components/Buttonn";
+import InputWithLabel from "../../../components/InputWithLabel/InputWithLabel";
+import { useMutation, useQuery } from "react-query";
 
 type IForm = {
-    deactivation_request:any,
-    submit_most_recent_financial_statement:any,
-    upload_all_levy_recipt:any,
-    note:string
+    submit_original_membership_cert:any,
+    letter_request_for_activation_or_deactivation:any,
+    status?:string
 }
 const schema = yup.object().shape({
-    deactivation_request:yup.mixed().required(),
-    submit_most_recent_financial_statement:yup.mixed().required(),
-    upload_all_levy_recipt:yup.mixed().required(),
-    note:yup.string().required()
+    letter_request_for_activation_or_deactivation:yup.mixed().required(),
+    submit_original_membership_cert:yup.mixed().required(),
 })
 
+
+const updateSuspensionApi = async(data:IForm)=>{
+    const form = new FormData()
+    form.append('letter_request_for_activation_or_deactivation',data.letter_request_for_activation_or_deactivation[0])
+    form.append('submit_original_membership_cert',data.submit_original_membership_cert[0])
+    const resp = await axios.put('/tenant/membershipservice/deactivation-activation-service/1/',form)
+    return resp.data.data
+}
+const getSuspensionApi = async()=>{
+    const resp = await axios.get('/tenant/membershipservice/deactivation-activation-service/1/',)
+    return resp.data.data
+}
 const Deactivation_or_suspension_of_membership:NextPage = ()=>{
-    const [isLoading,setIsLoading] = useState(false)
     const {notify} = useToast()
     const route = useRouter();
     const {
         watch, register,handleSubmit, formState: { errors },setValue,
     } = useForm<IForm>({resolver:yupResolver(schema)})
-
+    const {isLoading,mutate} = useMutation(updateSuspensionApi,{
+        'onSuccess':(d)=>{
+            notify('Success','success')
+        },
+        'onError':(err:any)=>{
+            notify('Please check your internet','error')
+        }
+    })
+    const {data,isLoading:loading} = useQuery('getSuspensionApi',getSuspensionApi)
     const submitData:SubmitHandler<IForm>=async (data)=>{
-        let user:any= localStorage.getItem('token')
-        console.log({user})
-        if(!user) return 
-        user = JSON.parse(localStorage.getItem('token'))
-        const form = new FormData()
-        form.append('deactivation_request',data.deactivation_request[0])
-        form.append('submit_most_recent_financial_statement',data.submit_most_recent_financial_statement[0])
-        form.append('upload_all_levy_recipt',data.upload_all_levy_recipt[0])
-        form.append('note',data.note)
-        form.append('member',user.member_id)
-        try{
-            setIsLoading(true)
-            
-            const resp = await axios.post('/tenant/services_request/deactivation_of_membership/',form)
-            setIsLoading(false)
-
-            console.log({resp})
-            if(typeof resp.data.id == 'number'){
-                notify('Submitted successfully','success')
-                notify('Your request is being processed','success')
-                setTimeout(()=>{
-                    route.back()
-                },3000)
-            }else{
-                notify('please upload pdf files','error')
-            }
-        }
-        catch(err:any){
-            setIsLoading(false)
-            console.log({err})
-            notify('please upload pdf files','error')
-
-        }
+        mutate(data)
     }
     return (
         <DashboardLayout
         title='Deactivation or Suspension Of Membership'
         >
-                            <GreenButton text='Updated Re Issuance Form' radius='10px'
-                click={(e)=>{
-                    route.push('/members/services/reissuance/')
-                }}
-                style={{'width':'30%'}}
-               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>  
                        {
-                isLoading?
+                (isLoading||loading)?
                 <Spinner />:''
             }
 
-<div   style={{'margin':'0 auto','maxWidth':'500px'}}>
+<div   style={{'margin':'0 auto','maxWidth':'900px'}}>
+            <div>
+            <p style={{'border':'5px solid green','display':'inline-block','padding':'.4rem','borderRadius':'10px'}}>
+            <strong>
+            {data?.status}
+            </strong>
+            </p>
+                <br /><br />
+            <h1>Please find below the requirements for the Deactivation/Suspension:</h1>
+            <ul>
+                <li>
+                Submit a letter requesting for
+                deactivation/suspension of membership
+                </li>
+                <li>
+                payment of all outstanding subscriptions/levies
+                </li>
+                <li>
+                submission of original membership certificate.
+                </li>
+            </ul>
+            </div>
                 <form    onSubmit={handleSubmit(submitData)}>
+
+
+                <InputWithLabel
+                label="Submit a letter requesting for
+                deactivation/suspension of membership"
+                isShowLabel={true}
+                type="file"
+                register={register('letter_request_for_activation_or_deactivation')}
+                />
                 <br />
-<br />
-                <label htmlFor="">Note</label>
-                <TextField
-                variant='standard'
-                label=""
-                // accept=''
-                fullWidth
-                InputLabelProps={{className:'light-text'}}
-                // {...register("note")}
-            />
-<br />
-<br />
-<label htmlFor="">Deactivation Request</label>
-<TextField
-                variant='standard'
-                label=""
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                // {...register("deactivation_request")}
-            />
-<br />
-<br />
 
-<label htmlFor="">Submit Most Recent Financial Statement</label>
-<TextField
-                variant='standard'
-                label=""
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                // {...register("submit_most_recent_financial_statement")}
-            />
-<br />
-<br />
-
-<label htmlFor="">Upload All Levy Receipt</label>
-<TextField
-                variant='standard'
-                label=""
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                // {...register("upload_all_levy_recipt")}
-            />
-<br />
-<br />
-<br />
-<br />
-
-
-
-            <CustomBtn style={{'width':'40%','margin':'0 auto'}}
-            onClick={e=>{
-                e.preventDefault()
-                notify('Upload success','success')
-            }}
-            >
+                <InputWithLabel
+                label="Submission of original membership certificate."
+                isShowLabel={true}
+                type="file"
+                register={register('submit_original_membership_cert')}
+                />
+                <br />
+            <CustomBtn>
                 Submit
             </CustomBtn>
                     </form>
