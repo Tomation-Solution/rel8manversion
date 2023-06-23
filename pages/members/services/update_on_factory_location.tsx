@@ -15,6 +15,7 @@ import { useState } from "react";
 import Spinner from "../../../components/Spinner";
 import useToast from "../../../hooks/useToast";
 import { useRouter } from "next/router";
+import GreenButton from "../../../components/Buttonn";
 
 type IForm = {
     proceed_to_update_your_profile:any,
@@ -78,12 +79,18 @@ const Update_on_factory_location = ()=>{
     }
     return (
         <DashboardLayout
-        title='Update On Product Manufactured'
+        title='Update On Factory Location'
         > {
                 isLoading?
                 <Spinner />:''
             }
-
+                <GreenButton text='Updated Re Issuance Form' radius='10px'
+                click={(e)=>{
+                    route.push('/members/services/reissuance/')
+                    
+                }}
+                style={{'width':'30%'}}
+               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>  
 <div   style={{'margin':'0 auto','maxWidth':'500px'}}>
                 <form    onSubmit={handleSubmit(submitData)}>
                 <br />
@@ -99,7 +106,7 @@ const Update_on_factory_location = ()=>{
             />
 <br />
 <br />
-<label htmlFor="">Proceed To Update Your Profile</label>
+{/* <label htmlFor="">Proceed To Update Your Profile</label>
 <TextField
                 variant='standard'
                 label=""
@@ -109,8 +116,18 @@ const Update_on_factory_location = ()=>{
                 {...register("proceed_to_update_your_profile")}
             />
 <br />
+<br /> */}
+<label>You need to update company profile<a 
+href=""
+onClick={e=>{
+    e.preventDefault()
+    route.push('/members/profile')
+}}
+>
+   {' '} click here to update 
+</a></label>
 <br />
-
+<br />
 <label htmlFor="">Submit Most Recent Financial Statement</label>
 <TextField
                 variant='standard'
@@ -135,7 +152,9 @@ const Update_on_factory_location = ()=>{
             />
 <br />
 <br />
-<label htmlFor="">Upload Factory Inspection Report</label>
+<label htmlFor="">Upload Factory Inspection Report from the Branch
+Executive Secretary to confirm the existence of the company operational base at the specified
+location.</label>
 <TextField
                 variant='standard'
                 label=""
@@ -151,7 +170,12 @@ const Update_on_factory_location = ()=>{
 
 
 
-            <CustomBtn style={{'width':'40%','margin':'0 auto'}}>
+            <CustomBtn style={{'width':'40%','margin':'0 auto'}}
+            onClick={e=>{
+                e.preventDefault()
+                notify('Upload success','success')
+            }}
+            >
                 Submit
             </CustomBtn>
                 </form>

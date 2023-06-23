@@ -13,6 +13,8 @@ import { useState } from "react";
 import Spinner from "../../../components/Spinner";
 import useToast from "../../../hooks/useToast";
 import { useRouter } from "next/router";
+import MarkoBtn from "../../../components/MarkoBtn";
+import GreenButton from "../../../components/Buttonn";
 
 type IForm = {
     attach_membership_receipt:any,
@@ -27,83 +29,76 @@ const ReissuanceOfCertificate:NextPage = ()=>{
     const [isLoading,setIsLoading] = useState(false)
     const {notify} = useToast()
     const route = useRouter()
-    const {
-        watch, register,handleSubmit, formState: { errors },setValue,
-    } = useForm<IForm>({resolver:yupResolver(schema)})
-    const submitData:SubmitHandler<IForm>=async (data)=>{
-        let user:any= localStorage.getItem('token')
-        console.log({user})
-        if(!user) return 
-        user = JSON.parse(localStorage.getItem('token'))
-        const form = new FormData()
-        console.log(data.attach_membership_receipt[0])
-        form.append('attach_membership_receipt',data.attach_membership_receipt[0])
-        form.append('note',data.note)
-        form.append('member',user.member_id)
-        try{
-            setIsLoading(true)
-            
-            const resp = await axios.post('/tenant/services_request/reissuance_of_certificate/',form)
-            setIsLoading(false)
-
-            console.log({resp})
-            if(typeof resp.data.id == 'number'){
-                notify('Submitted successfully','success')
-                notify('Your request is being processed','success')
-                setTimeout(()=>{
-                    route.back()
-                },3000)
-            }else{
-                notify('please upload pdf files','error')
-            }
-        }
-        catch(err:any){
-            setIsLoading(false)
-            console.log({err})
-            notify('please upload pdf files','error')
-
-        }
-
-    }
+    
     return (
+<div >
+        {/* <br /><br /><br /><br /> */}
+     
         <DashboardLayout title={'Reissuance Of Certificate'}>
             {
                 isLoading?
                 <Spinner />:''
             }
-              <div   style={{'margin':'0 auto','maxWidth':'500px'}}>
-                <form    onSubmit={handleSubmit(submitData)}>
-                <br />
+              <div   style={{'margin':'0 auto','maxWidth':'900px'}}>
+                <h1>CALL FOR RENEWAL OF MEMBERSHIP CERTIFICATE </h1>
+             <p>
+             As you are aware, the life span of the 2nd batch of Membership Certificate of the Manufacturers Association of Nigeria (MAN) which was issued in January 2020 expires on the 31st of December 2022. In view of the above, the Association is inviting members to come forward for the renewal of their membership certificate. 
+             </p>
+             <p>
+             Members are therefore advised to follow the guidelines below and do so early to avoid late re-issuance of Certificate
+             </p>
+             <p>
+             Similarly, it is pertinent to inform members who have not applied for re-issuance or fully complied with the requirements since 2017 when the exercise of three yearly renewal commenced to kindly do so urgently. This is because MAN Certificate in their possession has become obsolete and would no longer be accepted by the Association and all relevant Government Agencies and Parastatals. 
+             </p>
 <br />
-                <label htmlFor="">Note</label>
-                <TextField
-                variant='standard'
-                label=""
-                // accept=''
-                fullWidth
-                InputLabelProps={{className:'light-text'}}
-                {...register("note")}
-            />
-<br />
-<br />
-<label htmlFor="">Attach Membership Receipt</label>
-<TextField
-                variant='standard'
-                label=""
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                {...register("attach_membership_receipt")}
-            />
-<br />
-<br />
+             <p>
+            <strong>
+            Please find below the requirements for the re-issuance: 
+            </strong>
+             </p>
+<br />           
+           <h2>Section A: Companies that changed the names on their original Certificates are required to do the </h2>
+           <ul>
+           <li>Complete the Membership Certificate Re-issuance form as attached. </li>
+        <li> Return of MAN Membership Certificate which expired on the 31st December 2023. </li>
+        <li>Payment of all outstanding subscription(s) as advised by the undersigned on the 2023 Demand . </li>
+        <li>Submission of 2021 and 2022 Audited Financial Statements of the company (new applicants 
+        shall include 2019 Audited Financial Report).</li> 
+        <li>Copy of the certificate of incorporation. </li>
+        
+               <li> Submit Change of name Certificate as issued by Corporate Affairs Commission (CAC). </li>
+           <li>. A Bank Payment Teller in the sum of Fifty Thousand Naira Only (N50,000) in favour of  </li>
+           <li>Manufacturers Association of Nigeria for re-issuance of Membership Certificate. </li>
+           </ul>
+        <GreenButton text='Proceed' radius='10px'
+                click={(e)=>{
+                    // route.push('/members/services/reissuance/section-b/')
+                    route.push('/members/services/reissuance?nextpage='+'section-a')
+                }}
+                style={{'width':'30%'}}
+               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>
+              <br /><br />
+              <h2>Section B:Companies that lost their MAN Membership Certificates are required to do the following in </h2>
+           <ul>
+               <li> An affidavit from a Court of competence jurisdiction supporting the loss of the Certificate.  </li>
+           <li>Bank Payment Teller in the sum of Fifty Thousand Naira (N50,000) in favour of Manufacturers Association of Nigeria for re-issuance of Membership Certificate </li>
+           </ul>
+        <GreenButton text='Proceed' radius='10px'
+                click={(e)=>{
+                    // route.push('/members/services/reissuance/section-c/')
+                    route.push('/members/services/reissuance?nextpage='+'section-b')
+        // nextpage
 
-            <CustomBtn style={{'width':'40%','margin':'0 auto'}}>
-                Submit
-            </CustomBtn>
-                    </form>
+                }}
+                style={{'width':'30%'}}
+               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>
+              
               </div>
+
+
+
         </DashboardLayout>
+</div>
     )
 }
 

@@ -13,6 +13,7 @@ import { useState } from "react";
 import Spinner from "../../../components/Spinner";
 import useToast from "../../../hooks/useToast";
 import { useRouter } from "next/router";
+import GreenButton from "../../../components/Buttonn";
 
 type IForm = {
     deactivation_request:any,
@@ -74,6 +75,12 @@ const Deactivation_or_suspension_of_membership:NextPage = ()=>{
         <DashboardLayout
         title='Deactivation or Suspension Of Membership'
         >
+                            <GreenButton text='Updated Re Issuance Form' radius='10px'
+                click={(e)=>{
+                    route.push('/members/services/reissuance/')
+                }}
+                style={{'width':'30%'}}
+               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>  
                        {
                 isLoading?
                 <Spinner />:''
@@ -90,7 +97,7 @@ const Deactivation_or_suspension_of_membership:NextPage = ()=>{
                 // accept=''
                 fullWidth
                 InputLabelProps={{className:'light-text'}}
-                {...register("note")}
+                // {...register("note")}
             />
 <br />
 <br />
@@ -101,7 +108,7 @@ const Deactivation_or_suspension_of_membership:NextPage = ()=>{
                 fullWidth
                 type={'file'}
                 InputLabelProps={{className:'light-text'}}
-                {...register("deactivation_request")}
+                // {...register("deactivation_request")}
             />
 <br />
 <br />
@@ -113,7 +120,7 @@ const Deactivation_or_suspension_of_membership:NextPage = ()=>{
                 fullWidth
                 type={'file'}
                 InputLabelProps={{className:'light-text'}}
-                {...register("submit_most_recent_financial_statement")}
+                // {...register("submit_most_recent_financial_statement")}
             />
 <br />
 <br />
@@ -125,7 +132,7 @@ const Deactivation_or_suspension_of_membership:NextPage = ()=>{
                 fullWidth
                 type={'file'}
                 InputLabelProps={{className:'light-text'}}
-                {...register("upload_all_levy_recipt")}
+                // {...register("upload_all_levy_recipt")}
             />
 <br />
 <br />
@@ -134,7 +141,12 @@ const Deactivation_or_suspension_of_membership:NextPage = ()=>{
 
 
 
-            <CustomBtn style={{'width':'40%','margin':'0 auto'}}>
+            <CustomBtn style={{'width':'40%','margin':'0 auto'}}
+            onClick={e=>{
+                e.preventDefault()
+                notify('Upload success','success')
+            }}
+            >
                 Submit
             </CustomBtn>
                     </form>

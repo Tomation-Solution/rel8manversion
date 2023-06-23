@@ -9,7 +9,7 @@ type Prop ={
     Icon?:React.ReactElement
     label:string,
     errorMessage?:string;
-    type?:'text'|'password'|'file',
+    type?:'text'|'password'|'file'|'date',
     isShowLabel?:boolean
 }
 
@@ -27,7 +27,7 @@ const InputWithLabel = ({register,Icon,label,errorMessage,type='text',isShowLabe
               placeholder={label} 
               // label='Username'  
               style={{width:'100%',}} size='small'
-              type= {showPassword ?  'text':'password' }
+              type= {showPassword ?  type:'password' }
               InputProps={{
               
                   startAdornment:(

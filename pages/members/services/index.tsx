@@ -33,7 +33,7 @@ const ListOfService:NextPage=()=>{
         // 'membership_admission',
         // 'Loss_of_certificate',
         'Reissuance_of_certificate',// endpoint working
-        'Change_of_Name', // endpoint working
+        // 'Change_of_Name', // endpoint working
         'Merger_of_member_companies',// endpoint working
         'Deactivation_or_Suspension_of_membership',// endpoint working
         'Update_on_product_manufactured',// endpoint working

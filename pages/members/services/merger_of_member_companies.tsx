@@ -12,6 +12,7 @@ import { useState } from "react";
 import Spinner from "../../../components/Spinner";
 import useToast from "../../../hooks/useToast";
 import { useRouter } from "next/router";
+import GreenButton from "../../../components/Buttonn";
 
 type IForm = {
     upload_request_letter:any,
@@ -77,9 +78,21 @@ const MergerOfMemberCompanies: NextPage  =()=>{
         }
     }
         return (
-            <DashboardLayout
+            <div>
+
+<DashboardLayout
             title='Merger Of Member Companies'
             >
+
+                <div>
+
+                <GreenButton text='Updated Re Issuance Form' radius='10px'
+                click={(e)=>{
+                    route.push('/members/services/reissuance/')
+                }}
+                style={{'width':'30%'}}
+               textColor='white' paddingY={1} paddingX={1}  bg='#2e3715'/>   
+                </div>
  {
                 isLoading?
                 <Spinner />:''
@@ -100,17 +113,17 @@ const MergerOfMemberCompanies: NextPage  =()=>{
             />
 <br />
 <br />
-<label htmlFor="">Upload Request Letter Membership Receipt</label>
+<label htmlFor="">Upload request letter requesting for the merger of the companies under
+the membership of the Association,</label>
 <TextField
                 variant='standard'
                 label=""
                 fullWidth
                 type={'file'}
                 InputLabelProps={{className:'light-text'}}
-                {...register("upload_request_letter")}
+                // {...register("upload_request_letter")}
             />
-<br />
-<br />
+
 
 <br />
 <br />
@@ -121,14 +134,13 @@ const MergerOfMemberCompanies: NextPage  =()=>{
                 fullWidth
                 type={'file'}
                 InputLabelProps={{className:'light-text'}}
-                {...register("submit_most_recent_financial_statement")}
+                // {...register("submit_most_recent_financial_statement")}
             />
 <br />
 <br />
 
-<br />
-<br />
-<label htmlFor="">Upload Dues Reciept</label>
+
+{/* <label htmlFor="">Upload Dues Reciept</label>
 <TextField
                 variant='standard'
                 label=""
@@ -136,30 +148,42 @@ const MergerOfMemberCompanies: NextPage  =()=>{
                 type={'file'}
                 InputLabelProps={{className:'light-text'}}
                 {...register("upload_dues_reciept")}
-            />
-<br />
-<br />
+            /> */}
 
-<br />
-<br />
-<label htmlFor="">Upload Membership Cert For Both Companies</label>
+
+
+<label htmlFor="">Upload Membership Cert For Both Companies (first company)</label>
 <TextField
                 variant='standard'
                 fullWidth
                 type={'file'}
                 InputLabelProps={{className:'light-text'}}
-                {...register("upload_membership_cert_for_both_companies")}
+                // {...register("upload_membership_cert_for_both_companies")}
             />
 <br />
 <br />
 
-
-            <CustomBtn style={{'width':'40%','margin':'0 auto'}}>
+<label htmlFor="">Upload Membership Cert For Both Companies (second company)</label>
+<TextField
+                variant='standard'
+                fullWidth
+                type={'file'}
+                InputLabelProps={{className:'light-text'}}
+                // {...register("upload_membership_cert_for_both_companies")}
+            />
+            <br /><br />
+            <CustomBtn style={{'width':'40%','margin':'0 auto'}}
+            onClick={e=>{
+                e.preventDefault()
+                notify('Upload success','success')
+            }}
+            >
                 Submit
             </CustomBtn>
                     </form>
               </div>
             </DashboardLayout>
+            </div>
         )
 }
 
