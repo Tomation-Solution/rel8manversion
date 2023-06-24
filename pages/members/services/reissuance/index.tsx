@@ -204,6 +204,10 @@ const ReIssuance = ()=>{
             if(nextpage==='update_on_product_manufactured'){
                 route.push('/members/services/update_on_product_manufactured')
             }
+            if(nextpage ==='update_on_factory_location'){
+                route.push('/members/services/update_on_factory_location')
+
+            }
         },
         'onError':(error:any)=>{
             notify('Please check your network conntection')

@@ -107,14 +107,14 @@ const SecondBatchCert= ()=>{
 
 
                 
-          
+{/*           
 
 <InputWithLabel 
                 label=" Return of MAN Membership Certificate which expired on the 31st December."
                 isShowLabel={true}
                 type="file"
                 register={register('certificate_which_expired_on_thirtyone')}
-                />
+                /> */}
 <br />
 <InputWithLabel 
                 label="Certificate Incoporation"

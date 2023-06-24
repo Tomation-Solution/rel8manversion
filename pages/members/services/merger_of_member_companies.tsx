@@ -13,69 +13,53 @@ import Spinner from "../../../components/Spinner";
 import useToast from "../../../hooks/useToast";
 import { useRouter } from "next/router";
 import GreenButton from "../../../components/Buttonn";
+import InputWithLabel from "../../../components/InputWithLabel/InputWithLabel";
+import { useMutation, useQuery } from "react-query";
 
 type IForm = {
-    upload_request_letter:any,
-    submit_most_recent_financial_statement:any,
-    upload_dues_reciept:any,
-    upload_membership_cert_for_both_companies:any,
-    note:string
+    letter_requesting_merge:any,
+    most_recent_finicial_statement:any,
 }
 const schema = yup.object().shape({
-    upload_request_letter:yup.mixed().required(),
-    submit_most_recent_financial_statement:yup.mixed().required(),
-    upload_dues_reciept:yup.mixed().required(),
-    upload_membership_cert_for_both_companies:yup.mixed().required(),
-    note:yup.string().required()
+    most_recent_finicial_statement:yup.mixed().required(),
+    letter_requesting_merge:yup.mixed().required(),
 })
+
+const updateMergerOfCompaniesApi = async (data:IForm)=>{
+    const form = new FormData()
+    form.append('most_recent_finicial_statement',data.most_recent_finicial_statement[0])
+    form.append('letter_requesting_merge',data.letter_requesting_merge[0])
+    const resp = await axios.put('/tenant/membershipservice/merger-of-company/1/',form)
+    return resp.data.data 
+}
+const getupdateMergerOfCompaniesApi = async ()=>{
+    const resp = await axios.get('/tenant/membershipservice/merger-of-company/1/')
+    return resp.data.data 
+}
 const MergerOfMemberCompanies: NextPage  =()=>{
 
     const {
         watch, register,handleSubmit, formState: { errors },setValue,
     } = useForm<IForm>({resolver:yupResolver(schema)})
 
-
-    const [isLoading,setIsLoading] = useState(false)
     const {notify} = useToast()
     const route = useRouter();
 
+    const {data}= useQuery('getupdateMergerOfCompaniesApi',getupdateMergerOfCompaniesApi)
+    const { isLoading,mutate} = useMutation(updateMergerOfCompaniesApi,{
+        'onSuccess':(data)=>{
+            notify('Uploaded Admin will get back to you soon','success')
+        },  
+        'onError':(error:any)=>{
+            notify('Please Check Your Network Error')
+        }
+    })
+
+
 
     const submitData:SubmitHandler<IForm>=async (data)=>{
-        //
-        let user:any= localStorage.getItem('token')
-        console.log({user})
-        if(!user) return 
-        user = JSON.parse(localStorage.getItem('token'))
-        const form = new FormData()
-        form.append('upload_request_letter',data.upload_request_letter[0])
-        form.append('submit_most_recent_financial_statement',data.submit_most_recent_financial_statement[0])
-        form.append('upload_dues_reciept',data.upload_dues_reciept[0])
-        form.append('upload_membership_cert_for_both_companies',data.upload_membership_cert_for_both_companies[0])
-        form.append('note',data.note)
-        form.append('member',user.member_id)
-        try{
-            setIsLoading(true)
-            
-            const resp = await axios.post('/tenant/services_request/merger_of_companies/',form)
-            setIsLoading(false)
-
-            console.log({resp})
-            if(typeof resp.data.id == 'number'){
-                notify('Submitted successfully','success')
-                notify('Your request is being processed','success')
-                setTimeout(()=>{
-                    route.back()
-                },3000)
-            }else{
-                notify('please upload pdf files','error')
-            }
-        }
-        catch(err:any){
-            setIsLoading(false)
-            console.log({err})
-            notify('please upload pdf files','error')
-
-        }
+        console.log(data)
+    mutate(data)     
     }
         return (
             <div>
@@ -83,84 +67,62 @@ const MergerOfMemberCompanies: NextPage  =()=>{
 <DashboardLayout
             title='Merger Of Member Companies'
             >
-
-                <div>
-
-                </div>
+                
  {
                 isLoading?
                 <Spinner />:''
             }
 
-<div   style={{'margin':'0 auto','maxWidth':'500px'}}>
+
+            
+
+<div   style={{'margin':'0 auto','maxWidth':'700px'}}>
+<div>
+            <p style={{'border':'5px solid green','display':'inline-block','padding':'.4rem','borderRadius':'10px'}}>
+            <strong>
+            {data?.status}
+            </strong>
+            </p>
+                <br /><br />
+            <h1>Please find below the requirements for the Merger of member companies:</h1>
+            <ul>
+                <li>
+                Submit a letter requesting for the merger of the companies under the membership of the Association.
+                </li>
+                <li>
+                submission of most recent Audited Financial Statement.
+                </li>
+                <li>
+                payment of all outstanding subscriptions/levies of concerned companies and return of all
+membership certificates of the concerned companies.
+                </li>
+            </ul>
+            </div>
+     
+     
+            <div>
+                <InputWithLabel
+                label="Submit a letter requesting for the merger of the companies under
+                the membership of the Association"
+                isShowLabel={true}
+                register={register('letter_requesting_merge')}
+                type="file"
+                />
+<br />
+<InputWithLabel
+                label="Submission of most recent Audited Financial Statement,"
+                isShowLabel={true}
+                register={register('most_recent_finicial_statement')}
+                type="file"
+                />
+<br />
+                </div>
+     <br /><br /><br />
                 <form    onSubmit={handleSubmit(submitData)}>
-                <br />
-<br />
-<label htmlFor="">Upload request letter requesting for the merger of the companies under
-the membership of the Association,</label>
-<TextField
-                variant='standard'
-                label=""
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                // {...register("upload_request_letter")}
-            />
+     
 
 
-<br />
-<br />
-<label htmlFor="">Submit Most Recent Financial Statement</label>
-<TextField
-                variant='standard'
-                label=""
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                // {...register("submit_most_recent_financial_statement")}
-            />
-<br />
-<br />
-
-
-{/* <label htmlFor="">Upload Dues Reciept</label>
-<TextField
-                variant='standard'
-                label=""
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                {...register("upload_dues_reciept")}
-            /> */}
-
-
-
-<label htmlFor="">Upload Membership Cert For Both Companies (first company)</label>
-<TextField
-                variant='standard'
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                // {...register("upload_membership_cert_for_both_companies")}
-            />
-<br />
-<br />
-
-<label htmlFor="">Upload Membership Cert For Both Companies (second company)</label>
-<TextField
-                variant='standard'
-                fullWidth
-                type={'file'}
-                InputLabelProps={{className:'light-text'}}
-                // {...register("upload_membership_cert_for_both_companies")}
-            />
-            <br /><br />
-            <CustomBtn style={{'width':'40%','margin':'0 auto'}}
-            onClick={e=>{
-                e.preventDefault()
-                notify('Upload success','success')
-            }}
-            >
+            <CustomBtn style={{'width':'40%','margin':'0 auto'}}>
                 Submit
             </CustomBtn>
                     </form>

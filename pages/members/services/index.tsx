@@ -32,24 +32,22 @@ const ListOfService:NextPage=()=>{
     const services = [
         // 'membership_admission',
         // 'Loss_of_certificate',
-        'Reissuance_of_certificate',// endpoint working
+        'Reissuance_of_certificate',
         // 'Change_of_Name', // endpoint working
-        'Merger_of_member_companies',// endpoint working
+        'Merger_of_member_companies',
+        // endpoint working
         'Deactivation_or_Suspension_of_membership',// endpoint working
         'Update_on_product_manufactured',// endpoint working
         'Update_on_factory_location',// endpoint working
     ]
     const route = useRouter();
     const handleRequestRoute = (page_name:string)=>{
-        if(page_name==='deactivation_or_suspension_of_membership'){
-            route.push('/members/services/reissuance?nextpage='+'deactivation_or_suspension_of_membership')
+        if(page_name!=='Reissuance_of_certificate'){
+            route.push('/members/services/reissuance?nextpage='+page_name)
             return
+        }else{
+            route.push(`/members/services/${page_name}/`)
         }
-        if(page_name==='update_on_product_manufactured'){
-            route.push('/members/services/reissuance?nextpage='+'update_on_product_manufactured')
-            return 
-        }
-        route.push(`/members/services/${page_name}/`)
     }
     return (
         <DashboardLayout>
