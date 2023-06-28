@@ -21,11 +21,11 @@ type ResuissuanceForm={
         "file_fordate_one":string,
         "file_fordate_two": string,
     },
-    extras:{
-        plants:{data:{name:string}[]} ,
-        products_manufactured:{data:{name:string}[]},
-        imported_raw_materials:{data:{name:string}[]},
-    },
+    // extras:{
+    //     plants:{data:{name:string}[]} ,
+    //     products_manufactured:{data:{name:string}[]},
+    //     imported_raw_materials:{data:{name:string}[]},
+    // },
     name_of_company:string,
     cac_number:string,
     tax_identification_number:string,
@@ -92,14 +92,14 @@ const updateReIssuanceForm = async (data:FormType):Promise<ResuissuanceForm>=>{
 }
 
 const schema = yup.object().shape({
-    name_of_company:yup.string().required(),
+    name_of_company:yup.string(),
     cac_number:yup.string().required(),
     tax_identification_number:yup.string().required(),
     corporate_addresse:yup.string().required(),
     company_official_email:yup.string().email().required(),
-    plants:yup.array().of(yup.object().shape({name:yup.string()})),
-    products_manufactured:yup.array().of(yup.object().shape({name:yup.string()})),
-    imported_raw_materials:yup.array().of(yup.object().shape({name:yup.string()})),
+    // plants:yup.array().of(yup.object().shape({name:yup.string()})),
+    // products_manufactured:yup.array().of(yup.object().shape({name:yup.string()})),
+    // imported_raw_materials:yup.array().of(yup.object().shape({name:yup.string()})),
     ceo_name:yup.string().required(),
     phone_number:yup.string().required(),
     chief_finace_officer:yup.string().required(),
@@ -108,7 +108,7 @@ const schema = yup.object().shape({
     head_of_coporate_phone_number:yup.string().required(),
     officer_handling_man:yup.string().required(),
     officer_handling_man_phone_number:yup.string().required(),
-    man_reg_number:yup.string().required(),
+    man_reg_number:yup.string(),
 
 
     // yearly turn over
@@ -124,9 +124,9 @@ type FormType = {
     tax_identification_number:string,
     corporate_addresse:string,
     company_official_email:string,
-    plants:{name:string}[] ,
-    products_manufactured:{name:string}[],
-    imported_raw_materials:{name:string}[],
+    // plants:{name:string}[] ,
+    // products_manufactured:{name:string}[],
+    // imported_raw_materials:{name:string}[],
     ceo_name:string,
     phone_number:string,
     chief_finace_officer:string,
@@ -159,15 +159,15 @@ const ReIssuance = ()=>{
         'onSuccess':(data)=>{
             console.log(data)
             if(data){
-
+                    setValue('man_reg_number',data.man_reg_number)
                     setValue('name_of_company',data.name_of_company)
                     setValue('cac_number',data.cac_number)
                     setValue('tax_identification_number',data.tax_identification_number)
                     setValue('corporate_addresse',data.corporate_addresse)
                     setValue('company_official_email',data.company_official_email)
-                    setValue('plants',data.extras.plants.data)
-                    setValue('products_manufactured',data.extras.products_manufactured.data)
-                    setValue('imported_raw_materials',data.extras.imported_raw_materials.data)
+                    // setValue('plants',data.extras.plants.data)
+                    // setValue('products_manufactured',data.extras.products_manufactured.data)
+                    // setValue('imported_raw_materials',data.extras.imported_raw_materials.data)
                     setValue('ceo_name',data.ceo_name)
                     setValue('chief_finace_officer',data.chief_finace_officer)
                     setValue('chief_finace_officer_phone_number',data.chief_finace_officer_phone_number)
@@ -191,6 +191,9 @@ const ReIssuance = ()=>{
       const {isLoading:updating,mutate}= useMutation(updateReIssuanceForm,{
         'onSuccess':(data)=>{
             notify('Uploaded Successfully','success')
+            if(nextpage ==='reissuance_of_certificate'){
+                route.push('/members/services/reissuance_of_certificate')
+            }
             // let nextpage = queyrParams.get('next')
             if(nextpage ==='section-a'){
                 route.push('/members/services/reissuance/section-a/')
@@ -215,24 +218,24 @@ const ReIssuance = ()=>{
         }
       })
       
-  const { fields:plants__fields, append:plants__append,
-    remove:plants__remove } = useFieldArray({
-    control,
-    name: "plants", 
-  });
+//   const { fields:plants__fields, append:plants__append,
+//     remove:plants__remove } = useFieldArray({
+//     control,
+//     name: "plants", 
+//   });
 
 
-  const { fields:products_manufactured__fields, append:products_manufactured__append,
-    remove:products_manufactured__remove } = useFieldArray({
-    control,
-    name: "products_manufactured", 
-  });
+//   const { fields:products_manufactured__fields, append:products_manufactured__append,
+//     remove:products_manufactured__remove } = useFieldArray({
+//     control,
+//     name: "products_manufactured", 
+//   });
   
-  const { fields:imported_raw_materials__fields, append:imported_raw_materials__append,
-    remove:imported_raw_materials__remove } = useFieldArray({
-    control,
-    name: "imported_raw_materials", 
-  });
+//   const { fields:imported_raw_materials__fields, append:imported_raw_materials__append,
+//     remove:imported_raw_materials__remove } = useFieldArray({
+//     control,
+//     name: "imported_raw_materials", 
+//   });
 
   const onSubmit = (data: FormType) =>{
     mutate(data) 
@@ -272,7 +275,7 @@ const ReIssuance = ()=>{
                 <br /><br /><br /><br />
                 <InputWithLabel
                 label="Name Of Company"
-                register={register('name_of_company')}
+                register={register('name_of_company',{'disabled':true})}
                 isShowLabel={true}
                 />
 
@@ -290,7 +293,7 @@ const ReIssuance = ()=>{
 
 <InputWithLabel
                 label="man reg number"
-                register={register('man_reg_number')}
+                register={register('man_reg_number',{'disabled':true})}
                 isShowLabel={true}
                 />
 
@@ -340,7 +343,7 @@ const ReIssuance = ()=>{
                 <br />
 
 
-        <label
+        {/* <label
         style={{'textTransform':'capitalize','padding':'.4rem 0','display':'inline-block','fontWeight':'bold'}}
         >Plants</label>
         {
@@ -372,8 +375,8 @@ const ReIssuance = ()=>{
             </CustomBtn> 
                 </div>
             ))
-        }
-        <br />
+        } */}
+        {/* <br />
 
             <CustomBtn
             onClick={e=>{
@@ -388,11 +391,11 @@ const ReIssuance = ()=>{
             }}>
             Add more
             </CustomBtn>
-            <br />
+            <br /> */}
             <br />
 
 
-            <label
+            {/* <label
         style={{'textTransform':'capitalize','padding':'.4rem 0','display':'inline-block','fontWeight':'bold'}}
         >Imported Raw Materials</label>
         {
@@ -425,9 +428,9 @@ const ReIssuance = ()=>{
                 </div>
             ))
         }
-        <br />
+        <br /> */}
 
-            <CustomBtn
+            {/* <CustomBtn
             onClick={e=>{
                 e.preventDefault()
                 imported_raw_materials__append({
@@ -441,10 +444,10 @@ const ReIssuance = ()=>{
             Add more
             </CustomBtn>
             <br />
-            <br />
+            <br /> */}
 
 
-
+{/* 
             <label
         style={{'textTransform':'capitalize','padding':'.4rem 0','display':'inline-block','fontWeight':'bold'}}
         >Products Manufactured</label>
@@ -494,7 +497,7 @@ const ReIssuance = ()=>{
             Add more
             </CustomBtn>
             <br />
-            <br />
+            <br /> */}
 {/* <InputWithLabel
                 label="Plants"
                 register={register('plants')}
