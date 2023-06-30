@@ -129,10 +129,15 @@ const MeetDisplay = ({event}:Prop)=>{
                             :''
                         }
                 </div>
+                
                 </div>
 
                 <p>
                     {/* {event.} */}
+
+                    {/* @ts-ingore */}
+                    <p>{event?.event_extra_details}</p>
+
                 </p>
             </div>
 

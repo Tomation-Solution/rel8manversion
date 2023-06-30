@@ -24,6 +24,7 @@ export type MemberEventType = {
     "scheduletype":string,
     "schedule": string[],
     "event_access": event_accesstype
+    event_extra_details?:string;
 }
 
 type getMembersEventProp = {
