@@ -92,17 +92,37 @@ const ProjectDetail:NextPage = ()=>{
               />
     <br />
     <br />
-            <CustomBtn styleType="sec" style={{}} onClick={e=>{
+          <div>
+          <CustomBtn styleType="sec" style={{}} onClick={e=>{
 
-                // @ts-ignore
-                if(amount?.length!==0){
-                    dynamicPaymentApi({'payment_id':projects.id,'payment_type':'fund_a_project','query_param':'?donated_amount='+amount,'setIsloading':setIsloading})
-                }
+// @ts-ignore
+if(amount?.length!==0){
+    dynamicPaymentApi({'payment_id':projects.id,
+    'payment_type':'fund_a_project',
+    'query_param':'?donated_amount='+amount,
+    'setIsloading':setIsloading})
+}
 
 
-            }}>
-            Pay
-            </CustomBtn>
+}}>
+Pay With Paystack
+</CustomBtn>
+<br /><br />
+<CustomBtn styleType="sec" style={{}} onClick={e=>{
+
+// @ts-ignore
+if(amount?.length!==0){
+    dynamicPaymentApi({'payment_id':projects.id,
+    'payment_type':'fund_a_project',
+    'query_param':`${'?donated_amount='+amount}&payment_type=flutterwave`,
+    'setIsloading':setIsloading})
+}
+
+
+}}>
+Pay With FlutterWave
+</CustomBtn>
+          </div>
         </div>
       }/>
 
