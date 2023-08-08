@@ -137,15 +137,26 @@ const MeetingsPage:NextPage  = () =>{
                         title={value.name+'-'+ moment(value.event_date).format('LLL')}
                         details={value.details.slice(0,50)+'...'}
                         onClickAccept={()=>{
+                            // @ts-ignore
+                            if(!value?.is_authorized){
+                                notify('You Were Not Invited')
+                                return 
+                            }
                             setCurrentMeeting(value)
                             setAskQuetion(true)
 
                         }}
                         onClickApolgy={()=>{
+                            // @ts-ignore
+                            if(!value?.is_authorized){
+                                notify('You Were Not Invited')
+                                return 
+                            }
                             setCurrentMeeting(value)
                             setOpenApology(true)
                         }}
                         onClickJoin={()=>{
+
                             setCurrentMeeting(null)
                             route.push(`meetings/${value.id}/`)
                             window.localStorage.setItem('meeting_detail',JSON.stringify(value))

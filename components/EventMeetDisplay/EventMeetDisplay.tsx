@@ -124,6 +124,11 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                                     meeting.addresse.includes('https')?
                                     <CustomBtn style={{'padding':'.3rem'}}
                                     onClick={e=>{
+                                        // @ts-ignore
+                                        if(!meeting?.is_authorized){
+                                        notify('You Were Not Invited')
+                                        return 
+                                        }
                                         window.open(meeting.addresse,'_blank')
                                     }}
                                     >Join</CustomBtn>:
