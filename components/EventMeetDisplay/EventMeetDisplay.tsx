@@ -122,6 +122,8 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                             <TiLocation/>
                             <p> {meeting.addresse.includes('https')?'Remote':'On Site'}: {
                                     meeting.addresse.includes('https')?
+                                //   @ts-ignore
+                                    meeting.is_attending?
                                     <CustomBtn style={{'padding':'.3rem'}}
                                     onClick={e=>{
                                         // @ts-ignore
@@ -131,8 +133,9 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                                         }
                                         window.open(meeting.addresse,'_blank')
                                     }}
-                                    >Join</CustomBtn>:
-                                    <>{ meeting.addresse}</>
+                                    >Join</CustomBtn>:'':
+                                    // @ts-ignore
+                                    <>{ meeting.addresse}{  meeting.is_attending?'':'You Not Invited'}</>
                                 } </p>
                         </div>
                         <br />
@@ -145,13 +148,13 @@ const EventMeetDisplay = ({meeting}:Prop)=>{
                         </div>
                     <br />
                     <br />
-                        <CustomBtn 
+                        {/* <CustomBtn 
                         onClick={e=>{
                             setAskQuetion(true)
                         }}
                         style={{'borderRadius':'30px'}}>
                             Register
-                        </CustomBtn>
+                        </CustomBtn> */}
                 </div>
             </EventMeetDisplayContainer>
         </div>
