@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import setupInterceptors from "../helpers/setUpInterceptor"
 import NextNProgress from 'nextjs-progressbar';
+
 import {
   useQuery,
   useMutation,
@@ -15,6 +16,7 @@ const queryClient = new QueryClient()
 
 // import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { useEffect } from "react";
+import NofiicationComponent from "../components/NofiicationComponent";
 // import firebase, { firebaseConfig } from "../public/firebase-messaging-sw";
 
 
@@ -74,7 +76,6 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
     <NextNProgress color={'#2e3715'} />
     <ToastContainer />
-
     <Component {...pageProps} />
     </Provider>
     </QueryClientProvider>

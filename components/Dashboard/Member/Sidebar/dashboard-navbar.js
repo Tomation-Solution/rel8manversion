@@ -6,6 +6,8 @@ import NotificationsRounded from '@mui/icons-material/NotificationsRounded';
 import BasicPopover from '../../../PopOver';
 import axios from '../../../../helpers/axios';
 import { useEffect, useState } from 'react';
+import NofiicationComponent from '../../../NofiicationComponent'
+import { getUserOrNull } from '../../../../utils/extraFunction';
 
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
@@ -16,18 +18,8 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, type, ...other } = props;
   const [notification ,setNotification] =useState([])
-  const getNotification  = async ()=>{
-    try{
-      const resp = await axios.get('/tenant/reminder/member_reminder/')
-      setNotification(resp.data.results)
-
-    }catch(err){
-      setNotification([])
-    }
-  }
-  useEffect(()=>{
-    getNotification()
-  },[])
+  const user =getUserOrNull()
+ 
   return (
     <>
       <DashboardNavbarRoot
@@ -85,7 +77,7 @@ export const DashboardNavbar = (props) => {
             </Avatar>
             </IconButton>
           </Tooltip> */}
-            <BasicPopover
+            {/* <BasicPopover
             Button={
               <Tooltip title="Notifications">
 <IconButton>
@@ -104,7 +96,16 @@ export const DashboardNavbar = (props) => {
                   <p key={index} style={{'padding':'.9rem 0'}}>{data.title}</p>
                 ))
               }
-            </BasicPopover>
+            </BasicPopover> */}
+      {/* </DashboardLayoutRoot> */}
+      {
+        user?
+        <NofiicationComponent
+        user={user}
+        />
+        :''
+      }
+
 </Box>
             
           
