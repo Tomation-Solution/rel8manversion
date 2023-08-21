@@ -11,7 +11,6 @@ import { HeadlessService, FetchResult, ISession } from '@novu/headless';
 
 const NofiicationComponent = ({user}) => {
     const ref = useRef()
-    console.log({user})
 
   const [init,setInit]= useState(false)
     const headlessService = new HeadlessService({
@@ -71,12 +70,26 @@ const CustomNotify = ()=>{
   });
   const result = useNotifications();
 
-  useEffect(()=>{
-    // if(type window !===)
+
+  const handleNotifyDispaly = ()=>{
+    let localNotifyCount = window.localStorage.getItem('localNotifyCount')
+    if(!localNotifyCount){
+      localStorage.setItem('localNotifyCount',JSON.stringify(0))
+      localNotifyCount = 0
+    }else{
+      localNotifyCount = JSON.parse(window.localStorage.getItem('localNotifyCount'))
+    }
     if (result.unseenCount !==0){
-      const greeting = new Notification(`You have ${result.unseenCount} notifcation in MAN`);
+      if(localNotifyCount!=result.unseenCount){
+        localStorage.setItem('localNotifyCount',JSON.stringify(result.unseenCount ))
+        const greeting = new Notification(`You have ${result.unseenCount} unread message in MAN app`);
+      }
 
     }
+  }
+  useEffect(()=>{
+    // if(type window !===)
+    handleNotifyDispaly()
   },[result])
 
 const handleNofiy =async ()=>{
