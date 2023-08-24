@@ -25,14 +25,14 @@ import useToast from "../hooks/useToast"
 import Select from 'react-select';
 import listOfCompanys from '../utils/list-of-companys'
 interface LoginType{
-    email:string;
+  matric_number:string;
     password:string;
     company_name:string;
 }
 
 
 const schema = yup.object().shape({
-    email: yup.string().required('Email is required').email('Email is invalid'),
+  matric_number: yup.string().required('Matric number is required'),
     password: yup.string().required('Password is required').min(2, 'Password must be at least 2 characters'),
     company_name:yup.string().required()
   });
@@ -84,7 +84,6 @@ const Login =  () =>{
 
 
 
-  console.log({errors})
     return(
       <Grid 
       className={styles.loginBg}
@@ -115,7 +114,7 @@ const Login =  () =>{
           <Grid>
               <>
               <TextField 
-              placeholder=' Email' 
+              placeholder='Matric Number' 
               // label='Username'  
               style={{width:'100%'}} size='small'
               InputProps={{
@@ -126,9 +125,9 @@ const Login =  () =>{
                     </>
                   )
               }}
-              {...register("email")}
+              {...register("matric_number")}
               />
-              <Typography >{errors.email?.message}</Typography>
+              <Typography >{errors.matric_number?.message}</Typography>
               </>
               
           </Grid>
