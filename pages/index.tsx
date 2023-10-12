@@ -114,7 +114,7 @@ const Login =  () =>{
           <Grid>
               <>
               <TextField 
-              placeholder='Matric Number' 
+              placeholder='MAN Membership Number' 
               // label='Username'  
               style={{width:'100%'}} size='small'
               InputProps={{
@@ -127,7 +127,7 @@ const Login =  () =>{
               }}
               {...register("matric_number")}
               />
-              <Typography >{errors.matric_number?.message}</Typography>
+              <Typography >{errors.matric_number?.message?'MAN Membership Number is required':''}</Typography>
               </>
               
           </Grid>
