@@ -48,7 +48,7 @@ const NofiicationComponent = ({user}) => {
 
    
   return (
-    <NovuProvider subscriberId={`${user.user_id}`} applicationIdentifier={'oE8EO85MyIuN'}>
+    <NovuProvider subscriberId={`${user.user_id}__man`} applicationIdentifier={'oE8EO85MyIuN'}>
       <CustomNotify />
       <PopoverNotificationCenter   colorScheme={'light'}>
         
