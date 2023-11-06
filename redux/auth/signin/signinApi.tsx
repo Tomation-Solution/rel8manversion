@@ -24,3 +24,14 @@ export const signinApi =createAsyncThunk(
 )
 
 
+
+
+export const requestForgotPasswordApi = async (data:{email:string})=>{
+    const resp = await axios.post('/tenant/user/forgot-password/request_password_change/',data)
+    return resp.data
+}
+
+export const restPasswordApi= async(data:{new_password:string,token:string,uidb64:string})=>{
+    const resp = await axios.post('/tenant/user/forgot-password/rest_password/',data)
+    return resp.data
+}

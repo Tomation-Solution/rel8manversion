@@ -166,7 +166,13 @@ const Login =  () =>{
           </Grid>
           <br/>
           <Grid container alignItems='center' justifyContent='space-between' paddingY={1}>
-              <Grid item><Typography className='text' variant='subtitle2' fontWeight='normal' color='grey'>Forgot Password?</Typography></Grid>
+              <Grid item><Typography className='text' variant='subtitle2' fontWeight='normal' color='grey' style={{'cursor':'pointer'}}
+              onClick={e=>{
+                e.preventDefault()
+                router.push('/forget-password/')
+
+              }}
+              >Forgot Password?</Typography></Grid>
               <Grid item >
                   <Typography className='text' variant='subtitle2' fontWeight='normal' color='grey' style={{'cursor':'pointer'}}
                   onClick={e=>{
