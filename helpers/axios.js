@@ -6,8 +6,8 @@ import * as axiosOriginal from 'axios';
 export const tenantName = 'man'
 // export const sitename = 'http://localhost:8000'
 // export const baseURL= `http://localhost:8000/tenant/${tenantName}`
-export const sitename = 'web-production-81544.up.railway.app'
-export const baseURL= `https://web-production-81544.up.railway.app/tenant/${tenantName}`
+export const sitename = 'rel8corporate.watchdoglogisticsng.com'
+export const baseURL= `https://rel8corporate.watchdoglogisticsng.com/tenant/${tenantName}`
 const axios = axiosOriginal.create({
     baseURL,
 })
