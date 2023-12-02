@@ -16,7 +16,7 @@ export default function ChildNewsCard (props){
                     <Grid item sm={3}>
                         <img height={'70px'} style={{'objectFit':'contain'}} src={props.image} className='rounded-corners-small' />
                     </Grid>
-                    <Grid item paddingLeft={1} sm={9}>
+                    <Grid style={{'padding':'1.4rem'}} item paddingLeft={1} sm={9}>
                         <Typography textAlign='justify' variant='subtitle2' fontWeight='400' className='text'> 
                             {props.title}
                         </Typography>

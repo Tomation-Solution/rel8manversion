@@ -208,7 +208,7 @@ route.push('/members/event_detail/')
       {pub.name.slice(0,23)}..
     </h3>
     <p>
-      {pub?.paragraphs?.length!=0?pub?.paragraphs[0]?.paragragh.slice(0,100):''}..
+      {/* {pub?.paragraphs?.length!=0?pub?.paragraphs[0]?.paragragh.slice(0,100):''}.. */}
     </p>
     <a href="#"style={{'color':'#2e3715'}}
       onClick={()=>{
@@ -232,7 +232,9 @@ route.push('/members/event_detail/')
       key={index}
       title={data.name.slice(0,23)+'..'}
       image={data.image}
-      body={data.paragraphs.length==0?'....':data.paragraphs[0].paragragh.slice(0,100)}
+      body={
+        <div></div>
+      }
       data={data}
       />
   ))

@@ -27,7 +27,11 @@ export default function News(props){
                   key={index}
                   title={data.name}
                   image={data.image}
-                  body={data.paragraphs.length==0?'....':data.paragraphs[0].paragragh.slice(0,100)}
+                  body={
+                    <div>
+                      
+                    </div>
+                  }
                   data={data}
                   />
                 ))
