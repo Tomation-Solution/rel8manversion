@@ -76,7 +76,7 @@ const GroupChat:NextPage = ()=>{
             let url =''
             if(chatroom.type=='general'){
                 dispatch(get_old_chats(`?room_name=general`))
-                url = `ws://${sitename}/ws/chat/${tenantName}/general/`
+                url = `wss://${sitename}/ws/chat/${tenantName}/general/`
             }
             if(chatroom.type==='commitee'){
                 dispatch(get_old_chats(`?room_name=${chatroom.value}commitee`))
