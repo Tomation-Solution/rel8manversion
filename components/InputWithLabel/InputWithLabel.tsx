@@ -25,7 +25,7 @@ const InputWithLabel = ({register,Icon,label,errorMessage,type='text',isShowLabe
           }
             <TextField
               placeholder={label} 
-              // label='Username'  
+              label={label}  
               style={{width:'100%',}} size='small'
               type= {showPassword ?  type:'password' }
               InputProps={{
