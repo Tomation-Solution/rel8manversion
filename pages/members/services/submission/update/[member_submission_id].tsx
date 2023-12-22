@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useMutation, useQuery } from "react-query";
 import CustomBtn from "../../../../../components/CustomBtn/Button";
-import InputWithLabel from "../../../../../components/forms/InputWithLabel";
+import InputWithLabel from "../../../../../components/InputWithLabel/InputWithLabel";
 import {useRouter} from 'next/router'
 import {  MemberServiceSubmissionType, ServiceType, getMemberServiceSubmission, getServiceDetail, memberServiceSubmission } from "../../../../../redux/customServiceRequestApi";
 import Spinner from "../../../../../components/Spinner";
