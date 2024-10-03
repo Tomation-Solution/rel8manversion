@@ -12,7 +12,9 @@ import useToast from "../../hooks/useToast"
 import { useState } from "react"
 import BasicModal from "../Modals"
 import MeetingRegistration from "../Meeting/MeetingRegistration/MeetingRegistration"
-import { Box } from "@material-ui/core"
+// import { Box } from "@material-ui/core"
+import Box from '@mui/material/Box';
+
 import Spinner from "../Spinner"
 
 

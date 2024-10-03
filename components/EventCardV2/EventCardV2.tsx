@@ -1,4 +1,5 @@
-import { Box } from '@mui/system'
+// import { Box } from '@mui/system'
+import Box from '@mui/material/Box';
 import {useState} from 'react'
 import useToast from '../../hooks/useToast'
 import { registerForEventApi } from '../../redux/events/eventsApi'

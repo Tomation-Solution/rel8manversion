@@ -5,7 +5,8 @@ import {GoCalendar} from 'react-icons/go'
 import {TiLocation} from 'react-icons/ti'
 import CustomBtn from "../CustomBtn/Button"
 import { useState } from "react"
-import { Box } from "@mui/system"
+// import { Box } from "@mui/system"
+import Box from '@mui/material/Box';
 import BasicModal from "../Modals"
 import MeetingRegistration from "../Meeting/MeetingRegistration/MeetingRegistration"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
