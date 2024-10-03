@@ -1231,5 +1231,6 @@ export default [
     "tomation ",
     "spns",
     "savvyhr",
-    "mltcommunication service"
+    "mltcommunication service",
+    "mltcommunication services"
 ]

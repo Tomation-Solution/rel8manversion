@@ -8,6 +8,7 @@ export const signinApi =createAsyncThunk(
 
     
         try{
+            // console.log("Data before request:", data);
             const resp = await axios.post(`tenant/auth/login/`,{...data,'email':'m1@gmail.com'})
 
             console.log({resp,data:resp.data})
