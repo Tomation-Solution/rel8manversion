@@ -2,8 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../helpers/axios";
 import { generate_url_params } from "../../utils/extraFunction";
 
-
-
 type event_accesstype ={
     "has_paid": boolean,
     "link": string
@@ -25,6 +23,8 @@ export type MemberEventType = {
     "schedule": string[],
     "event_access": event_accesstype
     event_extra_details?:string;
+    event_docs?: string | null;
+    organiser_name: string
 }
 
 type getMembersEventProp = {

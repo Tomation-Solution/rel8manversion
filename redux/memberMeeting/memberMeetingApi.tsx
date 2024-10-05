@@ -13,6 +13,7 @@ export type MeetingType =        {
             "event_date": string,
             "organiserName": string,
             "organiserDetails":string,
+            organiserImage?: string | null; // Add this line
             "exco": null | number,
             "chapters": null | number,
             event_docs?:string|null

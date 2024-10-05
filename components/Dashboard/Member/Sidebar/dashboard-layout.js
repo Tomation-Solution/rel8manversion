@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Box, useMediaQuery } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
 import { DashboardNavbar } from './dashboard-navbar';
 import { DashboardSidebar } from './dashboard-sidebar';
 
@@ -16,7 +16,9 @@ const DashboardLayoutRoot = styled('div')(({ theme }) => ({
 
 export const DashboardLayout = (props) => {
   const { children } = props;
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const theme = useTheme();
+  const lgUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const [isSidebarOpen, setSidebarOpen] = useState(lgUp);
 
   return (
     <>
@@ -29,8 +31,8 @@ export const DashboardLayout = (props) => {
             width: '100%'
           }}
         >
-          <div style={{'padding':'1.5rem'}}>
-          {children}
+          <div style={{ padding: '1.5rem' }}>
+            {children}
           </div>
         </Box>
       </DashboardLayoutRoot>
