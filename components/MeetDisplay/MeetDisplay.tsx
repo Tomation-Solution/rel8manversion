@@ -1,4 +1,4 @@
-import { MemberEventType, registerForPaidEvent, registerForPaidEventApi } from "../../redux/memeberEvents/memeberEventsApi"
+import { MemberEventType, registerForPaidEvent, registerForPaidEventApi } from "../../redux/memberEvents/memeberEventsApi"
 import { EventMeetDisplayContainer } from "../EventMeetDisplay/EventMeetDisplay.style"
 import ClipImage from '../../images/clip.png'
 import {GoCalendar} from 'react-icons/go'
@@ -14,7 +14,7 @@ import { RequestRescheduleForm } from "../../pages/members/event_detail"
 import { registerForEventApi } from "../../redux/events/eventsApi"
 import { useMutation } from "react-query"
 import useToast from "../../hooks/useToast"
-import { selectMemberEvent } from "../../redux/memeberEvents/memeberEventsSlice"
+import { selectMemberEvent } from "../../redux/memberEvents/memeberEventsSlice"
 import Spinner from "../Spinner"
 
 
@@ -51,7 +51,7 @@ const MeetDisplay = ({event}:Prop)=>{
         body={
           <>
           {event?
-        <RequestRescheduleForm event_id={event.id }/>
+        <RequestRescheduleForm eventId={event.id }/>
         :''  
         }
           </>

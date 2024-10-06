@@ -13,109 +13,73 @@ import CommentInputWIthLabel from "../../../components/CommentInputWIthLabel/Com
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectNews } from '../../../redux/news/newsSlice';
 import { createNwsComment, deleteNewsComment, getNewsComment } from '../../../redux/news/newsApi';
+import { Container, Box, Card, CardMedia, CardContent, CircularProgress } from '@mui/material';
 
 export const img_url = 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1lZXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-export const NewsDetail:NextPage = ()=>{
-    const isLaptop = useMediaQuery({
-        query: '(min-width: 524px)'
-      })
-    const [data,setData] = useState<any|MemberNewsType>()
-    const dispatch = useAppDispatch()
-    const  {comment,commentStatus}  = useAppSelector(selectNews)
 
-    useEffect(()=>{
-        if( localStorage.getItem('news')){
-            setData(JSON.parse(localStorage.getItem('news')))
-            const news = JSON.parse(localStorage.getItem('news'))
-            dispatch(getNewsComment({'news_id':news.id}))
-          }
-    },[])
-      
-    //   if(typeof window == 'undefined'){
-    //     return <Spinner/>
-    //   }
-     
+const NewsDetail: NextPage = () => {
+  const isLaptop = useMediaQuery({ query: '(min-width: 524px)' });
+  const [data, setData] = useState<any | MemberNewsType>();
+  const dispatch = useAppDispatch();
+  const { comment, commentStatus } = useAppSelector(selectNews);
 
-    
-      return (
-        <DashboardLayout>
-            <div style={{'padding':'4rem 0',}}>
-                {
-                    commentStatus=='loading'?<Spinner/>:''
+  useEffect(() => {
+    if (localStorage.getItem('news')) {
+      const news = JSON.parse(localStorage.getItem('news'));
+      setData(news);
+      dispatch(getNewsComment({ 'news_id': news.id }));
+    }
+  }, [dispatch]);
+
+  return (
+    <DashboardLayout>
+      <Container maxWidth="lg" sx={{ padding: '4rem 0' }}>
+        {commentStatus === 'loading' && <CircularProgress />}
+
+        {data && (
+          <Card sx={{ maxWidth: 600, margin: '0 auto', borderRadius: 2 }}>
+            <CardMedia
+              component="img"
+              height="300"
+              image={data.image}
+              alt={data.name}
+              sx={{ objectFit: 'cover' }}
+            />
+            <CardContent>
+              <Typography variant="h4" align="center" gutterBottom>
+                {data?.name}
+              </Typography>
+              {data?.body && (
+                <Box dangerouslySetInnerHTML={{ __html: `${data.body}` }} />
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Comment Section */}
+        <Box sx={{ maxWidth: 500, margin: '2rem auto' }}>
+          {comment.map((data: any, index: number) => (
+            <PostComentDetails
+              deleteItem={(itemId) => {
+                dispatch(deleteNewsComment(itemId));
+              }}
+              data={data}
+              key={index}
+            />
+          ))}
+          <Box mt={10}>
+            <CommentInputWIthLabel
+              submit={(value) => {
+                if (data) {
+                  dispatch(createNwsComment({ news: data.id, comment: value }));
                 }
+              }}
+            />
+          </Box>
+        </Box>
+      </Container>
+    </DashboardLayout>
+  );
+};
 
-                {
-                    data?
-                    <img 
-                    src={data.image} 
-                    alt=""  style={{'display':'block','borderRadius':'10px','width':'400px','height':'300px','margin':'0 auto'}}/>
-:''
-                }
-
-
-            <div style={{'padding':'0  1rem','margin':'0 auto','maxWidth':'900px',}}>
-                <h2 style={{'textAlign':'center'}}>{data?.name}</h2>
-
-                {/* {
-                    data?.paragraphs?.map((p,index)=>(
-                        <div key={index}>
-                            <Grid  style={{'color':'#000000c4'}} >
-                            {p.paragragh}
-                        </Grid>
-                        <br />
-                        </div>
-
-                    ))
-                } */}
-                {
-                data?.body?
-                <div
-               dangerouslySetInnerHTML={{
-                 __html: `${data.body}`,
-               }}
-             />:''
-                }
-                
-            </div>
-
-            {/* <ContentReactionContainer>
-                <div className="" style={{'padding':'0 .4rem'}}>
-                    <GoThumbsup/>
-                    <p>Like</p>
-                </div>
-                <div className="">
-                    <GoThumbsdown/>
-                    <p>Dislike</p>
-                </div>
-            </ContentReactionContainer> */}
-<br />
-           <div style={{'margin':'0 auto','maxWidth':'500px'}}>
-           {
-               comment.map((data:any,index:number)=>(
-                    <PostComentDetails
-                    deleteItem={(itemId)=>{
-                        dispatch(deleteNewsComment(itemId))
-                    }}
-                    data={data} key={index}/>
-                ))
-            }
-            <br />
-            <br />
-            <CommentInputWIthLabel submit={(value)=>{
-                console.log({'value':value})
-                if(data){
-                    dispatch(createNwsComment({
-                        'news':data.id,
-                        'comment':value
-                    }))
-                }
-            }}/>
-           </div>
-            <br />
-            <br />
-            </div>
-        </DashboardLayout>
-    )
-}
-
-export default NewsDetail
+export default NewsDetail;

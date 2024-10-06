@@ -7,11 +7,11 @@ import 'react-calendar/dist/Calendar.css';
 import { DashboardLayout } from "../../components/Dashboard/Member/Sidebar/dashboard-layout";
 import useToast from "../../hooks/useToast";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectMemberEvent } from "../../redux/memeberEvents/memeberEventsSlice";
+import { selectMemberEvent } from "../../redux/memberEvents/memeberEventsSlice";
 import EventCard from "../../components/EventCard";
 import Spinner from "../../components/Spinner";
 import { useEffect } from "react";
-import { getMembersEvent } from "../../redux/memeberEvents/memeberEventsApi";
+import { getMembersEvent } from "../../redux/memberEvents/memeberEventsApi";
 import EventCardV2 from '../../components/EventCardV2/EventCardV2'
 
 export default function Events(){
@@ -24,6 +24,7 @@ export default function Events(){
       dispatch(getMembersEvent({}))
     },[])
     console.log(events)
+    
     return(
         <DashboardLayout>
           {status=='pending'&&<Spinner/>}

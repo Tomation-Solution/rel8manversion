@@ -24,6 +24,14 @@ export const MeetingHeader = styled.div`
   justify-content: space-between;
   width: 100%;
 
+  h1 {
+    color: #2e3715;
+    font-size: 2rem;
+      @media screen and (max-width: 500px) {
+          font-size: 1rem;
+      }
+  }
+
   h3 {
     border: 5px solid #2e3715;
     // width: 100px;
@@ -33,6 +41,9 @@ export const MeetingHeader = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    @media screen and (max-width: 500px) {
+        font-size: 0.7rem;
+    }
   }
 
   @media screen and (min-width: 500px) {

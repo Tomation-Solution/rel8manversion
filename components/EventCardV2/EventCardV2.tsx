@@ -4,7 +4,7 @@ import {useState} from 'react'
 import useToast from '../../hooks/useToast'
 import { registerForEventApi } from '../../redux/events/eventsApi'
 import { useAppDispatch } from "../../redux/hooks"
-import { MemberEventType, registerForPaidEvent } from "../../redux/memeberEvents/memeberEventsApi"
+import { MemberEventType, registerForPaidEvent } from "../../redux/memberEvents/memeberEventsApi"
 import CustomBtn from "../CustomBtn/Button"
 import MeetingRegistration from "../Meeting/MeetingRegistration/MeetingRegistration"
 import BasicModal from "../Modals"

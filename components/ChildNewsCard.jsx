@@ -1,37 +1,47 @@
-import { Grid, Typography } from "@mui/material"
-import Link from 'next/link'
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
-export default function ChildNewsCard (props){
-    const route = useRouter()
-    return(
-        <Grid px={1} item md={4}>
-            <Grid item md={11} marginX={1}>
-                <Grid container py={1}  marginY={1} px={2} className='light-grey-bg rounded-corners'>
-                    <Grid container >
-                        <Typography variant='caption' className='light-text' >
-                            {props.date}
-                        </Typography>
-                    </Grid>
-                    <Grid item sm={3}>
-                        <img height={'70px'} style={{'objectFit':'contain'}} src={props.image} className='rounded-corners-small' />
-                    </Grid>
-                    <Grid style={{'padding':'1.4rem'}} item paddingLeft={1} sm={9}>
-                        <Typography textAlign='justify' variant='subtitle2' fontWeight='400' className='text'> 
-                            {props.title}
-                        </Typography>
-                    </Grid>
-                    {/* <Link href="/"> */}
-                    <br/>
-                        <Typography  onClick={()=>{
-                            localStorage.setItem('publication_detail',JSON.stringify(props.data))
-                            // route.push('/members/NewsDetail/')
-                            route.push('/members/publicationDetail')
-
-                        }} variant='caption' fontWeight='500' className='text nav-link green-text'>Read More</Typography>
-                    {/* </Link> */}
-                </Grid>
-            </Grid>
-        </Grid>
-    )
+export default function ChildNewsCard(props) {
+  const route = useRouter();
+  
+  return (
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: "auto",
+        transition: "0.3s",
+        "&:hover": {
+          boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
+        },
+        mb: 2
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="140"
+        image={props.image}
+        alt={props.title}
+        sx={{ objectFit: "cover", borderRadius: '4px' }}
+      />
+      <CardContent>
+        <Typography variant="caption" color="textSecondary">
+          {props.date}
+        </Typography>
+        <Typography variant="subtitle1" fontWeight="bold" sx={{ mt: 1 }}>
+          {props.title}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="primary"
+          sx={{ cursor: "pointer", mt: 2, textDecoration: "underline" }}
+          onClick={() => {
+            localStorage.setItem("publication_detail", JSON.stringify(props.data));
+            route.push("/members/publicationDetail");
+          }}
+        >
+          Read More
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }

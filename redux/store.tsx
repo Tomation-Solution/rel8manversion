@@ -10,7 +10,7 @@ import publicationSlice from './publication/publicationSlice';
 import gallerySlice from './gallery/gallerySlice';
 import ManageAssigningExcoSlice from './ManageAssigningExco/ManageAssigningExcoSlice';
 import MembersAndExcoSlice from './members/membersSlice'
-import memeberEventsSlice from './memeberEvents/memeberEventsSlice';
+import memeberEventsSlice from './memberEvents/memeberEventsSlice';
 import memberNewsSlice from './memberNews/memberNewsSlice';
 import memberPublicationSlice from './memberPublication/memberPublicationSlice';
 import ChatSlice from './Chat/ChatSlice';
