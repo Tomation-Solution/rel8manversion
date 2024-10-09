@@ -1,7 +1,8 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
-import { Box, TextField } from "@material-ui/core";
+// import { Box, TextField } from "@material-ui/core";
+import { Box, TextField } from '@mui/material'; // Correct import for Material-UI v5
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectMemberEvent } from "../../redux/memberEvents/memeberEventsSlice";
 import { getEventAttendies } from '../../redux/memberEvents/memeberEventsApi';
